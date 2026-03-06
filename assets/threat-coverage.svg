@@ -16,7 +16,9 @@
 <text x="660.0" y="36" fill="#6b7280" font-size="9" text-anchor="middle">DoS</text>
 <text x="660.0" y="50" fill="#6366f1" font-size="10" font-weight="700" text-anchor="middle">T7</text>
 <text x="14" y="74.0" fill="#111827" font-size="10" font-weight="500">E2B</text>
-<circle cx="234.0" cy="70.0" r="8" fill="#059669"/>
+<circle cx="234.0" cy="70.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 234.0,62.0 A 8,8 0 0,0 234.0,78.0 Z" fill="#d97706"/>
+<circle cx="234.0" cy="70.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="305.0" cy="70.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 305.0,62.0 A 8,8 0 0,0 305.0,78.0 Z" fill="#d97706"/>
 <circle cx="305.0" cy="70.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
@@ -30,7 +32,9 @@
 <circle cx="589.0" cy="70.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="70.0" r="8" fill="#059669"/>
 <text x="14" y="105.0" fill="#111827" font-size="10" font-weight="500">Daytona (Kata)</text>
-<circle cx="234.0" cy="101.0" r="8" fill="#059669"/>
+<circle cx="234.0" cy="101.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 234.0,93.0 A 8,8 0 0,0 234.0,109.0 Z" fill="#d97706"/>
+<circle cx="234.0" cy="101.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="305.0" cy="101.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 305.0,93.0 A 8,8 0 0,0 305.0,109.0 Z" fill="#d97706"/>
 <circle cx="305.0" cy="101.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
@@ -44,7 +48,9 @@
 <circle cx="589.0" cy="101.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="101.0" r="8" fill="#059669"/>
 <text x="14" y="136.0" fill="#111827" font-size="10" font-weight="500">Modal</text>
-<circle cx="234.0" cy="132.0" r="8" fill="#059669"/>
+<circle cx="234.0" cy="132.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 234.0,124.0 A 8,8 0 0,0 234.0,140.0 Z" fill="#d97706"/>
+<circle cx="234.0" cy="132.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="305.0" cy="132.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 305.0,124.0 A 8,8 0 0,0 305.0,140.0 Z" fill="#d97706"/>
 <circle cx="305.0" cy="132.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
@@ -60,7 +66,9 @@
 <circle cx="589.0" cy="132.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="660.0" cy="132.0" r="8" fill="#059669"/>
 <text x="14" y="167.0" fill="#111827" font-size="10" font-weight="500">Fly.io Sprites</text>
-<circle cx="234.0" cy="163.0" r="8" fill="#059669"/>
+<circle cx="234.0" cy="163.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 234.0,155.0 A 8,8 0 0,0 234.0,171.0 Z" fill="#d97706"/>
+<circle cx="234.0" cy="163.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="305.0" cy="163.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 305.0,155.0 A 8,8 0 0,0 305.0,171.0 Z" fill="#d97706"/>
 <circle cx="305.0" cy="163.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
@@ -76,7 +84,9 @@
 <circle cx="589.0" cy="163.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="163.0" r="8" fill="#059669"/>
 <text x="14" y="198.0" fill="#111827" font-size="10" font-weight="500">Blaxel</text>
-<circle cx="234.0" cy="194.0" r="8" fill="#059669"/>
+<circle cx="234.0" cy="194.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 234.0,186.0 A 8,8 0 0,0 234.0,202.0 Z" fill="#d97706"/>
+<circle cx="234.0" cy="194.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="305.0" cy="194.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 305.0,186.0 A 8,8 0 0,0 305.0,202.0 Z" fill="#d97706"/>
 <circle cx="305.0" cy="194.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
@@ -90,7 +100,9 @@
 <circle cx="589.0" cy="194.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="194.0" r="8" fill="#059669"/>
 <text x="14" y="229.0" fill="#111827" font-size="10" font-weight="500">Unikraft Cloud</text>
-<circle cx="234.0" cy="225.0" r="8" fill="#059669"/>
+<circle cx="234.0" cy="225.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 234.0,217.0 A 8,8 0 0,0 234.0,233.0 Z" fill="#d97706"/>
+<circle cx="234.0" cy="225.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="305.0" cy="225.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 305.0,217.0 A 8,8 0 0,0 305.0,233.0 Z" fill="#d97706"/>
 <circle cx="305.0" cy="225.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
@@ -104,7 +116,9 @@
 <circle cx="589.0" cy="225.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="225.0" r="8" fill="#059669"/>
 <text x="14" y="260.0" fill="#111827" font-size="10" font-weight="500">Docker Sandbox</text>
-<circle cx="234.0" cy="256.0" r="8" fill="#059669"/>
+<circle cx="234.0" cy="256.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 234.0,248.0 A 8,8 0 0,0 234.0,264.0 Z" fill="#d97706"/>
+<circle cx="234.0" cy="256.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="305.0" cy="256.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 305.0,248.0 A 8,8 0 0,0 305.0,264.0 Z" fill="#d97706"/>
 <circle cx="305.0" cy="256.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
@@ -118,7 +132,9 @@
 <circle cx="589.0" cy="256.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="256.0" r="8" fill="#059669"/>
 <text x="14" y="291.0" fill="#111827" font-size="10" font-weight="500">Google Agent Sandbox</text>
-<circle cx="234.0" cy="287.0" r="8" fill="#059669"/>
+<circle cx="234.0" cy="287.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 234.0,279.0 A 8,8 0 0,0 234.0,295.0 Z" fill="#d97706"/>
+<circle cx="234.0" cy="287.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="305.0" cy="287.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 305.0,279.0 A 8,8 0 0,0 305.0,295.0 Z" fill="#d97706"/>
 <circle cx="305.0" cy="287.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
@@ -289,11 +305,11 @@
 <circle cx="660.0" cy="597.0" r="8" fill="#059669"/>
 <text x="10" y="628" fill="#6b7280" font-size="9" font-weight="600" letter-spacing="1">COVERAGE</text>
 <circle cx="87" cy="624" r="6" fill="#059669"/>
-<text x="99" y="628" fill="#6b7280" font-size="9">Primary defense</text>
-<circle cx="213" cy="624" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 213,618 A 6,6 0 0,0 213,630 Z" fill="#d97706"/>
-<circle cx="213" cy="624" r="6" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<text x="225" y="628" fill="#6b7280" font-size="9">Partial</text>
-<circle cx="291" cy="624" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<text x="303" y="628" fill="#6b7280" font-size="9">Not addressed</text>
+<text x="99" y="628" fill="#6b7280" font-size="9">Addressed</text>
+<circle cx="177" cy="624" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 177,618 A 6,6 0 0,0 177,630 Z" fill="#d97706"/>
+<circle cx="177" cy="624" r="6" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<text x="189" y="628" fill="#6b7280" font-size="9">Partial</text>
+<circle cx="255" cy="624" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<text x="267" y="628" fill="#6b7280" font-size="9">Not addressed</text>
 </svg>

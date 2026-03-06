@@ -326,9 +326,9 @@ For each of the 7 threats, use the threat-to-layer defense map (Part 2) and the 
 
 | Rating | Symbol | Meaning |
 |---|---|---|
-| Primary defense | **●** | The product's layers provide strong, multi-layer defense against this threat |
+| Addressed | **●** | The product actively defends against or structurally eliminates this threat (e.g., ephemeral sandbox = T5● because persistence is architecturally impossible) |
 | Partial | **◐** | Some layers contribute but gaps remain (e.g., local destruction mitigated but remote not) |
-| Not addressed | **○** | The product does not meaningfully defend against this threat |
+| Not addressed | **○** | The threat is real but this product provides no defense against it (a gap to fill via composition) |
 
 For T3 (Destructive Operations), always distinguish **local vs remote**:
 - Local destruction → primarily L3 + L1

@@ -259,7 +259,7 @@ def generate_threat_coverage(products):
     # legend
     legend_y = y + 14
     lines.append(f'<text x="10" y="{legend_y}" fill="{MUTED_COLOR}" font-size="9" font-weight="600" letter-spacing="1">COVERAGE</text>')
-    legend_data = [("full", "Primary defense"), ("partial", "Partial"), ("none", "Not addressed")]
+    legend_data = [("full", "Addressed"), ("partial", "Partial"), ("none", "Not addressed")]
     lx = 80
     for level, text in legend_data:
         lines.extend(_threat_shape(level, lx + 7, legend_y - 4, 6))

@@ -459,7 +459,7 @@ For full per-product details (granularity scores, mechanism notes, threat breakd
 
 # APPENDIX C: Threat Coverage Matrix
 
-**●** Primary defense, **◐** Partial, **○** Not addressed. T3: `L●/R○` = local mitigated/remote not; `L+R` = both.
+**●** Addressed — the product actively defends against or structurally eliminates this threat (e.g., ephemeral sandbox = T5● because persistence is architecturally impossible). **◐** Partial — some layers contribute but gaps remain. **○** Not addressed — the threat is real but this product provides no defense against it (a gap to fill via composition). T3: `L●/R○` = local mitigated/remote not; `L+R` = both.
 
 <p align="center">
   <img src="assets/threat-coverage.svg" alt="AST Threat Coverage Matrix" width="540"/>
