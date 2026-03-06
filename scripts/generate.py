@@ -33,43 +33,47 @@ LAYER_NAMES = {
 }
 THREATS = ["T1", "T2", "T3", "T4", "T5", "T6", "T7"]
 
-# ── Color scheme ──────────────────────────────────────────────────────
+# ── Color scheme (light theme, matching ast-infographic.svg) ──────────
 
 STRENGTH_COLORS = {
-    None: "#2d2d2d",  # — not addressed (dark)
-    0:    "#4a1a1a",  # ○ present but unenforced (dark red)
-    1:    "#b45309",  # cooperative (amber)
-    2:    "#2563eb",  # software-enforced (blue)
-    3:    "#7c3aed",  # kernel-enforced (purple)
-    4:    "#059669",  # structural (green)
+    None: "#f3f4f6",  # — not addressed (light gray)
+    0:    "#fef2f2",  # unenforced (red tint)
+    1:    "#fffbeb",  # cooperative (amber tint)
+    2:    "#eff6ff",  # software-enforced (blue tint)
+    3:    "#f5f3ff",  # kernel-enforced (purple tint)
+    4:    "#ecfdf5",  # structural (green tint)
 }
 
-STRENGTH_LABELS = {
-    None: "—",
-    0: "0",
-    1: "1",
-    2: "2",
-    3: "3",
-    4: "4",
+STRENGTH_BORDERS = {
+    None: "#d1d5db",  # gray
+    0:    "#fca5a5",  # red
+    1:    "#fbbf24",  # amber
+    2:    "#60a5fa",  # blue
+    3:    "#a78bfa",  # purple
+    4:    "#34d399",  # green
+}
+
+STRENGTH_TEXT = {
+    None: "#9ca3af",  # gray
+    0:    "#dc2626",  # red
+    1:    "#d97706",  # amber
+    2:    "#2563eb",  # blue
+    3:    "#7c3aed",  # purple
+    4:    "#059669",  # green
 }
 
 THREAT_COLORS = {
     "full":    "#059669",  # green
-    "partial": "#b45309",  # amber
-    "none":    "#4a1a1a",  # dark red
+    "partial": "#d97706",  # amber
+    "none":    "#d1d5db",  # light gray
 }
 
-THREAT_SYMBOLS = {
-    "full":    "●",
-    "partial": "◐",
-    "none":    "○",
-}
-
-BG_COLOR = "#0d1117"
-TEXT_COLOR = "#e6edf3"
-MUTED_COLOR = "#7d8590"
-GRID_COLOR = "#21262d"
-CATEGORY_COLOR = "#58a6ff"
+BG_COLOR = "white"
+TEXT_COLOR = "#111827"
+MUTED_COLOR = "#6b7280"
+GRID_COLOR = "#f3f4f6"
+ACCENT_COLOR = "#6366f1"
+FONT = "system-ui, -apple-system, 'Segoe UI', sans-serif"
 
 
 def load_products():
@@ -81,6 +85,11 @@ def load_products():
 def get_strength(product, layer):
     layer_data = product["layers"].get(layer, {})
     return layer_data.get("s")
+
+
+def get_granularity(product, layer):
+    layer_data = product["layers"].get(layer, {})
+    return layer_data.get("g")
 
 
 def get_threat_level(product, threat):
@@ -101,73 +110,68 @@ def escape_xml(text):
 
 def generate_heatmap(products):
     cell_w = 72
-    cell_h = 32
+    cell_h = 28
     name_col_w = 200
-    header_h = 60
-    category_h = 36
-    row_gap = 2
-    legend_h = 60
+    header_h = 56
+    row_gap = 3
+    legend_h = 50
 
-    # group by category preserving order
-    categories = {}
-    for p in products:
-        cat = p["category"]
-        if cat not in categories:
-            categories[cat] = []
-        categories[cat].append(p)
-
-    total_rows = sum(len(prods) for prods in categories.values())
-    total_categories = len(categories)
-    total_h = header_h + total_rows * (cell_h + row_gap) + total_categories * category_h + legend_h + 40
-    total_w = name_col_w + len(LAYERS) * (cell_w + row_gap) + 20
+    total_rows = len(products)
+    total_h = header_h + total_rows * (cell_h + row_gap) + legend_h + 20
+    total_w = name_col_w + len(LAYERS) * (cell_w + row_gap) + 16
 
     lines = []
-    lines.append(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {total_w} {total_h}" font-family="Consolas, Monaco, monospace">')
-    lines.append(f'<rect width="{total_w}" height="{total_h}" fill="{BG_COLOR}"/>')
+    lines.append(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {total_w} {total_h}" font-family="{FONT}">')
+    lines.append(f'<rect width="{total_w}" height="{total_h}" fill="{BG_COLOR}" rx="8"/>')
 
     # title
-    lines.append(f'<text x="{total_w/2}" y="20" fill="{TEXT_COLOR}" font-size="15" font-weight="bold" text-anchor="middle">AST Fingerprint Heatmap — Strength by Layer</text>')
+    lines.append(f'<text x="{total_w/2}" y="22" fill="{TEXT_COLOR}" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="-0.3">Product Score Cards — Strength · Granularity</text>')
 
     # column headers
     for i, layer in enumerate(LAYERS):
         x = name_col_w + i * (cell_w + row_gap) + cell_w / 2
-        lines.append(f'<text x="{x}" y="{header_h - 22}" fill="{MUTED_COLOR}" font-size="10" text-anchor="middle">{LAYER_NAMES[layer]}</text>')
-        lines.append(f'<text x="{x}" y="{header_h - 8}" fill="{TEXT_COLOR}" font-size="12" font-weight="bold" text-anchor="middle">{layer}</text>')
+        lines.append(f'<text x="{x}" y="{header_h - 20}" fill="{MUTED_COLOR}" font-size="9" text-anchor="middle">{LAYER_NAMES[layer]}</text>')
+        lines.append(f'<text x="{x}" y="{header_h - 6}" fill="{ACCENT_COLOR}" font-size="10" font-weight="700" text-anchor="middle">{layer}</text>')
 
     y = header_h
-    for cat, prods in categories.items():
-        # category header
-        lines.append(f'<text x="10" y="{y + 22}" fill="{CATEGORY_COLOR}" font-size="12" font-weight="bold">{escape_xml(cat.upper())}</text>')
-        y += category_h
+    for p in products:
+        name = escape_xml(p["name"])
+        lines.append(f'<text x="14" y="{y + cell_h/2 + 4}" fill="{TEXT_COLOR}" font-size="10" font-weight="500">{name}</text>')
 
-        for p in prods:
-            name = escape_xml(p["name"])
-            lines.append(f'<text x="14" y="{y + cell_h/2 + 4}" fill="{TEXT_COLOR}" font-size="11">{name}</text>')
+        for i, layer in enumerate(LAYERS):
+            s = get_strength(p, layer)
+            g = get_granularity(p, layer)
+            bg = STRENGTH_COLORS[s]
+            border = STRENGTH_BORDERS[s]
+            txt = STRENGTH_TEXT[s]
+            x = name_col_w + i * (cell_w + row_gap)
 
-            for i, layer in enumerate(LAYERS):
-                s = get_strength(p, layer)
-                color = STRENGTH_COLORS[s]
-                label = STRENGTH_LABELS[s]
-                x = name_col_w + i * (cell_w + row_gap)
+            # cell with colored border
+            lines.append(f'<rect x="{x}" y="{y}" width="{cell_w}" height="{cell_h}" rx="4" fill="{bg}" stroke="{border}" stroke-width="1"/>')
 
-                lines.append(f'<rect x="{x}" y="{y}" width="{cell_w}" height="{cell_h}" rx="4" fill="{color}"/>')
+            # strength bar at bottom
+            if s is not None and s > 0:
+                bar_w = (s / 4) * (cell_w - 8)
+                lines.append(f'<rect x="{x + 4}" y="{y + cell_h - 6}" width="{bar_w}" height="3" rx="1.5" fill="{border}" opacity="0.6"/>')
 
-                # bar fill proportional to strength
-                if s is not None and s > 0:
-                    bar_w = (s / 4) * (cell_w - 8)
-                    lines.append(f'<rect x="{x + 4}" y="{y + cell_h - 8}" width="{bar_w}" height="4" rx="2" fill="{TEXT_COLOR}" opacity="0.3"/>')
+            # label
+            if s is None:
+                label = "—"
+            elif s == 0:
+                label = f"0.{g}" if g is not None else "0"
+            else:
+                label = f"{s}.{g}" if g is not None else str(s)
 
-                label_color = TEXT_COLOR if s is not None and s > 0 else MUTED_COLOR
-                lines.append(f'<text x="{x + cell_w/2}" y="{y + cell_h/2 + 4}" fill="{label_color}" font-size="13" font-weight="bold" text-anchor="middle">{label}</text>')
+            lines.append(f'<text x="{x + cell_w/2}" y="{y + cell_h/2 + 1}" fill="{txt}" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">{label}</text>')
 
-            y += cell_h + row_gap
+        y += cell_h + row_gap
 
     # legend
-    legend_y = y + 16
-    lines.append(f'<text x="10" y="{legend_y}" fill="{MUTED_COLOR}" font-size="10">STRENGTH</text>')
+    legend_y = y + 14
+    lines.append(f'<text x="10" y="{legend_y}" fill="{MUTED_COLOR}" font-size="9" font-weight="600" letter-spacing="1">STRENGTH</text>')
     legend_items = [
-        (None, "— Not addressed"),
-        (0, "0 Unenforced"),
+        (None, "— N/A"),
+        (0, "0 None"),
         (1, "1 Cooperative"),
         (2, "2 Software"),
         (3, "3 Kernel"),
@@ -175,10 +179,12 @@ def generate_heatmap(products):
     ]
     lx = 80
     for val, text in legend_items:
-        color = STRENGTH_COLORS[val]
-        lines.append(f'<rect x="{lx}" y="{legend_y - 10}" width="14" height="14" rx="3" fill="{color}"/>')
-        lines.append(f'<text x="{lx + 18}" y="{legend_y}" fill="{MUTED_COLOR}" font-size="10">{escape_xml(text)}</text>')
-        lx += len(text) * 6.5 + 30
+        bg = STRENGTH_COLORS[val]
+        border = STRENGTH_BORDERS[val]
+        txt_color = STRENGTH_TEXT[val]
+        lines.append(f'<rect x="{lx}" y="{legend_y - 10}" width="14" height="14" rx="3" fill="{bg}" stroke="{border}" stroke-width="1"/>')
+        lines.append(f'<text x="{lx + 19}" y="{legend_y}" fill="{MUTED_COLOR}" font-size="9">{escape_xml(text)}</text>')
+        lx += len(text) * 6 + 28
 
     lines.append("</svg>")
     return "\n".join(lines)
@@ -186,26 +192,33 @@ def generate_heatmap(products):
 
 # ── Threat coverage SVG ───────────────────────────────────────────────
 
+def _threat_shape(level, cx, cy, r):
+    """SVG threat coverage indicator: filled/half/empty circle."""
+    elems = []
+    if level == "full":
+        elems.append(f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{THREAT_COLORS["full"]}"/>')
+    elif level == "partial":
+        # half circle: left filled, right empty
+        elems.append(f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{GRID_COLOR}" stroke="#e5e7eb" stroke-width="1"/>')
+        elems.append(f'<path d="M {cx},{cy - r} A {r},{r} 0 0,0 {cx},{cy + r} Z" fill="{THREAT_COLORS["partial"]}"/>')
+        elems.append(f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{THREAT_COLORS["partial"]}" stroke-width="1.5"/>')
+    else:  # none
+        elems.append(f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{GRID_COLOR}" stroke="#e5e7eb" stroke-width="1"/>')
+    return elems
+
+
 def generate_threat_coverage(products):
-    cell_w = 44
-    cell_h = 32
+    cell_w = 68
+    cell_h = 28
     name_col_w = 200
-    header_h = 60
-    category_h = 36
-    row_gap = 2
+    header_h = 56
+    row_gap = 3
     legend_h = 50
+    indicator_r = 8
 
-    categories = {}
-    for p in products:
-        cat = p["category"]
-        if cat not in categories:
-            categories[cat] = []
-        categories[cat].append(p)
-
-    total_rows = sum(len(prods) for prods in categories.values())
-    total_categories = len(categories)
-    total_h = header_h + total_rows * (cell_h + row_gap) + total_categories * category_h + legend_h + 40
-    total_w = name_col_w + len(THREATS) * (cell_w + row_gap) + 20
+    total_rows = len(products)
+    total_h = header_h + total_rows * (cell_h + row_gap) + legend_h + 20
+    total_w = name_col_w + len(THREATS) * (cell_w + row_gap) + 16
 
     threat_names = {
         "T1": "Exfiltration",
@@ -218,46 +231,40 @@ def generate_threat_coverage(products):
     }
 
     lines = []
-    lines.append(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {total_w} {total_h}" font-family="Consolas, Monaco, monospace">')
-    lines.append(f'<rect width="{total_w}" height="{total_h}" fill="{BG_COLOR}"/>')
+    lines.append(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {total_w} {total_h}" font-family="{FONT}">')
+    lines.append(f'<rect width="{total_w}" height="{total_h}" fill="{BG_COLOR}" rx="8"/>')
 
-    lines.append(f'<text x="{total_w/2}" y="20" fill="{TEXT_COLOR}" font-size="15" font-weight="bold" text-anchor="middle">AST Threat Coverage Matrix</text>')
+    lines.append(f'<text x="{total_w/2}" y="22" fill="{TEXT_COLOR}" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="-0.3">Threat Coverage Matrix</text>')
 
     for i, threat in enumerate(THREATS):
         x = name_col_w + i * (cell_w + row_gap) + cell_w / 2
-        lines.append(f'<text x="{x}" y="{header_h - 22}" fill="{MUTED_COLOR}" font-size="9" text-anchor="middle">{threat_names[threat]}</text>')
-        lines.append(f'<text x="{x}" y="{header_h - 8}" fill="{TEXT_COLOR}" font-size="12" font-weight="bold" text-anchor="middle">{threat}</text>')
+        lines.append(f'<text x="{x}" y="{header_h - 20}" fill="{MUTED_COLOR}" font-size="9" text-anchor="middle">{threat_names[threat]}</text>')
+        lines.append(f'<text x="{x}" y="{header_h - 6}" fill="{ACCENT_COLOR}" font-size="10" font-weight="700" text-anchor="middle">{threat}</text>')
 
     y = header_h
-    for cat, prods in categories.items():
-        lines.append(f'<text x="10" y="{y + 22}" fill="{CATEGORY_COLOR}" font-size="12" font-weight="bold">{escape_xml(cat.upper())}</text>')
-        y += category_h
+    for p in products:
+        name = escape_xml(p["name"])
+        lines.append(f'<text x="14" y="{y + cell_h/2 + 4}" fill="{TEXT_COLOR}" font-size="10" font-weight="500">{name}</text>')
 
-        for p in prods:
-            name = escape_xml(p["name"])
-            lines.append(f'<text x="14" y="{y + cell_h/2 + 4}" fill="{TEXT_COLOR}" font-size="11">{name}</text>')
+        for i, threat in enumerate(THREATS):
+            level = get_threat_level(p, threat)
+            x = name_col_w + i * (cell_w + row_gap)
+            cx = x + cell_w / 2
+            cy = y + cell_h / 2
 
-            for i, threat in enumerate(THREATS):
-                level = get_threat_level(p, threat)
-                color = THREAT_COLORS[level]
-                symbol = THREAT_SYMBOLS[level]
-                x = name_col_w + i * (cell_w + row_gap)
+            lines.extend(_threat_shape(level, cx, cy, indicator_r))
 
-                lines.append(f'<rect x="{x}" y="{y}" width="{cell_w}" height="{cell_h}" rx="4" fill="{color}"/>')
-                lines.append(f'<text x="{x + cell_w/2}" y="{y + cell_h/2 + 5}" fill="{TEXT_COLOR}" font-size="16" text-anchor="middle">{symbol}</text>')
-
-            y += cell_h + row_gap
+        y += cell_h + row_gap
 
     # legend
-    legend_y = y + 16
-    lines.append(f'<text x="10" y="{legend_y}" fill="{MUTED_COLOR}" font-size="10">COVERAGE</text>')
-    legend_data = [("full", "● Primary defense"), ("partial", "◐ Partial"), ("none", "○ Not addressed")]
+    legend_y = y + 14
+    lines.append(f'<text x="10" y="{legend_y}" fill="{MUTED_COLOR}" font-size="9" font-weight="600" letter-spacing="1">COVERAGE</text>')
+    legend_data = [("full", "Primary defense"), ("partial", "Partial"), ("none", "Not addressed")]
     lx = 80
     for level, text in legend_data:
-        color = THREAT_COLORS[level]
-        lines.append(f'<rect x="{lx}" y="{legend_y - 10}" width="14" height="14" rx="3" fill="{color}"/>')
-        lines.append(f'<text x="{lx + 18}" y="{legend_y}" fill="{MUTED_COLOR}" font-size="10">{escape_xml(text)}</text>')
-        lx += 120
+        lines.extend(_threat_shape(level, lx + 7, legend_y - 4, 6))
+        lines.append(f'<text x="{lx + 19}" y="{legend_y}" fill="{MUTED_COLOR}" font-size="9">{escape_xml(text)}</text>')
+        lx += len(text) * 6 + 36
 
     lines.append("</svg>")
     return "\n".join(lines)

@@ -450,7 +450,7 @@ Catalogs mechanisms at each layer with strength and granularity. Products listed
 Each product is scored `S.G` (Strength.Granularity) per layer. `0` = layer operates but unenforced; `—` = layer not addressed (see [The Fingerprint](#the-fingerprint)). All scores are maintained in [`products.yaml`](products.yaml).
 
 <p align="center">
-  <img src="assets/fingerprint-heatmap.svg" alt="AST Fingerprint Heatmap — Strength by Layer" width="740"/>
+  <img src="assets/fingerprint-heatmap.svg" alt="AST Product Score Cards — Strength.Granularity by Layer" width="740"/>
 </p>
 
 For full per-product details (granularity scores, mechanism notes, threat breakdowns, gaps, and complements), see [`products.yaml`](products.yaml).
