@@ -187,16 +187,24 @@ Products may have multiple tags (e.g., `linux+mac, no-infra`).
 
 Every product gets a **fingerprint** — a CVSS-inspired vector string showing its strength score at each layer. Each entry is `Layer:Score`, separated by `/`. A dash means the layer is not addressed.
 
+**Full form** — self-describing, used in product score cards:
 ```
 E2B      L1:4/L2:4/L3:4/L4:0/L5:2/L6:-/L7:2
-Leash    L1:2/L2:2/L3:2/L4:3/L5:2/L6:2/L7:3
-Warden   L1:-/L2:-/L3:1/L4:2/L5:3/L6:2/L7:3
-nono     L1:3/L2:-/L3:3/L4:3/L5:3/L6:2/L7:2
 ```
+
+**Compact form** — positional (L1 through L7, always in order), used in comparison tables and composition:
+```
+E2B      4/4/4/0/2/-/2
+Leash    2/2/2/3/2/2/3
+Warden   -/-/1/2/3/2/3
+nono     3/-/3/3/3/2/2
+```
+
+The two forms are interchangeable. The compact form always includes all seven positions in L1→L7 order, so the layer labels can be read from the column header.
 
 Score cards (see Appendix B) show each layer as `S.G` — strength and granularity separated by `.` (e.g., `4.1` = structural strength, binary granularity). The fingerprint uses strength only for the quick-compare view.
 
-**Separator convention:** `:` binds a layer to its value, `.` separates strength from granularity within a layer, `/` separates layers from each other. Three symbols, three jobs, zero ambiguity.
+**Separator convention:** `:` binds a layer to its value (full form), `.` separates strength from granularity within a layer, `/` separates layers from each other.
 
 See **Appendix B** for product score cards and **Appendix D** for the full fingerprint comparison table.
 
@@ -230,10 +238,10 @@ No single product covers all seven layers well. This is by design — products t
 The fingerprint makes this visible. Where one product shows `—` or `0`, another shows `3` or `4` — that's the complement. Stack them and the gaps disappear:
 
 ```
-E2B      L1:4/L2:4/L3:4/L4:0/L5:2/L6:-/L7:2  ← strong box, open network, no governance
-Warden   L1:-/L2:-/L3:1/L4:2/L5:3/L6:2/L7:3  ← no box, but governs behavior + secrets
-─────────────────────────────────────────────────
-Composed L1:4/L2:4/L3:4/L4:2/L5:3/L6:2/L7:3  ← take the max at each layer
+E2B       4/4/4/0/2/-/2  ← strong box, open network, no governance
+Warden    -/-/1/2/3/2/3  ← no box, but governs behavior + secrets
+────────────────────────
+Composed  4/4/4/2/3/2/3  ← take the max at each layer
 ```
 
 When composing, **take the maximum strength at each layer**. The composed stack is only as weak as its weakest uncovered layer.
@@ -654,53 +662,57 @@ SIG Apps project; warm pools; hibernation; SandboxClaim API
 
 # APPENDIX D: Fingerprint Comparison Table
 
-All products side by side. Strength per layer in `Layer:Score` format. Read vertically to compare at a layer. Read horizontally for a product's profile. Stack vertically (take max per column) to see composed coverage.
+All products side by side, using the compact fingerprint form. Read vertically to compare at a layer. Read horizontally for a product's profile. Stack vertically (take max per column) to see composed coverage.
 
 *Last updated: March 2026*
 
 ```
+                         L1/L2/L3/L4/L5/L6/L7   Portability
+                         ─────────────────────   ───────────
 CLOUD PLATFORMS
-  E2B                  L1:4/L2:4/L3:4/L4:0/L5:2/L6:-/L7:2   cloud-managed
-  Daytona (Kata)       L1:4/L2:4/L3:4/L4:0/L5:2/L6:-/L7:1   cloud-managed
-  Modal                L1:3/L2:3/L3:3/L4:0/L5:2/L6:-/L7:2   cloud-managed
-  Fly.io Sprites       L1:4/L2:4/L3:4/L4:0/L5:2/L6:-/L7:1   cloud-managed
-  Blaxel               L1:4/L2:4/L3:4/L4:0/L5:2/L6:-/L7:2   cloud-managed
-  Unikraft Cloud       L1:4/L2:3/L3:4/L4:0/L5:2/L6:-/L7:2   cloud-managed
-  Docker Sandbox       L1:4/L2:3/L3:3/L4:0/L5:2/L6:-/L7:1   any-os, windows, needs-docker
-  Google Agent Sandbox L1:3/L2:3/L3:3/L4:0/L5:2/L6:-/L7:1   linux-only, needs-k8s
+  E2B                     4/ 4/ 4/ 0/ 2/ -/ 2   cloud-managed
+  Daytona (Kata)          4/ 4/ 4/ 0/ 2/ -/ 1   cloud-managed
+  Modal                   3/ 3/ 3/ 0/ 2/ -/ 2   cloud-managed
+  Fly.io Sprites          4/ 4/ 4/ 0/ 2/ -/ 1   cloud-managed
+  Blaxel                  4/ 4/ 4/ 0/ 2/ -/ 2   cloud-managed
+  Unikraft Cloud          4/ 3/ 4/ 0/ 2/ -/ 2   cloud-managed
+  Docker Sandbox          4/ 3/ 3/ 0/ 2/ -/ 1   any-os, windows, needs-docker
+  Google Agent Sandbox    3/ 3/ 3/ 0/ 2/ -/ 1   linux-only, needs-k8s
 
 POLICY & CREDENTIAL TOOLS
-  StrongDM Leash       L1:2/L2:2/L3:2/L4:3/L5:2/L6:2/L7:3   linux+mac, needs-docker
-  Stakpak Warden       L1:-/L2:-/L3:1/L4:2/L5:3/L6:2/L7:3   linux+mac, no-infra
+  StrongDM Leash          2/ 2/ 2/ 3/ 2/ 2/ 3   linux+mac, needs-docker
+  Stakpak Warden          -/ -/ 1/ 2/ 3/ 2/ 3   linux+mac, no-infra
 
 OS-LEVEL WRAPPERS
-  nono                 L1:3/L2:-/L3:3/L4:3/L5:3/L6:2/L7:2   linux+mac, no-infra
-  packnplay            L1:2/L2:2/L3:2/L4:0/L5:2/L6:-/L7:1   linux+mac, needs-docker
+  nono                    3/ -/ 3/ 3/ 3/ 2/ 2   linux+mac, no-infra
+  packnplay               2/ 2/ 2/ 0/ 2/ -/ 1   linux+mac, needs-docker
 
 BUILT-IN AGENT SANDBOXES
-  Claude Code (local)  L1:3/L2:-/L3:3/L4:0/L5:3/L6:1/L7:1   linux+mac, no-infra
-  Claude Code (web)    L1:4/L2:3/L3:4/L4:4/L5:4/L6:1/L7:2   cloud-managed
-  Codex (agent phase)  L1:3/L2:3/L3:4/L4:4/L5:4/L6:1/L7:2   cloud-managed
-  Cursor (sandboxed)   L1:3/L2:-/L3:2/L4:3/L5:2/L6:1/L7:1   linux+mac, no-infra
-  Copilot agent        L1:2/L2:2/L3:2/L4:2/L5:2/L6:1/L7:1   cloud-managed
-  Devin                L1:4/L2:3/L3:3/L4:2/L5:2/L6:1/L7:2   cloud-managed
+  Claude Code (local)     3/ -/ 3/ 0/ 3/ 1/ 1   linux+mac, no-infra
+  Claude Code (web)       4/ 3/ 4/ 4/ 4/ 1/ 2   cloud-managed
+  Codex (agent phase)     3/ 3/ 4/ 4/ 4/ 1/ 2   cloud-managed
+  Cursor (sandboxed)      3/ -/ 2/ 3/ 2/ 1/ 1   linux+mac, no-infra
+  Copilot agent           2/ 2/ 2/ 2/ 2/ 1/ 1   cloud-managed
+  Devin                   4/ 3/ 3/ 2/ 2/ 1/ 2   cloud-managed
 ```
 
 ### Composition Examples
 
 ```
-  E2B              L1:4/L2:4/L3:4/L4:0/L5:2/L6:-/L7:2
-+ Stakpak Warden   L1:-/L2:-/L3:1/L4:2/L5:3/L6:2/L7:3
-──────────────────────────────────────────────────────────
-= Composed (max)   L1:4/L2:4/L3:4/L4:2/L5:3/L6:2/L7:3   ← gaps filled
+                         L1/L2/L3/L4/L5/L6/L7
+  E2B                     4/ 4/ 4/ 0/ 2/ -/ 2
++ Stakpak Warden          -/ -/ 1/ 2/ 3/ 2/ 3
+──────────────────────────────────────────────────
+= Composed (max)          4/ 4/ 4/ 2/ 3/ 2/ 3   ← gaps filled
 ```
 
 ```
-  Claude Code (local)  L1:3/L2:-/L3:3/L4:0/L5:3/L6:1/L7:1
-+ nono                 L1:3/L2:-/L3:3/L4:3/L5:3/L6:2/L7:2
-+ Leash                L1:2/L2:2/L3:2/L4:3/L5:2/L6:2/L7:3
-────────────────────────────────────────────────────────────
-= Composed (max)       L1:3/L2:2/L3:3/L4:3/L5:3/L6:2/L7:3   ← only L1 not at 4
+                         L1/L2/L3/L4/L5/L6/L7
+  Claude Code (local)     3/ -/ 3/ 0/ 3/ 1/ 1
++ nono                    3/ -/ 3/ 3/ 3/ 2/ 2
++ Leash                   2/ 2/ 2/ 3/ 2/ 2/ 3
+──────────────────────────────────────────────────
+= Composed (max)          3/ 2/ 3/ 3/ 3/ 2/ 3   ← only L1 not at 4
 ```
 
 ---
