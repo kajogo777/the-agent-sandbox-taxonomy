@@ -1,2 +1,6 @@
 # Stakpak session files
 .stakpak/session*
+
+# Python
+.venv/
+__pycache__/
