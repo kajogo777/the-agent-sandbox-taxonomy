@@ -1,9 +1,9 @@
 # The Agent Sandbox Taxonomy (AST)
 
-*Version 1.0 — March 2026*
+*Version 1.0, March 2026*
 
 <p align="center">
-  <img src="ast-infographic.svg" alt="AST 7-7-3 Infographic — 7 Defense Layers, 7 Threat Categories, 3 Evaluation Dimensions" width="960"/>
+  <img src="ast-infographic.svg" alt="AST 7-7-3 Infographic: 7 Defense Layers, 7 Threat Categories, 3 Evaluation Dimensions" width="960"/>
 </p>
 
 ---
@@ -56,7 +56,7 @@ The document has two halves:
 
 When someone says "we sandbox our agents," that could mean anything from a Docker container with no security hardening to a hardware-isolated microVM with default-deny egress and credential proxying.
 
-AI coding agents must support full development workflows — package installation, compilation, test execution, database access, browser automation — while treating every generated command as potentially hostile. The agent might misbehave because of a hallucination, a prompt injection, a compromised dependency, or a misunderstanding of intent. The sandbox doesn't care *why*. It enforces boundaries regardless.
+AI coding agents must support full development workflows (package installation, compilation, test execution, database access, browser automation) while treating every generated command as potentially hostile. The agent might misbehave because of a hallucination, a prompt injection, a compromised dependency, or a misunderstanding of intent. The sandbox doesn't care *why*. It enforces boundaries regardless.
 
 The Taxonomy decomposes sandboxing into **seven defense layers** and maps them against **seven threat categories**, producing a precise vocabulary for what any sandbox does and doesn't do.
 
@@ -76,22 +76,22 @@ Every sandbox enforces some combination of seven layers. No sandbox covers all s
 | **L2** | Resource Limits | Is it constrained in CPU, memory, disk, time? |
 | **L1** | Compute Isolation | What separates the agent from the host? |
 
-Layers are numbered bottom-up because lower layers are foundational. Strong L1 makes L3 easier — a microVM gets a fresh filesystem by default. But **upper layers cannot be derived from lower ones**. A microVM with perfect L1 but no L4 still lets the agent exfiltrate secrets via a single outbound request. A system with impeccable L1–L5 but no L7 gives you no way to detect misuse or improve policies.
+Layers are numbered bottom-up because lower layers are foundational. Strong L1 makes L3 easier: a microVM gets a fresh filesystem by default. But **upper layers cannot be derived from lower ones**. A microVM with perfect L1 but no L4 still lets the agent exfiltrate secrets via a single outbound request. A system with impeccable L1–L5 but no L7 gives you no way to detect misuse or improve policies.
 
 ### L1 — Compute Isolation
 *What separates the agent's execution from the host system?*
 
-The foundational layer. No upper layer can be stronger than L1, because a process that escapes L1 bypasses everything above it. The key metric is the **size of the shared attack surface** between the sandboxed workload and the host — ranging from the full host kernel (containers), through a reduced syscall surface (user-space kernels), to a minimal VMM (microVMs), to a single-purpose kernel (unikernels), to hardware-encrypted memory (confidential computing). See **[Appendix A](#appendix-a-layer-mechanism-reference)** for the mechanism spectrum.
+L1 is the foundation. No upper layer can be stronger, because a process that escapes L1 bypasses everything above it. What matters is the **size of the shared attack surface** between the sandboxed workload and the host, ranging from the full host kernel (containers), through a reduced syscall surface (user-space kernels), to a minimal VMM (microVMs), to a single-purpose kernel (unikernels), to hardware-encrypted memory (confidential computing). See **[Appendix A](#appendix-a-layer-mechanism-reference)** for the mechanism spectrum.
 
 ### L2 — Resource Limits
 *Can the agent exhaust CPU, memory, disk, or time?*
 
-A fork bomb or memory leak can denial-of-service the host even inside a perfect L1 boundary. Enforcement must happen **outside the sandbox** — cgroups on the host, or VM resource allocation by the hypervisor. An agent with root inside its sandbox can bypass in-sandbox resource controls but cannot escape hypervisor-level caps.
+A fork bomb or memory leak can denial-of-service the host even inside a perfect L1 boundary. Enforcement must happen **outside the sandbox**: cgroups on the host, or VM resource allocation by the hypervisor. An agent with root inside its sandbox can bypass in-sandbox resource controls but cannot escape hypervisor-level caps.
 
 ### L3 — Filesystem Boundary
 *What can the agent read, write, and delete on disk?*
 
-The boundary must be **selective**, not total — agents legitimately need to read/write project files. The critical question is whether sensitive paths (`~/.ssh`, `~/.aws`, `.env`) are accessible. Ranges from full access through path allowlists, sensitive-path blocklists, ephemeral roots, immutable roots with writable overlays, to fully independent filesystems.
+The boundary must be **selective**, not total. Agents legitimately need to read/write project files. The real question is whether sensitive paths (`~/.ssh`, `~/.aws`, `.env`) are accessible. Ranges from full access through path allowlists, sensitive-path blocklists, ephemeral roots, immutable roots with writable overlays, to fully independent filesystems.
 
 ### L4 — Network Boundary
 *What external systems can the agent communicate with?*
@@ -103,16 +103,16 @@ The most underappreciated layer. An agent inside a perfect compute sandbox with 
 ### L5 — Credential & Secret Management
 *Can the agent see, use, or exfiltrate credentials?*
 
-Even with strong L1–L4, an agent with API keys can embed them in generated code or commit them to a repo. The ideal: credentials are **never present** in the agent's environment. Ranges from full credential access through file blocking, env-var filtering, placeholder substitution (secrets detected and swapped with tokens, restored at execution), credential proxying (external proxy authenticates on behalf), to ephemeral per-session tokens.
+Even with strong L1–L4, an agent with API keys can embed them in generated code or commit them to a repo. Ideally, credentials are **never present** in the agent's environment. Ranges from full credential access through file blocking, env-var filtering, placeholder substitution (secrets detected and swapped with tokens, restored at execution), credential proxying (external proxy authenticates on behalf), to ephemeral per-session tokens.
 
 ### L6 — Action Governance
 *Can the agent perform destructive or unauthorized operations?*
 
 L6 is different from L1–L5. Those layers restrict **access to resources**. L6 restricts **what the agent does with the access it has**. An agent with legitimate cloud access can still terminate instances. An agent with legitimate DB credentials can still drop tables.
 
-L6 operates at a **semantic level** that cuts across lower layers. L3 says "you cannot write to this path." L4 says "you cannot connect to this destination." L6 says "you cannot delete production resources" — governing intent and effect regardless of which layer the action flows through. This lets L6 express policies no single lower layer can.
+L6 operates at a **semantic level** that cuts across lower layers. L3 says "you cannot write to this path." L4 says "you cannot connect to this destination." L6 says "you cannot delete production resources," governing intent and effect regardless of which layer the action flows through. This lets L6 express policies no single lower layer can.
 
-The tradeoff: L6 is generally software-enforced and bypassable in ways kernel/hardware enforcement is not. A command blocklist can be circumvented via shell redirection. L6 is defense-in-depth, most valuable on top of strong L1–L4.
+The tradeoff is that L6 is generally software-enforced and bypassable in ways kernel/hardware enforcement is not. A command blocklist can be circumvented via shell redirection. L6 is defense-in-depth, most valuable on top of strong L1–L4.
 
 ### L7 — Observability & Audit
 *Can you see what the agent did, when, and why?*
@@ -128,7 +128,7 @@ Agents can cause seven categories of harm. Sandboxes exist to contain them.
 | ID | Threat | What Goes Wrong | Example |
 |---|---|---|---|
 | **T1** | **Data Exfiltration** | Agent reads sensitive data and transmits it externally | Reads SSH keys, sends via outbound request |
-| **T2** | **Supply Chain Compromise** | Agent introduces malicious code — compromised dependencies, binary replacement, build artifact poisoning | Malicious install script exfiltrates env vars; package replaces trusted binary |
+| **T2** | **Supply Chain Compromise** | Agent introduces malicious code: compromised dependencies, binary replacement, build artifact poisoning | Malicious install script exfiltrates env vars; package replaces trusted binary |
 | **T3** | **Destructive Operations** | Agent destroys or misconfigures resources, **both local and remote** | Local: `rm -rf /`. Remote: cloud resource deletion via API, dropping DB tables, `kubectl delete namespace` |
 | **T4** | **Lateral Movement** | Agent reaches systems beyond its intended scope | Scans local network, hits cloud metadata endpoint |
 | **T5** | **Persistence** | Agent survives sandbox destruction | Writes cron job, modifies shell init files, installs git hooks |
@@ -137,7 +137,7 @@ Agents can cause seven categories of harm. Sandboxes exist to contain them.
 
 ### Prompt Injection Is a Vector, Not a Threat
 
-Prompt injection is **not an eighth threat** — it is a **vector** that activates T1–T7. No sandbox technology can prevent prompt injection itself — that's an LLM-layer problem. Sandboxes limit the **blast radius** when injection succeeds.
+Prompt injection is **not an eighth threat**; it is a **vector** that activates T1–T7. No sandbox technology can prevent prompt injection itself, because that's an LLM-layer problem. Sandboxes limit the **blast radius** when injection succeeds.
 
 ```
   Prompt Injection ──┐
@@ -153,7 +153,7 @@ Threats don't respect layer boundaries. A single destructive operation might inv
 |---|---|---|
 | **T1 Exfiltration** | L3 + L4 + L5 | L3 blocks reading secrets, L4 blocks sending them out, L5 ensures they're not present. Any single layer alone leaks. |
 | **T2 Supply Chain** | L3 + L4 + L7 | L4 controls download sources, L3 protects filesystem integrity (prevents binary replacement), L7 detects compromises after the fact. |
-| **T3 Destructive Ops** | L3 + **L4** + L6 | L3 covers local destruction. **Remote destruction is a network operation** — needs L4 to block access or L6 to block the action semantically. L1 alone doesn't protect remote resources. |
+| **T3 Destructive Ops** | L3 + **L4** + L6 | L3 covers local destruction. **Remote destruction is a network operation**: needs L4 to block access or L6 to block the action semantically. L1 alone doesn't protect remote resources. |
 | **T4 Lateral Movement** | L4 + L1 | L4 blocks outbound access. L1 provides network namespace isolation as secondary boundary. |
 | **T5 Persistence** | L3 + L1 + L6 | Ephemeral sandboxes (L1 destroyed) inherently prevent persistence. Persistent sandboxes need L3 to block init file writes and L6 to block scheduled task creation. |
 | **T6 Privilege Escalation** | L1 + L2 | L1 strength directly determines escape resistance. Hardware boundaries are fundamentally harder to escape than software boundaries. |
@@ -177,7 +177,7 @@ Strength combines robustness of enforcement, reversibility, and enforcement tran
 | **1** | Cooperative | Enforcement that the sandboxed process can circumvent, opt out of, or that can be reversed via escape hatch. Includes: proxy env vars the process can ignore, advisory restrictions, configurations with known bypass mechanisms. If the process can open a raw socket and skip your filter, it's S:1. |
 | **2** | Software-enforced | Enforced by a separate process or proxy that the sandboxed process cannot circumvent from inside, but that can be reconfigured from outside by the operator. Includes: container-level isolation, hot-reloadable policy engines, MITM proxies with iptables redirect |
 | **3** | Kernel-enforced | Enforced by the OS kernel through mechanisms that cannot be weakened once applied, even by the operator during the session. Includes: Landlock, Seatbelt, seccomp-BPF, kernel-level network filtering. Irreversible. |
-| **4** | Structural | Enforced by CPU virtualization, hardware encryption, or architectural absence — the protected resource or attack surface doesn't exist inside the sandbox. Includes: KVM-isolated microVMs, unikernels, network-disabled sandboxes (no network device), credential proxies (secrets never enter sandbox), confidential VMs (SEV-SNP/TDX). |
+| **4** | Structural | Enforced by CPU virtualization, hardware encryption, or architectural absence. The protected resource or attack surface doesn't exist inside the sandbox. Includes: KVM-isolated microVMs, unikernels, network-disabled sandboxes (no network device), credential proxies (secrets never enter sandbox), confidential VMs (SEV-SNP/TDX). |
 
 **Key principle:** Cooperative enforcement is always S:1, regardless of how sophisticated the proxy is. If the kernel denies the syscall, it's S:3. If there's no network device to use, it's S:4.
 
@@ -212,16 +212,16 @@ Products may have multiple tags (e.g., `linux+mac, no-infra`).
 
 ### The Fingerprint
 
-Every product gets a **fingerprint** — a CVSS-inspired vector string showing its strength score at each layer. Each entry is `Layer:Score`, separated by `/`.
+Every product gets a **fingerprint**, a CVSS-inspired vector string showing its strength score at each layer. Each entry is `Layer:Score`, separated by `/`.
 
-**`0` vs `—` (dash):** Both mean "no coverage," but for different reasons. **`0`** means the product *operates* at this layer but provides no enforcement — the capability exists, it's just wide open (e.g., a cloud sandbox with an unrestricted network stack). **`—`** means the product *does not address* this layer at all — it's outside the product's scope (e.g., a policy tool that isn't a compute sandbox). For composition purposes both are treated as "no coverage" — any non-zero score from another product fills the gap.
+**`0` vs `—` (dash):** Both mean "no coverage," but for different reasons. **`0`** means the product *operates* at this layer but provides no enforcement: the capability exists, it's just wide open (e.g., a cloud sandbox with an unrestricted network stack). **`—`** means the product *does not address* this layer at all; it's outside the product's scope (e.g., a policy tool that isn't a compute sandbox). For composition purposes both are treated as "no coverage," and any non-zero score from another product fills the gap.
 
-**Full form** — self-describing, used in product score cards:
+**Full form**, self-describing, used in product score cards:
 ```
 E2B      L1:4/L2:4/L3:4/L4:0/L5:2/L6:-/L7:2
 ```
 
-**Compact form** — positional (L1 through L7, always in order), used in comparison tables and composition:
+**Compact form**, positional (L1 through L7, always in order), used in comparison tables and composition:
 ```
 E2B      4/4/4/0/2/-/2
 Leash    2/2/2/3/2/2/3
@@ -231,7 +231,7 @@ nono     3/-/3/3/3/2/2
 
 The two forms are interchangeable. The compact form always includes all seven positions in L1→L7 order, so the layer labels can be read from the column header.
 
-Score cards (see [Appendix B](#appendix-b-product-score-cards)) show each layer as `S.G` — strength and granularity separated by `.` (e.g., `4.1` = structural strength, binary granularity). The fingerprint uses strength only for the quick-compare view.
+Score cards (see [Appendix B](#appendix-b-product-score-cards)) show each layer as `S.G`, strength and granularity separated by `.` (e.g., `4.1` = structural strength, binary granularity). The fingerprint uses strength only for the quick-compare view.
 
 **Separator convention:** `:` binds a layer to its value (full form), `.` separates strength from granularity within a layer, `/` separates layers from each other.
 
@@ -244,12 +244,12 @@ See **[Appendix B](#appendix-b-product-score-cards)** for product score cards an
 | Term | Definition |
 |---|---|
 | **Blast radius** | Maximum damage when an agent is compromised or misbehaves |
-| **Cooperative enforcement** | Enforcement relying on the sandboxed process respecting a convention (e.g., proxy env vars) — bypassable; always S:1 |
+| **Cooperative enforcement** | Enforcement relying on the sandboxed process respecting a convention (e.g., proxy env vars). Bypassable; always S:1 |
 | **Defense-in-depth** | Layering multiple independent boundaries so failure of one doesn't compromise the system |
 | **Escape hatch** | A mechanism allowing bypass of sandbox restrictions; its existence caps strength at S:1 |
-| **Opaque enforcement** | Enforcement that works regardless of the sandboxed process's behavior — cannot be circumvented; S:2–3 |
-| **Structural enforcement** | Enforcement where the protected resource doesn't exist inside the sandbox — nothing to bypass; S:4 |
-| **Vector** | The method by which a threat is triggered (prompt injection, hallucination, malicious tool) — distinct from the threat itself |
+| **Opaque enforcement** | Enforcement that works regardless of the sandboxed process's behavior. Cannot be circumvented; S:2–3 |
+| **Structural enforcement** | Enforcement where the protected resource doesn't exist inside the sandbox. Nothing to bypass; S:4 |
+| **Vector** | The method by which a threat is triggered (prompt injection, hallucination, malicious tool), distinct from the threat itself |
 
 ---
 ---
@@ -262,9 +262,9 @@ See **[Appendix B](#appendix-b-product-score-cards)** for product score cards an
 
 ## 6. Why Composition Is Necessary
 
-No single product covers all seven layers well. This is by design — products that focus on L1–L3 (the isolation boundary) complement products that focus on L4–L7 (behavior governance, credentials, observability). Recognizing this is the most important insight from the Taxonomy.
+No single product covers all seven layers well. This is by design: products that focus on L1–L3 (the isolation boundary) complement products that focus on L4–L7 (behavior governance, credentials, observability). Recognizing this is the most important insight from the Taxonomy.
 
-The fingerprint makes this visible. Where one product shows `—` or `0`, another shows `3` or `4` — that's the complement. Stack them and the gaps disappear:
+The fingerprint makes this visible. Where one product shows `—` or `0`, another shows `3` or `4`. That's the complement. Stack them and the gaps disappear:
 
 ```
 E2B       4/4/4/0/2/-/2  ← strong box, open network, no governance
@@ -303,7 +303,7 @@ A Kubernetes sandbox CRD (L1/L2/L3) + NetworkPolicy (L4) + policy engine (L6) + 
 
 A cloud platform provides excellent L1/L2/L3, but the user deploys with default (unrestricted) network access and passes cloud credentials as env vars. The agent runs in a perfect microVM but can still exfiltrate credentials, delete cloud resources, and reach internal services.
 
-**This is the most common configuration in practice and a false sense of security.** Strong L1 is necessary but not sufficient. Look at the fingerprint — if L4 is `0`, you have a problem.
+**This is the most common configuration in practice and a false sense of security.** Strong L1 is necessary but not sufficient. Look at the fingerprint: if L4 is `0`, you have a problem.
 
 ---
 
@@ -344,7 +344,7 @@ Map your answers to layer requirements, then scan the [fingerprint comparison ta
 
 # APPENDIX A: Layer Mechanism Reference
 
-Catalogs mechanisms at each layer with strength and granularity. Products listed as examples — not exhaustive.
+Catalogs mechanisms at each layer with strength and granularity. Products listed as examples, not exhaustive.
 
 *Last updated: March 2026*
 
@@ -388,12 +388,12 @@ Catalogs mechanisms at each layer with strength and granularity. Products listed
 | Mechanism | S | G | How It Works |
 |---|---|---|---|
 | No restriction | 0 | 0 | Full network access |
-| Proxy env vars | 1 | 2 | **Cooperative** — trivially bypassed via raw sockets |
-| Transparent proxy (iptables redirect) | 2 | 3 | **Opaque** — all traffic redirected regardless of process |
-| Kernel/hypervisor network filter | 3 | 2 | **Opaque** — iptables, eBPF, or Network Extension |
-| MITM proxy (kernel-redirected) | 2–3 | 3 | **Opaque** — TLS-terminating; per-URL/method policies |
-| Default-deny + exceptions | 3–4 | 2–3 | **Opaque/Structural** — all egress blocked; allowlist only |
-| Network disabled | 4 | 1 | **Structural** — no network interface exists |
+| Proxy env vars | 1 | 2 | **Cooperative**: trivially bypassed via raw sockets |
+| Transparent proxy (iptables redirect) | 2 | 3 | **Opaque**: all traffic redirected regardless of process |
+| Kernel/hypervisor network filter | 3 | 2 | **Opaque**: iptables, eBPF, or Network Extension |
+| MITM proxy (kernel-redirected) | 2–3 | 3 | **Opaque**: TLS-terminating; per-URL/method policies |
+| Default-deny + exceptions | 3–4 | 2–3 | **Opaque/Structural**: all egress blocked; allowlist only |
+| Network disabled | 4 | 1 | **Structural**: no network interface exists |
 
 ## A.5 — L5 Credentials
 
@@ -685,7 +685,7 @@ SIG Apps project; warm pools; hibernation; SandboxClaim API
 | Cursor (sandboxed) | ◐ | ○ | ◐ L◐/R● | ● | ◐ | ◐ | ○ |
 | Copilot agent | ◐ | ◐ | ◐ | ◐ | ● | ◐ | ◐ |
 
-**Patterns**: Cloud platforms cluster at T3 ◐ (L●/R○) — strong box, open window for remote destruction. Policy tools score T3 ● and T4 ● but T6 ○. Local OS tools score T7 ○ universally. T2 is universally ◐ or ○.
+**Patterns**: Cloud platforms cluster at T3 ◐ (L●/R○), strong box but an open window for remote destruction. Policy tools score T3 ● and T4 ● but T6 ○. Local OS tools score T7 ○ universally. T2 is universally ◐ or ○.
 
 ---
 
