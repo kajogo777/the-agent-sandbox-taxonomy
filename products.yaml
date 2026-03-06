@@ -1,0 +1,405 @@
+# Agent Sandbox Taxonomy — Product Scores
+# Single source of truth for all product evaluations.
+#
+# To add a new product: copy an existing entry, fill in scores.
+# To update: modify scores/notes, then run: python assets/generate.py
+#
+# Scoring reference:
+#   Strength (S): 0=None, 1=Cooperative, 2=Software-enforced, 3=Kernel-enforced, 4=Structural
+#   Granularity (G): 0=None, 1=Binary, 2=Allowlist/Blocklist, 3=Per-resource policy
+#   Strength null (~) means the layer is not addressed (shown as — in output)
+#   Strength 0 means the layer operates but is unenforced (shown as ○ in output)
+#
+# Threat coverage:
+#   full = ● (primary defense)
+#   partial = ◐
+#   none = ○
+#   For T3, use "partial L●/R○" format to distinguish local vs remote
+
+products:
+
+  # ── CLOUD PLATFORMS ──────────────────────────────────────────────────
+
+  - name: E2B
+    category: Cloud Platforms
+    portability: [cloud-managed]
+    layers:
+      L1: { s: 4, g: 1, note: "Firecracker microVM; KVM isolation" }
+      L2: { s: 4, g: 2, note: "VM-allocated caps" }
+      L3: { s: 4, g: 1, note: "Ephemeral root" }
+      L4: { s: 0, g: 0, note: "Not restricted by default; user-configurable" }
+      L5: { s: 2, g: 2, note: "Env-var filtering" }
+      L6: { s: ~, g: ~, note: "" }
+      L7: { s: 2, g: 2, note: "API-level logging" }
+    threats:
+      T1: full
+      T2: partial
+      T3: "partial L●/R○"
+      T4: partial
+      T5: full
+      T6: full
+      T7: full
+    notes: "Gaps: L4 not default; no L6. Complements: Policy tools for L4–L7"
+
+  - name: Daytona (Kata)
+    category: Cloud Platforms
+    portability: [cloud-managed, needs-kvm]
+    layers:
+      L1: { s: 4, g: 1, note: "Kata Containers; Cloud Hypervisor" }
+      L2: { s: 4, g: 2, note: "VM-allocated caps" }
+      L3: { s: 4, g: 1, note: "Ephemeral root" }
+      L4: { s: 0, g: 0, note: "User-configurable" }
+      L5: { s: 2, g: 2, note: "Env-var filtering" }
+      L6: { s: ~, g: ~, note: "" }
+      L7: { s: 1, g: 1, note: "Basic logs" }
+    threats:
+      T1: full
+      T2: partial
+      T3: "partial L●/R○"
+      T4: partial
+      T5: full
+      T6: full
+      T7: full
+    notes: "BYOC available"
+
+  - name: Modal
+    category: Cloud Platforms
+    portability: [cloud-managed]
+    layers:
+      L1: { s: 3, g: 1, note: "gVisor user-space kernel" }
+      L2: { s: 3, g: 2, note: "Container-level limits" }
+      L3: { s: 3, g: 1, note: "Ephemeral" }
+      L4: { s: 0, g: 0, note: "No default restriction" }
+      L5: { s: 2, g: 2, note: "Env-var filtering" }
+      L6: { s: ~, g: ~, note: "" }
+      L7: { s: 2, g: 2, note: "Platform logs" }
+    threats:
+      T1: full
+      T2: partial
+      T3: "partial L●/R○"
+      T4: partial
+      T5: full
+      T6: partial
+      T7: full
+    notes: "GPU support (T4→H100)"
+
+  - name: Fly.io Sprites
+    category: Cloud Platforms
+    portability: [cloud-managed]
+    layers:
+      L1: { s: 4, g: 1, note: "Firecracker microVM" }
+      L2: { s: 4, g: 2, note: "VM-allocated caps" }
+      L3: { s: 4, g: 1, note: "Full independent; 100GB NVMe" }
+      L4: { s: 0, g: 0, note: "No default restriction" }
+      L5: { s: 2, g: 2, note: "Env injection" }
+      L6: { s: ~, g: ~, note: "" }
+      L7: { s: 1, g: 1, note: "Basic logs" }
+    threats:
+      T1: full
+      T2: partial
+      T3: "partial L●/R○"
+      T4: partial
+      T5: partial
+      T6: full
+      T7: full
+    notes: "Persistent VMs; zero idle charges"
+
+  - name: Blaxel
+    category: Cloud Platforms
+    portability: [cloud-managed]
+    layers:
+      L1: { s: 4, g: 1, note: "Firecracker-forked microVM" }
+      L2: { s: 4, g: 2, note: "VM-allocated caps" }
+      L3: { s: 4, g: 2, note: "Immutable root + overlay; snapshot/rollback" }
+      L4: { s: 0, g: 0, note: "User-configurable; egress IP control" }
+      L5: { s: 2, g: 2, note: "Env-var filtering" }
+      L6: { s: ~, g: ~, note: "" }
+      L7: { s: 2, g: 2, note: "Observability suite" }
+    threats:
+      T1: full
+      T2: partial
+      T3: "partial L●/R○"
+      T4: partial
+      T5: full
+      T6: full
+      T7: full
+    notes: "25ms resume; SOC2/HIPAA"
+
+  - name: Unikraft Cloud
+    category: Cloud Platforms
+    portability: [cloud-managed, needs-kvm]
+    layers:
+      L1: { s: 4, g: 1, note: "Unikernel VM; minimal single-app kernel" }
+      L2: { s: 3, g: 2, note: "VM-allocated" }
+      L3: { s: 4, g: 1, note: "Full independent" }
+      L4: { s: 0, g: 1, note: "Platform-configurable" }
+      L5: { s: 2, g: 1, note: "Env injection" }
+      L6: { s: ~, g: ~, note: "" }
+      L7: { s: 2, g: 2, note: "Prometheus/Grafana" }
+    threats:
+      T1: full
+      T2: partial
+      T3: "partial L●/R○"
+      T4: partial
+      T5: full
+      T6: full
+      T7: full
+    notes: "10-50ms cold start; 100K+ VMs/server"
+
+  - name: Docker Sandbox
+    category: Cloud Platforms
+    portability: [any-os, windows, needs-docker]
+    layers:
+      L1: { s: 4, g: 1, note: "MicroVM inside Docker Desktop" }
+      L2: { s: 3, g: 2, note: "VM-allocated" }
+      L3: { s: 3, g: 1, note: "Workspace bind-mount; private Docker daemon" }
+      L4: { s: 0, g: 0, note: "No default restriction" }
+      L5: { s: 2, g: 2, note: "Env-var filtering" }
+      L6: { s: ~, g: ~, note: "" }
+      L7: { s: 1, g: 1, note: "Basic logs" }
+    threats:
+      T1: full
+      T2: partial
+      T3: "partial L●/R○"
+      T4: partial
+      T5: full
+      T6: full
+      T7: full
+    notes: "Native Claude/Copilot/Gemini support"
+
+  - name: Google Agent Sandbox
+    category: Cloud Platforms
+    portability: [linux-only, needs-k8s]
+    layers:
+      L1: { s: 3, g: 1, note: "gVisor (default) or Kata (opt-in)" }
+      L2: { s: 3, g: 2, note: "K8s resource quotas" }
+      L3: { s: 3, g: 1, note: "Ephemeral; PVC optional" }
+      L4: { s: 0, g: 0, note: "Via K8s NetworkPolicy (user-configured)" }
+      L5: { s: 2, g: 2, note: "K8s Secrets" }
+      L6: { s: ~, g: ~, note: "" }
+      L7: { s: 1, g: 1, note: "K8s audit log" }
+    threats:
+      T1: full
+      T2: partial
+      T3: "partial L●/R○"
+      T4: partial
+      T5: full
+      T6: full
+      T7: full
+    notes: "SIG Apps project; warm pools; hibernation; SandboxClaim API"
+
+  # ── POLICY & CREDENTIAL TOOLS ───────────────────────────────────────
+
+  - name: StrongDM Leash
+    category: Policy & Credential Tools
+    portability: [linux+mac, needs-docker]
+    layers:
+      L1: { s: 2, g: 1, note: "Docker container" }
+      L2: { s: 2, g: 2, note: "Container limits" }
+      L3: { s: 2, g: 1, note: "Container mount" }
+      L4: { s: 3, g: 3, note: "Linux: iptables→MITM; macOS: Network Extension (kernel)" }
+      L5: { s: 2, g: 2, note: "Env-var forwarding" }
+      L6: { s: 2, g: 3, note: "Cedar policies; governs network + filesystem + MCP" }
+      L7: { s: 3, g: 3, note: "Real-time web UI; MCP observer; full telemetry" }
+    threats:
+      T1: partial
+      T2: partial
+      T3: "full L+R Cedar"
+      T4: full
+      T5: partial
+      T6: none
+      T7: partial
+    notes: "Complements: MicroVM platforms for L1"
+
+  - name: Stakpak Warden
+    category: Policy & Credential Tools
+    portability: [linux+mac, no-infra]
+    layers:
+      L1: { s: ~, g: ~, note: "Not a compute sandbox" }
+      L2: { s: ~, g: ~, note: "" }
+      L3: { s: 1, g: 1, note: "Backup before edit" }
+      L4: { s: 2, g: 3, note: "Transparent proxy; iptables redirect; Cedar per-request" }
+      L5: { s: 3, g: 3, note: "210+ secret types; placeholder substitution" }
+      L6: { s: 2, g: 3, note: "Cedar; blocks destructive cloud/infra operations" }
+      L7: { s: 3, g: 3, note: "Full session trace; mTLS" }
+    threats:
+      T1: full
+      T2: none
+      T3: "full R via Cedar"
+      T4: full
+      T5: none
+      T6: none
+      T7: none
+    notes: "Complements: Any L1 solution. Rust; Apache-2.0"
+
+  # ── OS-LEVEL WRAPPERS ───────────────────────────────────────────────
+
+  - name: nono
+    category: OS-Level Wrappers
+    portability: [linux+mac, no-infra]
+    layers:
+      L1: { s: 3, g: 1, note: "Landlock (Linux) / Seatbelt (macOS); irreversible" }
+      L2: { s: ~, g: ~, note: "" }
+      L3: { s: 3, g: 2, note: "Per-path read/write/deny; irreversible" }
+      L4: { s: 3, g: 1, note: "--net-block; kernel-enforced; binary only" }
+      L5: { s: 3, g: 2, note: "Sensitive paths auto-blocked; irreversible" }
+      L6: { s: 2, g: 2, note: "Command blocklist" }
+      L7: { s: 2, g: 2, note: "Structured JSON audit; crypto snapshots" }
+    threats:
+      T1: full
+      T2: none
+      T3: "partial L●/R○"
+      T4: partial
+      T5: full
+      T6: partial
+      T7: none
+    notes: "ALL restrictions IRREVERSIBLE. Rust; Apache-2.0"
+
+  - name: packnplay
+    category: OS-Level Wrappers
+    portability: [linux+mac, needs-docker]
+    layers:
+      L1: { s: 2, g: 1, note: "Docker container" }
+      L2: { s: 2, g: 2, note: "Container limits" }
+      L3: { s: 2, g: 1, note: "Container mount" }
+      L4: { s: 0, g: 0, note: "No default restriction" }
+      L5: { s: 2, g: 2, note: "Env-var filtering" }
+      L6: { s: ~, g: ~, note: "" }
+      L7: { s: 1, g: 1, note: "Basic logs" }
+    threats:
+      T1: partial
+      T2: partial
+      T3: "partial L◐/R○"
+      T4: partial
+      T5: full
+      T6: partial
+      T7: none
+    notes: ""
+
+  # ── BUILT-IN AGENT SANDBOXES ────────────────────────────────────────
+
+  - name: Claude Code (local)
+    category: Built-in Agent Sandboxes
+    portability: [linux+mac, no-infra]
+    layers:
+      L1: { s: 3, g: 1, note: "bubblewrap (Linux) / Seatbelt (macOS)" }
+      L2: { s: ~, g: ~, note: "" }
+      L3: { s: 3, g: 2, note: "Sensitive path blocking" }
+      L4: { s: 0, g: 0, note: "No default restriction" }
+      L5: { s: 3, g: 2, note: "Sensitive file paths blocked" }
+      L6: { s: 1, g: 1, note: "Human-in-the-loop" }
+      L7: { s: 1, g: 1, note: "Basic session logs" }
+    threats:
+      T1: partial
+      T2: none
+      T3: "partial L◐/R○"
+      T4: none
+      T5: partial
+      T6: partial
+      T7: none
+    notes: "Complements: nono (L4), Leash (L4+L6+L7), cloud (L2). MIT"
+
+  - name: Claude Code (web)
+    category: Built-in Agent Sandboxes
+    portability: [cloud-managed]
+    layers:
+      L1: { s: 4, g: 1, note: "Managed VM; hardware isolation" }
+      L2: { s: 3, g: 2, note: "VM-allocated" }
+      L3: { s: 4, g: 1, note: "Ephemeral; repo only" }
+      L4: { s: 4, g: 2, note: "Default-deny egress; structural" }
+      L5: { s: 4, g: 3, note: "External git proxy; credentials never enter sandbox" }
+      L6: { s: 1, g: 1, note: "Human-in-the-loop" }
+      L7: { s: 2, g: 2, note: "Session logs" }
+    threats:
+      T1: full
+      T2: partial
+      T3: "full L+R"
+      T4: full
+      T5: full
+      T6: full
+      T7: full
+    notes: "Credentials never enter sandbox"
+
+  - name: Codex (agent phase)
+    category: Built-in Agent Sandboxes
+    portability: [cloud-managed]
+    layers:
+      L1: { s: 3, g: 1, note: "OS-enforced sandbox" }
+      L2: { s: 3, g: 2, note: "Platform-managed" }
+      L3: { s: 4, g: 1, note: "Ephemeral workspace" }
+      L4: { s: 4, g: 1, note: "Network disabled; structural" }
+      L5: { s: 4, g: 3, note: "Secrets stripped before agent phase" }
+      L6: { s: 1, g: 1, note: "Human-in-the-loop" }
+      L7: { s: 2, g: 2, note: "Task-level audit" }
+    threats:
+      T1: full
+      T2: partial
+      T3: "full L+R no-net"
+      T4: full
+      T5: full
+      T6: partial
+      T7: full
+    notes: "Two-phase model"
+
+  - name: Cursor (sandboxed)
+    category: Built-in Agent Sandboxes
+    portability: [linux+mac, no-infra]
+    layers:
+      L1: { s: 3, g: 1, note: "Landlock (Linux) / Seatbelt (macOS)" }
+      L2: { s: ~, g: ~, note: "" }
+      L3: { s: 2, g: 2, note: "Path blocking; workspace + /tmp" }
+      L4: { s: 3, g: 1, note: "Network disabled; kernel-enforced" }
+      L5: { s: 2, g: 2, note: "Path blocking" }
+      L6: { s: 1, g: 1, note: "Human-in-the-loop" }
+      L7: { s: 1, g: 1, note: "Basic logs" }
+    threats:
+      T1: partial
+      T2: none
+      T3: "partial L◐/R●"
+      T4: full
+      T5: partial
+      T6: partial
+      T7: none
+    notes: ""
+
+  - name: Copilot agent
+    category: Built-in Agent Sandboxes
+    portability: [cloud-managed]
+    layers:
+      L1: { s: 2, g: 1, note: "Container isolation" }
+      L2: { s: 2, g: 2, note: "Container limits" }
+      L3: { s: 2, g: 1, note: "Container mount" }
+      L4: { s: 2, g: 1, note: "Limited egress" }
+      L5: { s: 2, g: 2, note: "Env-var filtering" }
+      L6: { s: 1, g: 1, note: "Human-in-the-loop" }
+      L7: { s: 1, g: 1, note: "Basic logs" }
+    threats:
+      T1: partial
+      T2: partial
+      T3: partial
+      T4: partial
+      T5: full
+      T6: partial
+      T7: partial
+    notes: ""
+
+  - name: Devin
+    category: Built-in Agent Sandboxes
+    portability: [cloud-managed]
+    layers:
+      L1: { s: 4, g: 1, note: "Managed VM; hardware isolation" }
+      L2: { s: 3, g: 2, note: "VM-allocated" }
+      L3: { s: 3, g: 1, note: "Ephemeral workspace" }
+      L4: { s: 2, g: 1, note: "Limited egress control" }
+      L5: { s: 2, g: 2, note: "Env-var filtering" }
+      L6: { s: 1, g: 1, note: "Human-in-the-loop" }
+      L7: { s: 2, g: 2, note: "Session logs" }
+    threats:
+      T1: partial
+      T2: partial
+      T3: "partial L●/R○"
+      T4: partial
+      T5: full
+      T6: partial
+      T7: full
+    notes: ""

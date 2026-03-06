@@ -3,7 +3,7 @@
 *Version 1.0, March 2026*
 
 <p align="center">
-  <img src="ast-infographic.svg" alt="AST 7-7-3 Infographic: 7 Defense Layers, 7 Threat Categories, 3 Evaluation Dimensions" width="960"/>
+  <img src="assets/ast-infographic.svg" alt="AST 7-7-3 Infographic: 7 Defense Layers, 7 Threat Categories, 3 Evaluation Dimensions" width="960"/>
 </p>
 
 ---
@@ -18,7 +18,7 @@ The document has two halves:
 
 **The Framework** ([Parts 6–8](#the-framework)) defines what sandbox consumers should *do*. Composition patterns, anti-patterns, a decision checklist, and stacking rules. Use it to choose the right sandbox stack for your situation.
 
-**The Appendix** contains product-specific data: [score cards](#appendix-b-product-score-cards), [fingerprint comparison tables](#appendix-d-fingerprint-comparison-table), [threat coverage matrices](#appendix-c-threat-coverage-matrix), and [mechanism references](#appendix-a-layer-mechanism-reference). This is the only part that needs regular updating.
+**The Appendix** contains product-specific data: [score cards](#appendix-b-product-score-cards), [threat coverage matrices](#appendix-c-threat-coverage-matrix), and [mechanism references](#appendix-a-layer-mechanism-reference). This is the only part that needs regular updating.
 
 ---
 
@@ -42,7 +42,7 @@ The document has two halves:
 - [A — Layer Mechanism Reference](#appendix-a-layer-mechanism-reference)
 - [B — Product Score Cards](#appendix-b-product-score-cards)
 - [C — Threat Coverage Matrix](#appendix-c-threat-coverage-matrix)
-- [D — Fingerprint Comparison Table](#appendix-d-fingerprint-comparison-table)
+- [Conclusion](#conclusion)
 
 ---
 
@@ -251,7 +251,7 @@ Score cards (see [Appendix B](#appendix-b-product-score-cards)) show each layer 
 
 **Separator convention:** `:` binds a layer to its value (full form), `.` separates strength from granularity within a layer, `/` separates layers from each other.
 
-See **[Appendix B](#appendix-b-product-score-cards)** for product score cards and **[Appendix D](#appendix-d-fingerprint-comparison-table)** for the full fingerprint comparison table.
+See **[Appendix B](#appendix-b-product-score-cards)** for product score cards.
 
 ---
 
@@ -354,7 +354,7 @@ No infrastructure → process wrappers (`no-infra`). Docker available → contai
 
 ### After the Checklist
 
-Map your answers to layer requirements, then scan the [fingerprint comparison table (Appendix D)](#appendix-d-fingerprint-comparison-table) for products that cover those layers at the required strength. Where no single product covers your needs, compose two using the stacking rule (take the max at each layer). Verify the composed fingerprint has no zeros or dashes at layers you care about.
+Map your answers to layer requirements, then scan the [score cards (Appendix B)](#appendix-b-product-score-cards) for products that cover those layers at the required strength. Where no single product covers your needs, compose two using the stacking rule (take the max at each layer). Verify the composed fingerprint has no zeros or dashes at layers you care about.
 
 ---
 ---
@@ -447,234 +447,13 @@ Catalogs mechanisms at each layer with strength and granularity. Products listed
 
 # APPENDIX B: Product Score Cards
 
-Each card shows `S.G` (Strength.Granularity) per layer and a fingerprint (strength only, `Layer:Score` format). `0` = layer operates but unenforced; `—` = layer not addressed (see [The Fingerprint](#the-fingerprint)).
+Each product is scored `S.G` (Strength.Granularity) per layer. `0` = layer operates but unenforced; `—` = layer not addressed (see [The Fingerprint](#the-fingerprint)). All scores are maintained in [`products.yaml`](products.yaml).
 
-*Last updated: March 2026*
+<p align="center">
+  <img src="assets/fingerprint-heatmap.svg" alt="AST Fingerprint Heatmap — Strength by Layer" width="740"/>
+</p>
 
-### E2B
-**Fingerprint: `L1:4/L2:4/L3:4/L4:0/L5:2/L6:-/L7:2`** · Portability: `cloud-managed`
-
-| Layer | S.G | Notes |
-|---|---|---|
-| L1 Compute | 4.1 | Firecracker microVM; KVM isolation |
-| L2 Resource | 4.2 | VM-allocated caps |
-| L3 Filesystem | 4.1 | Ephemeral root |
-| L4 Network | 0.0 | Not restricted by default; user-configurable |
-| L5 Credentials | 2.2 | Env-var filtering |
-| L6 Action | — | |
-| L7 Observability | 2.2 | API-level logging |
-
-Threats: T1● T2◐ T3◐(L●/R○) T4◐ T5● T6● T7● · Gaps: L4 not default; no L6 · Complements: Policy tools for L4–L7
-
-### Daytona (Kata Containers mode)
-**Fingerprint: `L1:4/L2:4/L3:4/L4:0/L5:2/L6:-/L7:1`** · Portability: `cloud-managed, needs-kvm`
-
-| Layer | S.G | Notes |
-|---|---|---|
-| L1 Compute | 4.1 | Kata Containers; Cloud Hypervisor |
-| L2 Resource | 4.2 | VM-allocated caps |
-| L3 Filesystem | 4.1 | Ephemeral root |
-| L4 Network | 0.0 | User-configurable |
-| L5 Credentials | 2.2 | Env-var filtering |
-| L6 Action | — | |
-| L7 Observability | 1.1 | Basic logs |
-
-Threats: T1● T2◐ T3◐(L●/R○) T4◐ T5● T6● T7● · BYOC available
-
-### Modal
-**Fingerprint: `L1:3/L2:3/L3:3/L4:0/L5:2/L6:-/L7:2`** · Portability: `cloud-managed`
-
-| Layer | S.G | Notes |
-|---|---|---|
-| L1 Compute | 3.1 | gVisor user-space kernel |
-| L2 Resource | 3.2 | Container-level limits |
-| L3 Filesystem | 3.1 | Ephemeral |
-| L4 Network | 0.0 | No default restriction |
-| L5 Credentials | 2.2 | Env-var filtering |
-| L6 Action | — | |
-| L7 Observability | 2.2 | Platform logs |
-
-Threats: T1● T2◐ T3◐(L●/R○) T4◐ T5● T6◐ T7● · GPU support (T4→H100)
-
-### Fly.io Sprites
-**Fingerprint: `L1:4/L2:4/L3:4/L4:0/L5:2/L6:-/L7:1`** · Portability: `cloud-managed`
-
-| Layer | S.G | Notes |
-|---|---|---|
-| L1 Compute | 4.1 | Firecracker microVM |
-| L2 Resource | 4.2 | VM-allocated caps |
-| L3 Filesystem | 4.1 | Full independent; 100GB NVMe |
-| L4 Network | 0.0 | No default restriction |
-| L5 Credentials | 2.2 | Env injection |
-| L6 Action | — | |
-| L7 Observability | 1.1 | Basic logs |
-
-Threats: T1● T2◐ T3◐(L●/R○) T4◐ T5◐(persistent) T6● T7● · Persistent VMs; zero idle charges
-
-### Blaxel
-**Fingerprint: `L1:4/L2:4/L3:4/L4:0/L5:2/L6:-/L7:2`** · Portability: `cloud-managed`
-
-| Layer | S.G | Notes |
-|---|---|---|
-| L1 Compute | 4.1 | Firecracker-forked microVM |
-| L2 Resource | 4.2 | VM-allocated caps |
-| L3 Filesystem | 4.2 | Immutable root + overlay; snapshot/rollback |
-| L4 Network | 0.0 | User-configurable; egress IP control |
-| L5 Credentials | 2.2 | Env-var filtering |
-| L6 Action | — | |
-| L7 Observability | 2.2 | Observability suite |
-
-Threats: T1● T2◐ T3◐(L●/R○) T4◐ T5●(rollback) T6● T7● · 25ms resume; SOC2/HIPAA
-
-### Unikraft Cloud
-**Fingerprint: `L1:4/L2:3/L3:4/L4:0/L5:2/L6:-/L7:2`** · Portability: `cloud-managed, needs-kvm`
-
-| Layer | S.G | Notes |
-|---|---|---|
-| L1 Compute | 4.1 | Unikernel VM; minimal single-app kernel |
-| L2 Resource | 3.2 | VM-allocated |
-| L3 Filesystem | 4.1 | Full independent |
-| L4 Network | 0.1 | Platform-configurable |
-| L5 Credentials | 2.1 | Env injection |
-| L6 Action | — | |
-| L7 Observability | 2.2 | Prometheus/Grafana |
-
-Threats: T1● T2◐ T3◐(L●/R○) T4◐ T5● T6● T7● · 10-50ms cold start; 100K+ VMs/server
-
-### StrongDM Leash
-**Fingerprint: `L1:2/L2:2/L3:2/L4:3/L5:2/L6:2/L7:3`** · Portability: `linux+mac, needs-docker (Linux) or Leash.app (macOS)`
-
-| Layer | S.G | Notes |
-|---|---|---|
-| L1 Compute | 2.1 | Docker container |
-| L2 Resource | 2.2 | Container limits |
-| L3 Filesystem | 2.1 | Container mount |
-| L4 Network | 3.3 | Linux: iptables→MITM; macOS: Network Extension (kernel) |
-| L5 Credentials | 2.2 | Env-var forwarding |
-| L6 Action | 2.3 | Cedar policies; governs network + filesystem + MCP |
-| L7 Observability | 3.3 | Real-time web UI; MCP observer; full telemetry |
-
-Threats: T1◐ T2◐ T3●(L+R Cedar) T4● T5◐ T6○ T7◐ · Complements: MicroVM platforms for L1
-
-### Stakpak Warden
-**Fingerprint: `L1:-/L2:-/L3:1/L4:2/L5:3/L6:2/L7:3`** · Portability: `linux+mac, no-infra`
-
-| Layer | S.G | Notes |
-|---|---|---|
-| L1 Compute | — | Not a compute sandbox |
-| L2 Resource | — | |
-| L3 Filesystem | 1.1 | Backup before edit |
-| L4 Network | 2.3 | Transparent proxy; iptables redirect; Cedar per-request |
-| L5 Credentials | 3.3 | 210+ secret types; placeholder substitution |
-| L6 Action | 2.3 | Cedar; blocks destructive cloud/infra operations |
-| L7 Observability | 3.3 | Full session trace; mTLS |
-
-Threats: T1●(secrets) T2○ T3●(R via Cedar) T4● T5○ T6○ T7○ · Complements: Any L1 solution · Rust; Apache-2.0
-
-### nono
-**Fingerprint: `L1:3/L2:-/L3:3/L4:3/L5:3/L6:2/L7:2`** · Portability: `linux+mac, no-infra`
-
-| Layer | S.G | Notes |
-|---|---|---|
-| L1 Compute | 3.1 | Landlock (Linux) / Seatbelt (macOS); irreversible |
-| L2 Resource | — | |
-| L3 Filesystem | 3.2 | Per-path read/write/deny; irreversible |
-| L4 Network | 3.1 | `--net-block`; kernel-enforced; binary only |
-| L5 Credentials | 3.2 | Sensitive paths auto-blocked; irreversible |
-| L6 Action | 2.2 | Command blocklist |
-| L7 Observability | 2.2 | Structured JSON audit; crypto snapshots |
-
-Threats: T1● T2○ T3◐(L●/R○) T4◐ T5● T6◐ T7○ · ALL restrictions IRREVERSIBLE · Rust; Apache-2.0
-
-### Claude Code (local sandbox)
-**Fingerprint: `L1:3/L2:-/L3:3/L4:0/L5:3/L6:1/L7:1`** · Portability: `linux+mac, no-infra`
-
-| Layer | S.G | Notes |
-|---|---|---|
-| L1 Compute | 3.1 | bubblewrap (Linux) / Seatbelt (macOS) |
-| L2 Resource | — | |
-| L3 Filesystem | 3.2 | Sensitive path blocking |
-| L4 Network | 0.0 | No default restriction |
-| L5 Credentials | 3.2 | Sensitive file paths blocked |
-| L6 Action | 1.1 | Human-in-the-loop |
-| L7 Observability | 1.1 | Basic session logs |
-
-Threats: T1◐ T2○ T3◐(L◐/R○) T4○ T5◐ T6◐ T7○ · Complements: nono (L4), Leash (L4+L6+L7), cloud (L2) · MIT
-
-### Claude Code (web sandbox)
-**Fingerprint: `L1:4/L2:3/L3:4/L4:4/L5:4/L6:1/L7:2`** · Portability: `cloud-managed`
-
-| Layer | S.G | Notes |
-|---|---|---|
-| L1 Compute | 4.1 | Managed VM; hardware isolation |
-| L2 Resource | 3.2 | VM-allocated |
-| L3 Filesystem | 4.1 | Ephemeral; repo only |
-| L4 Network | 4.2 | Default-deny egress; structural |
-| L5 Credentials | 4.3 | External git proxy; credentials never enter sandbox |
-| L6 Action | 1.1 | Human-in-the-loop |
-| L7 Observability | 2.2 | Session logs |
-
-Threats: T1● T2◐ T3●(L+R) T4● T5● T6● T7● · Credentials never enter sandbox
-
-### OpenAI Codex (agent phase)
-**Fingerprint: `L1:3/L2:3/L3:4/L4:4/L5:4/L6:1/L7:2`** · Portability: `cloud-managed`
-
-| Layer | S.G | Notes |
-|---|---|---|
-| L1 Compute | 3.1 | OS-enforced sandbox |
-| L2 Resource | 3.2 | Platform-managed |
-| L3 Filesystem | 4.1 | Ephemeral workspace |
-| L4 Network | 4.1 | Network disabled; structural |
-| L5 Credentials | 4.3 | Secrets stripped before agent phase |
-| L6 Action | 1.1 | Human-in-the-loop |
-| L7 Observability | 2.2 | Task-level audit |
-
-Threats: T1● T2◐(setup phase) T3●(L+R no-net) T4● T5● T6◐ T7● · Two-phase model
-
-### Cursor (sandboxed mode)
-**Fingerprint: `L1:3/L2:-/L3:2/L4:3/L5:2/L6:1/L7:1`** · Portability: `linux+mac, no-infra`
-
-| Layer | S.G | Notes |
-|---|---|---|
-| L1 Compute | 3.1 | Landlock (Linux) / Seatbelt (macOS) |
-| L2 Resource | — | |
-| L3 Filesystem | 2.2 | Path blocking; workspace + /tmp |
-| L4 Network | 3.1 | Network disabled; kernel-enforced |
-| L5 Credentials | 2.2 | Path blocking |
-| L6 Action | 1.1 | Human-in-the-loop |
-| L7 Observability | 1.1 | Basic logs |
-
-Threats: T1◐ T2○ T3◐(L◐/R●no-net) T4●(no-net) T5◐ T6◐ T7○
-
-### Docker Sandbox
-**Fingerprint: `L1:4/L2:3/L3:3/L4:0/L5:2/L6:-/L7:1`** · Portability: `any-os, windows, needs-docker`
-
-| Layer | S.G | Notes |
-|---|---|---|
-| L1 Compute | 4.1 | MicroVM inside Docker Desktop |
-| L2 Resource | 3.2 | VM-allocated |
-| L3 Filesystem | 3.1 | Workspace bind-mount; private Docker daemon |
-| L4 Network | 0.0 | No default restriction |
-| L5 Credentials | 2.2 | Env-var filtering |
-| L6 Action | — | |
-| L7 Observability | 1.1 | Basic logs |
-
-Threats: T1● T2◐ T3◐(L●/R○) T4◐ T5● T6● T7● · Native Claude/Copilot/Gemini support
-
-### Google Agent Sandbox (K8s CRD)
-**Fingerprint: `L1:3/L2:3/L3:3/L4:0/L5:2/L6:-/L7:1`** · Portability: `linux-only, needs-k8s`
-
-| Layer | S.G | Notes |
-|---|---|---|
-| L1 Compute | 3–4.1 | gVisor (default) or Kata (opt-in) |
-| L2 Resource | 3.2 | K8s resource quotas |
-| L3 Filesystem | 3.1 | Ephemeral; PVC optional |
-| L4 Network | 0.0 | Via K8s NetworkPolicy (user-configured) |
-| L5 Credentials | 2.2 | K8s Secrets |
-| L6 Action | — | |
-| L7 Observability | 1.1 | K8s audit log |
-
-SIG Apps project; warm pools; hibernation; SandboxClaim API
+For full per-product details (granularity scores, mechanism notes, threat breakdowns, gaps, and complements), see [`products.yaml`](products.yaml).
 
 ---
 
@@ -682,65 +461,11 @@ SIG Apps project; warm pools; hibernation; SandboxClaim API
 
 **●** Primary defense, **◐** Partial, **○** Not addressed. T3: `L●/R○` = local mitigated/remote not; `L+R` = both.
 
-*Last updated: March 2026*
-
-| Product | T1 | T2 | T3 | T4 | T5 | T6 | T7 |
-|---|---|---|---|---|---|---|---|
-| E2B | ● | ◐ | ◐ L●/R○ | ◐ | ● | ● | ● |
-| Daytona (Kata) | ● | ◐ | ◐ L●/R○ | ◐ | ● | ● | ● |
-| Modal | ● | ◐ | ◐ L●/R○ | ◐ | ● | ◐ | ● |
-| Fly.io Sprites | ● | ◐ | ◐ L●/R○ | ◐ | ◐ | ● | ● |
-| Blaxel | ● | ◐ | ◐ L●/R○ | ◐ | ● | ● | ● |
-| Unikraft | ● | ◐ | ◐ L●/R○ | ◐ | ● | ● | ● |
-| Docker Sandbox | ● | ◐ | ◐ L●/R○ | ◐ | ● | ● | ● |
-| Leash | ◐ | ◐ | ● L+R | ● | ◐ | ○ | ◐ |
-| Stakpak Warden | ● | ○ | ● L◐/R● | ● | ○ | ○ | ○ |
-| nono | ● | ○ | ◐ L●/R○ | ◐ | ● | ◐ | ○ |
-| Claude Code (local) | ◐ | ○ | ◐ L◐/R○ | ○ | ◐ | ◐ | ○ |
-| Claude Code (web) | ● | ◐ | ● L+R | ● | ● | ● | ● |
-| Codex (agent) | ● | ◐ | ● L+R | ● | ● | ◐ | ● |
-| Cursor (sandboxed) | ◐ | ○ | ◐ L◐/R● | ● | ◐ | ◐ | ○ |
-| Copilot agent | ◐ | ◐ | ◐ | ◐ | ● | ◐ | ◐ |
+<p align="center">
+  <img src="assets/threat-coverage.svg" alt="AST Threat Coverage Matrix" width="540"/>
+</p>
 
 **Patterns**: Cloud platforms cluster at T3 ◐ (L●/R○), strong box but an open window for remote destruction. Policy tools score T3 ● and T4 ● but T6 ○. Local OS tools score T7 ○ universally. T2 is universally ◐ or ○.
-
----
-
-# APPENDIX D: Fingerprint Comparison Table
-
-All products side by side, using the compact fingerprint form. Read vertically to compare at a layer. Read horizontally for a product's profile. Stack vertically (take max per column) to see composed coverage.
-
-*Last updated: March 2026*
-
-```
-                         L1/L2/L3/L4/L5/L6/L7   Portability
-                         ─────────────────────   ───────────
-CLOUD PLATFORMS
-  E2B                     4/ 4/ 4/ 0/ 2/ -/ 2   cloud-managed
-  Daytona (Kata)          4/ 4/ 4/ 0/ 2/ -/ 1   cloud-managed
-  Modal                   3/ 3/ 3/ 0/ 2/ -/ 2   cloud-managed
-  Fly.io Sprites          4/ 4/ 4/ 0/ 2/ -/ 1   cloud-managed
-  Blaxel                  4/ 4/ 4/ 0/ 2/ -/ 2   cloud-managed
-  Unikraft Cloud          4/ 3/ 4/ 0/ 2/ -/ 2   cloud-managed
-  Docker Sandbox          4/ 3/ 3/ 0/ 2/ -/ 1   any-os, windows, needs-docker
-  Google Agent Sandbox    3/ 3/ 3/ 0/ 2/ -/ 1   linux-only, needs-k8s
-
-POLICY & CREDENTIAL TOOLS
-  StrongDM Leash          2/ 2/ 2/ 3/ 2/ 2/ 3   linux+mac, needs-docker
-  Stakpak Warden          -/ -/ 1/ 2/ 3/ 2/ 3   linux+mac, no-infra
-
-OS-LEVEL WRAPPERS
-  nono                    3/ -/ 3/ 3/ 3/ 2/ 2   linux+mac, no-infra
-  packnplay               2/ 2/ 2/ 0/ 2/ -/ 1   linux+mac, needs-docker
-
-BUILT-IN AGENT SANDBOXES
-  Claude Code (local)     3/ -/ 3/ 0/ 3/ 1/ 1   linux+mac, no-infra
-  Claude Code (web)       4/ 3/ 4/ 4/ 4/ 1/ 2   cloud-managed
-  Codex (agent phase)     3/ 3/ 4/ 4/ 4/ 1/ 2   cloud-managed
-  Cursor (sandboxed)      3/ -/ 2/ 3/ 2/ 1/ 1   linux+mac, no-infra
-  Copilot agent           2/ 2/ 2/ 2/ 2/ 1/ 1   cloud-managed
-  Devin                   4/ 3/ 3/ 2/ 2/ 1/ 2   cloud-managed
-```
 
 ### Composition Examples
 
@@ -763,4 +488,20 @@ BUILT-IN AGENT SANDBOXES
 
 ---
 
-*The [Taxonomy (Parts 1–5)](#the-taxonomy) and [Framework (Parts 6–8)](#the-framework) should remain stable. [Appendices (A–D)](#appendix-a-layer-mechanism-reference) updated as products change. Feedback welcome.*
+# Conclusion
+
+The Agent Sandbox Taxonomy provides a shared vocabulary — **7 defense layers**, **7 threat categories**, **3 evaluation dimensions** — for describing what any agent sandbox does and doesn't do.
+
+**Three takeaways:**
+
+1. **No single product covers all seven layers well.** Cloud platforms excel at L1–L3 (the isolation boundary) but leave L4–L7 (network, credentials, governance, observability) open. Policy tools cover the upper layers but have no compute boundary. This complementarity is by design — composition is not optional, it is the expected deployment model.
+
+2. **The most common configuration is the most dangerous one.** A microVM with unrestricted network access and raw credentials as env vars looks secure. The fingerprint reveals the truth: L4:0 means exfiltration is one `curl` away. Always check the fingerprint before trusting the marketing.
+
+3. **Sandboxes and agent alignment are independent problems.** Getting the agent to make good decisions (alignment) and limiting the damage when it makes bad ones (sandboxing) are complementary but separate. Invest in both. Neither substitutes for the other.
+
+The [Taxonomy (Parts 1–5)](#the-taxonomy) and [Framework (Parts 6–8)](#the-framework) should remain stable. [Appendices (A–C)](#appendix-a-layer-mechanism-reference) are updated as products evolve — edit [`products.yaml`](products.yaml) and run `uv run python scripts/generate.py` to regenerate the visuals.
+
+---
+
+*Feedback welcome.*

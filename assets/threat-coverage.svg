@@ -1,0 +1,299 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 542 906" font-family="Consolas, Monaco, monospace">
+<rect width="542" height="906" fill="#0d1117"/>
+<text x="271.0" y="20" fill="#e6edf3" font-size="15" font-weight="bold" text-anchor="middle">AST Threat Coverage Matrix</text>
+<text x="222.0" y="38" fill="#7d8590" font-size="9" text-anchor="middle">Exfiltration</text>
+<text x="222.0" y="52" fill="#e6edf3" font-size="12" font-weight="bold" text-anchor="middle">T1</text>
+<text x="268.0" y="38" fill="#7d8590" font-size="9" text-anchor="middle">Supply Chain</text>
+<text x="268.0" y="52" fill="#e6edf3" font-size="12" font-weight="bold" text-anchor="middle">T2</text>
+<text x="314.0" y="38" fill="#7d8590" font-size="9" text-anchor="middle">Destructive</text>
+<text x="314.0" y="52" fill="#e6edf3" font-size="12" font-weight="bold" text-anchor="middle">T3</text>
+<text x="360.0" y="38" fill="#7d8590" font-size="9" text-anchor="middle">Lateral</text>
+<text x="360.0" y="52" fill="#e6edf3" font-size="12" font-weight="bold" text-anchor="middle">T4</text>
+<text x="406.0" y="38" fill="#7d8590" font-size="9" text-anchor="middle">Persistence</text>
+<text x="406.0" y="52" fill="#e6edf3" font-size="12" font-weight="bold" text-anchor="middle">T5</text>
+<text x="452.0" y="38" fill="#7d8590" font-size="9" text-anchor="middle">Priv Esc</text>
+<text x="452.0" y="52" fill="#e6edf3" font-size="12" font-weight="bold" text-anchor="middle">T6</text>
+<text x="498.0" y="38" fill="#7d8590" font-size="9" text-anchor="middle">DoS</text>
+<text x="498.0" y="52" fill="#e6edf3" font-size="12" font-weight="bold" text-anchor="middle">T7</text>
+<text x="10" y="82" fill="#58a6ff" font-size="12" font-weight="bold">CLOUD PLATFORMS</text>
+<text x="14" y="116.0" fill="#e6edf3" font-size="11">E2B</text>
+<rect x="200" y="96" width="44" height="32" rx="4" fill="#059669"/>
+<text x="222.0" y="117.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="246" y="96" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="268.0" y="117.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="292" y="96" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="314.0" y="117.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="338" y="96" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="360.0" y="117.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="384" y="96" width="44" height="32" rx="4" fill="#059669"/>
+<text x="406.0" y="117.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="430" y="96" width="44" height="32" rx="4" fill="#059669"/>
+<text x="452.0" y="117.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="476" y="96" width="44" height="32" rx="4" fill="#059669"/>
+<text x="498.0" y="117.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<text x="14" y="150.0" fill="#e6edf3" font-size="11">Daytona (Kata)</text>
+<rect x="200" y="130" width="44" height="32" rx="4" fill="#059669"/>
+<text x="222.0" y="151.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="246" y="130" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="268.0" y="151.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="292" y="130" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="314.0" y="151.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="338" y="130" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="360.0" y="151.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="384" y="130" width="44" height="32" rx="4" fill="#059669"/>
+<text x="406.0" y="151.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="430" y="130" width="44" height="32" rx="4" fill="#059669"/>
+<text x="452.0" y="151.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="476" y="130" width="44" height="32" rx="4" fill="#059669"/>
+<text x="498.0" y="151.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<text x="14" y="184.0" fill="#e6edf3" font-size="11">Modal</text>
+<rect x="200" y="164" width="44" height="32" rx="4" fill="#059669"/>
+<text x="222.0" y="185.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="246" y="164" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="268.0" y="185.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="292" y="164" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="314.0" y="185.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="338" y="164" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="360.0" y="185.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="384" y="164" width="44" height="32" rx="4" fill="#059669"/>
+<text x="406.0" y="185.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="430" y="164" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="452.0" y="185.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="476" y="164" width="44" height="32" rx="4" fill="#059669"/>
+<text x="498.0" y="185.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<text x="14" y="218.0" fill="#e6edf3" font-size="11">Fly.io Sprites</text>
+<rect x="200" y="198" width="44" height="32" rx="4" fill="#059669"/>
+<text x="222.0" y="219.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="246" y="198" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="268.0" y="219.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="292" y="198" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="314.0" y="219.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="338" y="198" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="360.0" y="219.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="384" y="198" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="406.0" y="219.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="430" y="198" width="44" height="32" rx="4" fill="#059669"/>
+<text x="452.0" y="219.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="476" y="198" width="44" height="32" rx="4" fill="#059669"/>
+<text x="498.0" y="219.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<text x="14" y="252.0" fill="#e6edf3" font-size="11">Blaxel</text>
+<rect x="200" y="232" width="44" height="32" rx="4" fill="#059669"/>
+<text x="222.0" y="253.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="246" y="232" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="268.0" y="253.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="292" y="232" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="314.0" y="253.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="338" y="232" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="360.0" y="253.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="384" y="232" width="44" height="32" rx="4" fill="#059669"/>
+<text x="406.0" y="253.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="430" y="232" width="44" height="32" rx="4" fill="#059669"/>
+<text x="452.0" y="253.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="476" y="232" width="44" height="32" rx="4" fill="#059669"/>
+<text x="498.0" y="253.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<text x="14" y="286.0" fill="#e6edf3" font-size="11">Unikraft Cloud</text>
+<rect x="200" y="266" width="44" height="32" rx="4" fill="#059669"/>
+<text x="222.0" y="287.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="246" y="266" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="268.0" y="287.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="292" y="266" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="314.0" y="287.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="338" y="266" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="360.0" y="287.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="384" y="266" width="44" height="32" rx="4" fill="#059669"/>
+<text x="406.0" y="287.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="430" y="266" width="44" height="32" rx="4" fill="#059669"/>
+<text x="452.0" y="287.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="476" y="266" width="44" height="32" rx="4" fill="#059669"/>
+<text x="498.0" y="287.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<text x="14" y="320.0" fill="#e6edf3" font-size="11">Docker Sandbox</text>
+<rect x="200" y="300" width="44" height="32" rx="4" fill="#059669"/>
+<text x="222.0" y="321.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="246" y="300" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="268.0" y="321.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="292" y="300" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="314.0" y="321.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="338" y="300" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="360.0" y="321.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="384" y="300" width="44" height="32" rx="4" fill="#059669"/>
+<text x="406.0" y="321.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="430" y="300" width="44" height="32" rx="4" fill="#059669"/>
+<text x="452.0" y="321.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="476" y="300" width="44" height="32" rx="4" fill="#059669"/>
+<text x="498.0" y="321.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<text x="14" y="354.0" fill="#e6edf3" font-size="11">Google Agent Sandbox</text>
+<rect x="200" y="334" width="44" height="32" rx="4" fill="#059669"/>
+<text x="222.0" y="355.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="246" y="334" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="268.0" y="355.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="292" y="334" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="314.0" y="355.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="338" y="334" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="360.0" y="355.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="384" y="334" width="44" height="32" rx="4" fill="#059669"/>
+<text x="406.0" y="355.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="430" y="334" width="44" height="32" rx="4" fill="#059669"/>
+<text x="452.0" y="355.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="476" y="334" width="44" height="32" rx="4" fill="#059669"/>
+<text x="498.0" y="355.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<text x="10" y="390" fill="#58a6ff" font-size="12" font-weight="bold">POLICY &amp; CREDENTIAL TOOLS</text>
+<text x="14" y="424.0" fill="#e6edf3" font-size="11">StrongDM Leash</text>
+<rect x="200" y="404" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="222.0" y="425.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="246" y="404" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="268.0" y="425.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="292" y="404" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="314.0" y="425.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="338" y="404" width="44" height="32" rx="4" fill="#059669"/>
+<text x="360.0" y="425.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="384" y="404" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="406.0" y="425.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="430" y="404" width="44" height="32" rx="4" fill="#4a1a1a"/>
+<text x="452.0" y="425.0" fill="#e6edf3" font-size="16" text-anchor="middle">○</text>
+<rect x="476" y="404" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="498.0" y="425.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<text x="14" y="458.0" fill="#e6edf3" font-size="11">Stakpak Warden</text>
+<rect x="200" y="438" width="44" height="32" rx="4" fill="#059669"/>
+<text x="222.0" y="459.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="246" y="438" width="44" height="32" rx="4" fill="#4a1a1a"/>
+<text x="268.0" y="459.0" fill="#e6edf3" font-size="16" text-anchor="middle">○</text>
+<rect x="292" y="438" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="314.0" y="459.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="338" y="438" width="44" height="32" rx="4" fill="#059669"/>
+<text x="360.0" y="459.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="384" y="438" width="44" height="32" rx="4" fill="#4a1a1a"/>
+<text x="406.0" y="459.0" fill="#e6edf3" font-size="16" text-anchor="middle">○</text>
+<rect x="430" y="438" width="44" height="32" rx="4" fill="#4a1a1a"/>
+<text x="452.0" y="459.0" fill="#e6edf3" font-size="16" text-anchor="middle">○</text>
+<rect x="476" y="438" width="44" height="32" rx="4" fill="#4a1a1a"/>
+<text x="498.0" y="459.0" fill="#e6edf3" font-size="16" text-anchor="middle">○</text>
+<text x="10" y="494" fill="#58a6ff" font-size="12" font-weight="bold">OS-LEVEL WRAPPERS</text>
+<text x="14" y="528.0" fill="#e6edf3" font-size="11">nono</text>
+<rect x="200" y="508" width="44" height="32" rx="4" fill="#059669"/>
+<text x="222.0" y="529.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="246" y="508" width="44" height="32" rx="4" fill="#4a1a1a"/>
+<text x="268.0" y="529.0" fill="#e6edf3" font-size="16" text-anchor="middle">○</text>
+<rect x="292" y="508" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="314.0" y="529.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="338" y="508" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="360.0" y="529.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="384" y="508" width="44" height="32" rx="4" fill="#059669"/>
+<text x="406.0" y="529.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="430" y="508" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="452.0" y="529.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="476" y="508" width="44" height="32" rx="4" fill="#4a1a1a"/>
+<text x="498.0" y="529.0" fill="#e6edf3" font-size="16" text-anchor="middle">○</text>
+<text x="14" y="562.0" fill="#e6edf3" font-size="11">packnplay</text>
+<rect x="200" y="542" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="222.0" y="563.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="246" y="542" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="268.0" y="563.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="292" y="542" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="314.0" y="563.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="338" y="542" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="360.0" y="563.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="384" y="542" width="44" height="32" rx="4" fill="#059669"/>
+<text x="406.0" y="563.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="430" y="542" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="452.0" y="563.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="476" y="542" width="44" height="32" rx="4" fill="#4a1a1a"/>
+<text x="498.0" y="563.0" fill="#e6edf3" font-size="16" text-anchor="middle">○</text>
+<text x="10" y="598" fill="#58a6ff" font-size="12" font-weight="bold">BUILT-IN AGENT SANDBOXES</text>
+<text x="14" y="632.0" fill="#e6edf3" font-size="11">Claude Code (local)</text>
+<rect x="200" y="612" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="222.0" y="633.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="246" y="612" width="44" height="32" rx="4" fill="#4a1a1a"/>
+<text x="268.0" y="633.0" fill="#e6edf3" font-size="16" text-anchor="middle">○</text>
+<rect x="292" y="612" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="314.0" y="633.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="338" y="612" width="44" height="32" rx="4" fill="#4a1a1a"/>
+<text x="360.0" y="633.0" fill="#e6edf3" font-size="16" text-anchor="middle">○</text>
+<rect x="384" y="612" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="406.0" y="633.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="430" y="612" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="452.0" y="633.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="476" y="612" width="44" height="32" rx="4" fill="#4a1a1a"/>
+<text x="498.0" y="633.0" fill="#e6edf3" font-size="16" text-anchor="middle">○</text>
+<text x="14" y="666.0" fill="#e6edf3" font-size="11">Claude Code (web)</text>
+<rect x="200" y="646" width="44" height="32" rx="4" fill="#059669"/>
+<text x="222.0" y="667.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="246" y="646" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="268.0" y="667.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="292" y="646" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="314.0" y="667.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="338" y="646" width="44" height="32" rx="4" fill="#059669"/>
+<text x="360.0" y="667.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="384" y="646" width="44" height="32" rx="4" fill="#059669"/>
+<text x="406.0" y="667.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="430" y="646" width="44" height="32" rx="4" fill="#059669"/>
+<text x="452.0" y="667.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="476" y="646" width="44" height="32" rx="4" fill="#059669"/>
+<text x="498.0" y="667.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<text x="14" y="700.0" fill="#e6edf3" font-size="11">Codex (agent phase)</text>
+<rect x="200" y="680" width="44" height="32" rx="4" fill="#059669"/>
+<text x="222.0" y="701.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="246" y="680" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="268.0" y="701.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="292" y="680" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="314.0" y="701.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="338" y="680" width="44" height="32" rx="4" fill="#059669"/>
+<text x="360.0" y="701.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="384" y="680" width="44" height="32" rx="4" fill="#059669"/>
+<text x="406.0" y="701.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="430" y="680" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="452.0" y="701.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="476" y="680" width="44" height="32" rx="4" fill="#059669"/>
+<text x="498.0" y="701.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<text x="14" y="734.0" fill="#e6edf3" font-size="11">Cursor (sandboxed)</text>
+<rect x="200" y="714" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="222.0" y="735.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="246" y="714" width="44" height="32" rx="4" fill="#4a1a1a"/>
+<text x="268.0" y="735.0" fill="#e6edf3" font-size="16" text-anchor="middle">○</text>
+<rect x="292" y="714" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="314.0" y="735.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="338" y="714" width="44" height="32" rx="4" fill="#059669"/>
+<text x="360.0" y="735.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="384" y="714" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="406.0" y="735.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="430" y="714" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="452.0" y="735.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="476" y="714" width="44" height="32" rx="4" fill="#4a1a1a"/>
+<text x="498.0" y="735.0" fill="#e6edf3" font-size="16" text-anchor="middle">○</text>
+<text x="14" y="768.0" fill="#e6edf3" font-size="11">Copilot agent</text>
+<rect x="200" y="748" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="222.0" y="769.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="246" y="748" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="268.0" y="769.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="292" y="748" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="314.0" y="769.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="338" y="748" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="360.0" y="769.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="384" y="748" width="44" height="32" rx="4" fill="#059669"/>
+<text x="406.0" y="769.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="430" y="748" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="452.0" y="769.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="476" y="748" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="498.0" y="769.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<text x="14" y="802.0" fill="#e6edf3" font-size="11">Devin</text>
+<rect x="200" y="782" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="222.0" y="803.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="246" y="782" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="268.0" y="803.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="292" y="782" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="314.0" y="803.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="338" y="782" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="360.0" y="803.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="384" y="782" width="44" height="32" rx="4" fill="#059669"/>
+<text x="406.0" y="803.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<rect x="430" y="782" width="44" height="32" rx="4" fill="#b45309"/>
+<text x="452.0" y="803.0" fill="#e6edf3" font-size="16" text-anchor="middle">◐</text>
+<rect x="476" y="782" width="44" height="32" rx="4" fill="#059669"/>
+<text x="498.0" y="803.0" fill="#e6edf3" font-size="16" text-anchor="middle">●</text>
+<text x="10" y="832" fill="#7d8590" font-size="10">COVERAGE</text>
+<rect x="80" y="822" width="14" height="14" rx="3" fill="#059669"/>
+<text x="98" y="832" fill="#7d8590" font-size="10">● Primary defense</text>
+<rect x="200" y="822" width="14" height="14" rx="3" fill="#b45309"/>
+<text x="218" y="832" fill="#7d8590" font-size="10">◐ Partial</text>
+<rect x="320" y="822" width="14" height="14" rx="3" fill="#4a1a1a"/>
+<text x="338" y="832" fill="#7d8590" font-size="10">○ Not addressed</text>
+</svg>
