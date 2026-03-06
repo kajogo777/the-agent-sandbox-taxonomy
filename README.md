@@ -2,9 +2,13 @@
 
 *Version 1.0 — March 2026*
 
+<p align="center">
+  <img src="ast-infographic.svg" alt="AST 7-7-3 Infographic — 7 Isolation Layers, 7 Threat Categories, 3 Evaluation Dimensions" width="960"/>
+</p>
+
 ---
 
-## How to Use This Document
+## How to Use This
 
 This document provides a shared language for discussing what agent sandboxes do, what they don't do, and which threats they address. Remember **7-7-3**: **7** isolation layers, **7** threat categories, **3** evaluation dimensions (strength, granularity, portability).
 
@@ -17,11 +21,10 @@ The document has two halves:
 **The Appendix** contains product-specific data: score cards, fingerprint comparison tables, threat coverage matrices, and mechanism references. This is the only part that needs regular updating.
 
 ---
----
 
 # THE TAXONOMY
 
-*What sandboxes are, how to describe them, and how to score them.*
+*What sandboxes are, how to describe them, and how to compare them.*
 
 ---
 
