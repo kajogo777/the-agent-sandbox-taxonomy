@@ -212,7 +212,9 @@ Products may have multiple tags (e.g., `linux+mac, no-infra`).
 
 ### The Fingerprint
 
-Every product gets a **fingerprint** — a CVSS-inspired vector string showing its strength score at each layer. Each entry is `Layer:Score`, separated by `/`. A dash means the layer is not addressed.
+Every product gets a **fingerprint** — a CVSS-inspired vector string showing its strength score at each layer. Each entry is `Layer:Score`, separated by `/`.
+
+**`0` vs `—` (dash):** Both mean "no coverage," but for different reasons. **`0`** means the product *operates* at this layer but provides no enforcement — the capability exists, it's just wide open (e.g., a cloud sandbox with an unrestricted network stack). **`—`** means the product *does not address* this layer at all — it's outside the product's scope (e.g., a policy tool that isn't a compute sandbox). For composition purposes both are treated as "no coverage" — any non-zero score from another product fills the gap.
 
 **Full form** — self-describing, used in product score cards:
 ```
@@ -428,7 +430,7 @@ Catalogs mechanisms at each layer with strength and granularity. Products listed
 
 # APPENDIX B: Product Score Cards
 
-Each card shows `S.G` (Strength.Granularity) per layer and a fingerprint (strength only, `Layer:Score` format). Dash (—) = layer not addressed.
+Each card shows `S.G` (Strength.Granularity) per layer and a fingerprint (strength only, `Layer:Score` format). `0` = layer operates but unenforced; `—` = layer not addressed (see [The Fingerprint](#the-fingerprint)).
 
 *Last updated: March 2026*
 
