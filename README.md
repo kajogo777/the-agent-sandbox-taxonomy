@@ -14,11 +14,35 @@ This document provides a shared language for discussing what agent sandboxes do,
 
 The document has two halves:
 
-**The Taxonomy** (Parts 1–5) defines what sandboxes *are*. Seven defense layers, seven threat categories, how they relate, how to score mechanisms, and how to fingerprint any product. Use it to describe, classify, and compare solutions on equal terms.
+**The Taxonomy** ([Parts 1–5](#the-taxonomy)) defines what sandboxes *are*. Seven defense layers, seven threat categories, how they relate, how to score mechanisms, and how to fingerprint any product. Use it to describe, classify, and compare solutions on equal terms.
 
-**The Framework** (Parts 6–8) defines what sandbox consumers should *do*. Composition patterns, anti-patterns, a decision checklist, and stacking rules. Use it to choose the right sandbox stack for your situation.
+**The Framework** ([Parts 6–8](#the-framework)) defines what sandbox consumers should *do*. Composition patterns, anti-patterns, a decision checklist, and stacking rules. Use it to choose the right sandbox stack for your situation.
 
-**The Appendix** contains product-specific data: score cards, fingerprint comparison tables, threat coverage matrices, and mechanism references. This is the only part that needs regular updating.
+**The Appendix** contains product-specific data: [score cards](#appendix-b-product-score-cards), [fingerprint comparison tables](#appendix-d-fingerprint-comparison-table), [threat coverage matrices](#appendix-c-threat-coverage-matrix), and [mechanism references](#appendix-a-layer-mechanism-reference). This is the only part that needs regular updating.
+
+---
+
+### Table of Contents
+
+**The Taxonomy**
+1. [The Problem](#1-the-problem)
+2. [The Seven Defense Layers](#2-the-seven-defense-layers)
+   - [L1 — Compute Isolation](#l1--compute-isolation) · [L2 — Resource Limits](#l2--resource-limits) · [L3 — Filesystem Boundary](#l3--filesystem-boundary) · [L4 — Network Boundary](#l4--network-boundary) · [L5 — Credential & Secret Management](#l5--credential--secret-management) · [L6 — Action Governance](#l6--action-governance) · [L7 — Observability & Audit](#l7--observability--audit)
+3. [The Seven Threats](#3-the-seven-threats)
+4. [Scoring](#4-scoring)
+   - [Strength](#strength-s-04) · [Granularity](#granularity-g-03) · [Portability](#portability) · [The Fingerprint](#the-fingerprint)
+5. [Glossary](#5-glossary)
+
+**The Framework**
+6. [Why Composition Is Necessary](#6-why-composition-is-necessary)
+7. [Composition Patterns](#7-composition-patterns)
+8. [Decision Checklist](#8-decision-checklist)
+
+**Appendices**
+- [A — Layer Mechanism Reference](#appendix-a-layer-mechanism-reference)
+- [B — Product Score Cards](#appendix-b-product-score-cards)
+- [C — Threat Coverage Matrix](#appendix-c-threat-coverage-matrix)
+- [D — Fingerprint Comparison Table](#appendix-d-fingerprint-comparison-table)
 
 ---
 
@@ -57,7 +81,7 @@ Layers are numbered bottom-up because lower layers are foundational. Strong L1 m
 ### L1 — Compute Isolation
 *What separates the agent's execution from the host system?*
 
-The foundational layer. No upper layer can be stronger than L1, because a process that escapes L1 bypasses everything above it. The key metric is the **size of the shared attack surface** between the sandboxed workload and the host — ranging from the full host kernel (containers), through a reduced syscall surface (user-space kernels), to a minimal VMM (microVMs), to a single-purpose kernel (unikernels), to hardware-encrypted memory (confidential computing). See **Appendix A** for the mechanism spectrum.
+The foundational layer. No upper layer can be stronger than L1, because a process that escapes L1 bypasses everything above it. The key metric is the **size of the shared attack surface** between the sandboxed workload and the host — ranging from the full host kernel (containers), through a reduced syscall surface (user-space kernels), to a minimal VMM (microVMs), to a single-purpose kernel (unikernels), to hardware-encrypted memory (confidential computing). See **[Appendix A](#appendix-a-layer-mechanism-reference)** for the mechanism spectrum.
 
 ### L2 — Resource Limits
 *Can the agent exhaust CPU, memory, disk, or time?*
@@ -205,11 +229,11 @@ nono     3/-/3/3/3/2/2
 
 The two forms are interchangeable. The compact form always includes all seven positions in L1→L7 order, so the layer labels can be read from the column header.
 
-Score cards (see Appendix B) show each layer as `S.G` — strength and granularity separated by `.` (e.g., `4.1` = structural strength, binary granularity). The fingerprint uses strength only for the quick-compare view.
+Score cards (see [Appendix B](#appendix-b-product-score-cards)) show each layer as `S.G` — strength and granularity separated by `.` (e.g., `4.1` = structural strength, binary granularity). The fingerprint uses strength only for the quick-compare view.
 
 **Separator convention:** `:` binds a layer to its value (full form), `.` separates strength from granularity within a layer, `/` separates layers from each other.
 
-See **Appendix B** for product score cards and **Appendix D** for the full fingerprint comparison table.
+See **[Appendix B](#appendix-b-product-score-cards)** for product score cards and **[Appendix D](#appendix-d-fingerprint-comparison-table)** for the full fingerprint comparison table.
 
 ---
 
@@ -311,7 +335,7 @@ No infrastructure → process wrappers (`no-infra`). Docker available → contai
 
 ### After the Checklist
 
-Map your answers to layer requirements, then scan the fingerprint comparison table (Appendix D) for products that cover those layers at the required strength. Where no single product covers your needs, compose two using the stacking rule (take the max at each layer). Verify the composed fingerprint has no zeros or dashes at layers you care about.
+Map your answers to layer requirements, then scan the [fingerprint comparison table (Appendix D)](#appendix-d-fingerprint-comparison-table) for products that cover those layers at the required strength. Where no single product covers your needs, compose two using the stacking rule (take the max at each layer). Verify the composed fingerprint has no zeros or dashes at layers you care about.
 
 ---
 ---
@@ -720,4 +744,4 @@ BUILT-IN AGENT SANDBOXES
 
 ---
 
-*The Taxonomy (Parts 1–5) and Framework (Parts 6–8) should remain stable. Appendices (A–D) updated as products change. Feedback welcome.*
+*The [Taxonomy (Parts 1–5)](#the-taxonomy) and [Framework (Parts 6–8)](#the-framework) should remain stable. [Appendices (A–D)](#appendix-a-layer-mechanism-reference) updated as products change. Feedback welcome.*
