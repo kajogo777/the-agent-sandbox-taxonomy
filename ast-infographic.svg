@@ -135,6 +135,7 @@
     <!-- Portability — plain text -->
     <g transform="translate(0, 216)">
       <text x="0" y="11" font-weight="700" fill="#10b981" font-size="10">Portability</text>
+      <text x="68" y="11" fill="#888" font-size="9">tags</text>
       <text x="0" y="25" fill="#555" font-size="8.5">linux · mac · windows · needs-docker</text>
     </g>
   </g>
