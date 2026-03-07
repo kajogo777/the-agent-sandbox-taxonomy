@@ -490,6 +490,17 @@ Catalogs mechanisms at each layer with strength and granularity. Products listed
 
 Each product is scored `S.G` (Strength.Granularity) per layer. `0` = layer operates but unenforced; `—` = layer not addressed (see [The Fingerprint](#the-fingerprint)). All scores are maintained in [`products.yaml`](products.yaml).
 
+### Evidence Levels
+
+Each product carries an `evidence_level` field indicating the best evidence used to produce its scores. This is **orthogonal to the strength score** — it describes confidence in the score, not the score itself.
+
+| Level | Meaning |
+|---|---|
+| **verified** | Hands-on testing — sandbox was run, enforcement was inspected at runtime, bypass attempts were made. Highest confidence. |
+| **source-code** | Scored from open-source code (seccomp profiles, Dockerfile, VM config, sandbox runtime). Ground truth for mechanism identification, but no runtime verification. |
+| **docs** | Scored from official documentation — architecture docs, API/CLI reference, README, security whitepapers. No source code or hands-on corroboration. |
+| **inferred** | Scored from indirect evidence — blog posts, marketing pages, changelog mentions, or reasonable inference from related products. Lowest confidence; scores may be inaccurate. |
+
 <p align="center">
   <img src="assets/fingerprint-heatmap.svg" alt="AST Product Score Cards — Strength.Granularity by Layer" width="740"/>
 </p>

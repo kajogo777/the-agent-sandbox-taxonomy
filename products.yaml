@@ -49,6 +49,7 @@ products:
   notes: 'Gaps: L5 (env vars exposed), L6 (no governance), L7 (session-level only).
     Complements: Credential proxy, governance overlay, external SIEM'
   last_reviewed: null
+  evidence_level: docs
 - name: Daytona
   portability:
   - cloud-managed
@@ -98,6 +99,7 @@ products:
   notes: 'Gaps: L1 (shared kernel), L5 (env var delivery), L6 (no governance). Complements:
     Kata for L1 upgrade, credential proxy for L5, Warden/Leash for L6'
   last_reviewed: null
+  evidence_level: docs
 - name: Modal
   portability:
   - cloud-managed
@@ -147,6 +149,7 @@ products:
   notes: 'Gaps: L5 (env var delivery), L6 (no governance). Complements: Credential
     proxy for L5, governance overlay for L6'
   last_reviewed: null
+  evidence_level: docs
 - name: Fly.io Sprites
   portability:
   - cloud-managed
@@ -196,6 +199,7 @@ products:
   notes: 'Gaps: L5 (no credential management), L6 (no governance), L7 (basic logging).
     Complements: Credential proxy, governance overlay, external audit/SIEM'
   last_reviewed: null
+  evidence_level: docs
 - name: Blaxel
   portability:
   - cloud-managed
@@ -246,6 +250,7 @@ products:
   notes: 'Gaps: L4 (undocumented enforcement), L5 (env var delivery), L6 (deployment-level
     only). Blog-to-docs gap on security features'
   last_reviewed: null
+  evidence_level: docs
 - name: Unikraft Cloud
   portability:
   - cloud-managed
@@ -296,6 +301,7 @@ products:
   notes: 'Gaps: L4 (no egress filtering), L5 (no secrets management), L6 (no governance),
     L7 (roadmap only). Not designed as agent sandbox'
   last_reviewed: null
+  evidence_level: docs
 - name: Docker Sandbox
   portability:
   - linux
@@ -348,6 +354,7 @@ products:
   notes: 'Gaps: L6 (no governance), L7 (network logs only). T1 fully addressed by
     credential proxy + network filtering. Complements: Governance engine (Leash/Warden)'
   last_reviewed: null
+  evidence_level: docs
 - name: Google Agent Sandbox
   portability:
   - cloud-managed
@@ -399,6 +406,7 @@ products:
   notes: 'Most complete coverage of any product scored. gVisor L1 is S:3 (not S:4
     hardware isolation), which caps all layers. Complements: Kata for L1:4 upgrade'
   last_reviewed: null
+  evidence_level: docs
 - name: StrongDM Leash
   portability:
   - linux
@@ -450,6 +458,7 @@ products:
   notes: 'Gaps: L1 (shared kernel caps everything at S:2), L2 (no resource limits
     → T7 unaddressed), L5 (env var exposure). Primary value is L6/L7 governance overlay'
   last_reviewed: null
+  evidence_level: docs
 - name: Stakpak Warden
   portability:
   - linux
@@ -503,6 +512,7 @@ products:
   notes: 'Gaps: L1 (shared kernel), L2 (no resource limits → T7 unaddressed). Secret
     substitution (L5) is most sophisticated credential handling among governance tools'
   last_reviewed: null
+  evidence_level: docs
 - name: nono
   portability:
   - linux
@@ -560,6 +570,7 @@ products:
     per-layer scores among all local-first tools. Complements: cgroups/ulimits wrapper
     for L2'
   last_reviewed: null
+  evidence_level: docs
 - name: packnplay
   portability:
   - any-os
@@ -610,6 +621,7 @@ products:
     for developer convenience, not security. Complements: Network proxy, governance
     overlay, nono inside container'
   last_reviewed: null
+  evidence_level: docs
 - name: Claude Code (local)
   portability:
   - linux
@@ -664,6 +676,7 @@ products:
     limits (ulimits/cgroups), credential proxy, ephemeral wrapper (Docker Sandbox
     or VM). MIT'
   last_reviewed: null
+  evidence_level: docs
 - name: Claude Code (web)
   portability:
   - cloud-managed
@@ -716,6 +729,7 @@ products:
   notes: 'Credentials never enter sandbox. L6 limited to PR-level governance (agent
     autonomous within session). Complements: Runtime action governance within VM'
   last_reviewed: null
+  evidence_level: docs
 - name: Codex CLI (agent phase)
   portability:
   - linux
@@ -771,6 +785,7 @@ products:
   notes: 'Gaps: L2 (no resource caps), L4 binary (network on = unrestricted). Complements:
     Resource wrapper (cgroups), domain-level network filtering, ephemeral container'
   last_reviewed: null
+  evidence_level: docs
 - name: Cursor (sandboxed)
   portability:
   - linux
@@ -824,6 +839,7 @@ products:
     shell + cooperative network gate. Complements: Kernel-enforced network blocking,
     credential isolation, nono as inner sandbox'
   last_reviewed: null
+  evidence_level: docs
 - name: Copilot coding agent
   portability:
   - cloud-managed
@@ -878,6 +894,7 @@ products:
   notes: 'L4 firewall has documented MCP server gap and acknowledged bypass potential.
     Otherwise comprehensive coverage. Complements: MCP server network isolation'
   last_reviewed: null
+  evidence_level: docs
 - name: Devin
   portability:
   - cloud-managed
@@ -934,6 +951,7 @@ products:
     vars = T1 exfiltration risk. Complements: Network egress firewall (critical),
     credential proxy, SIEM integration'
   last_reviewed: null
+  evidence_level: docs
 - name: Replit
   portability:
   - cloud-managed
@@ -984,6 +1002,7 @@ products:
     (all met). L4 permissive egress is weakest link — rate-limited but no allowlist.
     Complements: Egress allowlist for L4 upgrade'
   last_reviewed: null
+  evidence_level: docs
 - name: Deno Sandbox
   portability:
   - cloud-managed
@@ -1033,6 +1052,7 @@ products:
     T5. L5 credential proxying is best-in-class. Complements: Dedicated audit logging
     for L7 upgrade'
   last_reviewed: null
+  evidence_level: docs
 - name: Deno Deploy
   portability:
   - cloud-managed
@@ -1084,6 +1104,7 @@ products:
     is the weakest link — no domain filtering. Read-only FS (L3) is strong. Complements:
     Egress allowlist for L4 upgrade'
   last_reviewed: null
+  evidence_level: docs
 - name: Cloudflare Workers
   portability:
   - cloud-managed
@@ -1135,3 +1156,4 @@ products:
     escalation defense. No filesystem is a structural strength (L3). Complements:
     Stronger compute isolation for L1 upgrade'
   last_reviewed: null
+  evidence_level: docs

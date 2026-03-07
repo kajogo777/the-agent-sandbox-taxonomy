@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 813 808" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
-<rect width="813" height="808" fill="white" rx="8"/>
-<text x="406.5" y="22" fill="#111827" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="-0.3">Threat Coverage Matrix</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 893 808" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+<rect width="893" height="808" fill="white" rx="8"/>
+<text x="446.5" y="22" fill="#111827" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="-0.3">Threat Coverage Matrix</text>
 <text x="234.0" y="36" fill="#6b7280" font-size="9" text-anchor="middle">Exfiltration</text>
 <text x="234.0" y="50" fill="#6366f1" font-size="10" font-weight="700" text-anchor="middle">T1</text>
 <text x="305.0" y="36" fill="#6b7280" font-size="9" text-anchor="middle">Supply Chain</text>
@@ -15,8 +15,9 @@
 <text x="589.0" y="50" fill="#6366f1" font-size="10" font-weight="700" text-anchor="middle">T6</text>
 <text x="660.0" y="36" fill="#6b7280" font-size="9" text-anchor="middle">DoS</text>
 <text x="660.0" y="50" fill="#6366f1" font-size="10" font-weight="700" text-anchor="middle">T7</text>
-<text x="747.0" y="36" fill="#6b7280" font-size="9" text-anchor="middle">Last</text>
-<text x="747.0" y="50" fill="#6b7280" font-size="9" text-anchor="middle">Reviewed</text>
+<text x="737.0" y="43" fill="#6b7280" font-size="9" text-anchor="middle">Evidence</text>
+<text x="827.0" y="36" fill="#6b7280" font-size="9" text-anchor="middle">Last</text>
+<text x="827.0" y="50" fill="#6b7280" font-size="9" text-anchor="middle">Reviewed</text>
 <text x="14" y="74.0" fill="#111827" font-size="10" font-weight="500">E2B</text>
 <circle cx="234.0" cy="70.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 234.0,62.0 A 8,8 0 0,0 234.0,78.0 Z" fill="#d97706"/>
@@ -31,7 +32,8 @@
 <circle cx="518.0" cy="70.0" r="8" fill="#059669"/>
 <circle cx="589.0" cy="70.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="70.0" r="8" fill="#059669"/>
-<text x="747.0" y="71.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="71.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="71.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="105.0" fill="#111827" font-size="10" font-weight="500">Daytona</text>
 <circle cx="234.0" cy="101.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 234.0,93.0 A 8,8 0 0,0 234.0,109.0 Z" fill="#d97706"/>
@@ -48,7 +50,8 @@
 <path d="M 589.0,93.0 A 8,8 0 0,0 589.0,109.0 Z" fill="#d97706"/>
 <circle cx="589.0" cy="101.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="660.0" cy="101.0" r="8" fill="#059669"/>
-<text x="747.0" y="102.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="102.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="102.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="136.0" fill="#111827" font-size="10" font-weight="500">Modal</text>
 <circle cx="234.0" cy="132.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 234.0,124.0 A 8,8 0 0,0 234.0,140.0 Z" fill="#d97706"/>
@@ -61,7 +64,8 @@
 <circle cx="518.0" cy="132.0" r="8" fill="#059669"/>
 <circle cx="589.0" cy="132.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="132.0" r="8" fill="#059669"/>
-<text x="747.0" y="133.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="133.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="133.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="167.0" fill="#111827" font-size="10" font-weight="500">Fly.io Sprites</text>
 <circle cx="234.0" cy="163.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 234.0,155.0 A 8,8 0 0,0 234.0,171.0 Z" fill="#d97706"/>
@@ -78,7 +82,8 @@
 <circle cx="518.0" cy="163.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="589.0" cy="163.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="163.0" r="8" fill="#059669"/>
-<text x="747.0" y="164.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="164.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="164.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="198.0" fill="#111827" font-size="10" font-weight="500">Blaxel</text>
 <circle cx="234.0" cy="194.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 234.0,186.0 A 8,8 0 0,0 234.0,202.0 Z" fill="#d97706"/>
@@ -97,7 +102,8 @@
 <circle cx="518.0" cy="194.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="589.0" cy="194.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="194.0" r="8" fill="#059669"/>
-<text x="747.0" y="195.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="195.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="195.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="229.0" fill="#111827" font-size="10" font-weight="500">Unikraft Cloud</text>
 <circle cx="234.0" cy="225.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 234.0,217.0 A 8,8 0 0,0 234.0,233.0 Z" fill="#d97706"/>
@@ -116,7 +122,8 @@
 <circle cx="518.0" cy="225.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="589.0" cy="225.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="225.0" r="8" fill="#059669"/>
-<text x="747.0" y="226.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="226.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="226.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="260.0" fill="#111827" font-size="10" font-weight="500">Docker Sandbox</text>
 <circle cx="234.0" cy="256.0" r="8" fill="#059669"/>
 <circle cx="305.0" cy="256.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
@@ -131,7 +138,8 @@
 <circle cx="518.0" cy="256.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="589.0" cy="256.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="256.0" r="8" fill="#059669"/>
-<text x="747.0" y="257.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="257.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="257.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="291.0" fill="#111827" font-size="10" font-weight="500">Google Agent Sandbox</text>
 <circle cx="234.0" cy="287.0" r="8" fill="#059669"/>
 <circle cx="305.0" cy="287.0" r="8" fill="#059669"/>
@@ -142,7 +150,8 @@
 <circle cx="518.0" cy="287.0" r="8" fill="#059669"/>
 <circle cx="589.0" cy="287.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="287.0" r="8" fill="#059669"/>
-<text x="747.0" y="288.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="288.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="288.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="322.0" fill="#111827" font-size="10" font-weight="500">StrongDM Leash</text>
 <circle cx="234.0" cy="318.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 234.0,310.0 A 8,8 0 0,0 234.0,326.0 Z" fill="#d97706"/>
@@ -159,7 +168,8 @@
 <circle cx="660.0" cy="318.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 660.0,310.0 A 8,8 0 0,0 660.0,326.0 Z" fill="#d97706"/>
 <circle cx="660.0" cy="318.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<text x="747.0" y="319.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="319.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="319.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="353.0" fill="#111827" font-size="10" font-weight="500">Stakpak Warden</text>
 <circle cx="234.0" cy="349.0" r="8" fill="#059669"/>
 <circle cx="305.0" cy="349.0" r="8" fill="#059669"/>
@@ -174,7 +184,8 @@
 <circle cx="660.0" cy="349.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 660.0,341.0 A 8,8 0 0,0 660.0,357.0 Z" fill="#d97706"/>
 <circle cx="660.0" cy="349.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<text x="747.0" y="350.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="350.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="350.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="384.0" fill="#111827" font-size="10" font-weight="500">nono</text>
 <circle cx="234.0" cy="380.0" r="8" fill="#059669"/>
 <circle cx="305.0" cy="380.0" r="8" fill="#059669"/>
@@ -189,7 +200,8 @@
 <circle cx="660.0" cy="380.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 660.0,372.0 A 8,8 0 0,0 660.0,388.0 Z" fill="#d97706"/>
 <circle cx="660.0" cy="380.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<text x="747.0" y="381.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="381.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="381.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="415.0" fill="#111827" font-size="10" font-weight="500">packnplay</text>
 <circle cx="234.0" cy="411.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 234.0,403.0 A 8,8 0 0,0 234.0,419.0 Z" fill="#d97706"/>
@@ -212,7 +224,8 @@
 <circle cx="660.0" cy="411.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 660.0,403.0 A 8,8 0 0,0 660.0,419.0 Z" fill="#d97706"/>
 <circle cx="660.0" cy="411.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<text x="747.0" y="412.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="412.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="412.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="446.0" fill="#111827" font-size="10" font-weight="500">Claude Code (local)</text>
 <circle cx="234.0" cy="442.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 234.0,434.0 A 8,8 0 0,0 234.0,450.0 Z" fill="#d97706"/>
@@ -229,7 +242,8 @@
 <circle cx="660.0" cy="442.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 660.0,434.0 A 8,8 0 0,0 660.0,450.0 Z" fill="#d97706"/>
 <circle cx="660.0" cy="442.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<text x="747.0" y="443.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="443.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="443.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="477.0" fill="#111827" font-size="10" font-weight="500">Claude Code (web)</text>
 <circle cx="234.0" cy="473.0" r="8" fill="#059669"/>
 <circle cx="305.0" cy="473.0" r="8" fill="#059669"/>
@@ -240,7 +254,8 @@
 <circle cx="518.0" cy="473.0" r="8" fill="#059669"/>
 <circle cx="589.0" cy="473.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="473.0" r="8" fill="#059669"/>
-<text x="747.0" y="474.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="474.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="474.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="508.0" fill="#111827" font-size="10" font-weight="500">Codex CLI (agent phase)</text>
 <circle cx="234.0" cy="504.0" r="8" fill="#059669"/>
 <circle cx="305.0" cy="504.0" r="8" fill="#059669"/>
@@ -255,7 +270,8 @@
 <circle cx="660.0" cy="504.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 660.0,496.0 A 8,8 0 0,0 660.0,512.0 Z" fill="#d97706"/>
 <circle cx="660.0" cy="504.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<text x="747.0" y="505.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="505.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="505.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="539.0" fill="#111827" font-size="10" font-weight="500">Cursor (sandboxed)</text>
 <circle cx="234.0" cy="535.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 234.0,527.0 A 8,8 0 0,0 234.0,543.0 Z" fill="#d97706"/>
@@ -276,7 +292,8 @@
 <circle cx="660.0" cy="535.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 660.0,527.0 A 8,8 0 0,0 660.0,543.0 Z" fill="#d97706"/>
 <circle cx="660.0" cy="535.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<text x="747.0" y="536.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="536.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="536.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="570.0" fill="#111827" font-size="10" font-weight="500">Copilot coding agent</text>
 <circle cx="234.0" cy="566.0" r="8" fill="#059669"/>
 <circle cx="305.0" cy="566.0" r="8" fill="#059669"/>
@@ -287,7 +304,8 @@
 <circle cx="518.0" cy="566.0" r="8" fill="#059669"/>
 <circle cx="589.0" cy="566.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="566.0" r="8" fill="#059669"/>
-<text x="747.0" y="567.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="567.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="567.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="601.0" fill="#111827" font-size="10" font-weight="500">Devin</text>
 <circle cx="234.0" cy="597.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 234.0,589.0 A 8,8 0 0,0 234.0,605.0 Z" fill="#d97706"/>
@@ -304,7 +322,8 @@
 <circle cx="518.0" cy="597.0" r="8" fill="#059669"/>
 <circle cx="589.0" cy="597.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="597.0" r="8" fill="#059669"/>
-<text x="747.0" y="598.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="598.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="598.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="632.0" fill="#111827" font-size="10" font-weight="500">Replit</text>
 <circle cx="234.0" cy="628.0" r="8" fill="#059669"/>
 <circle cx="305.0" cy="628.0" r="8" fill="#059669"/>
@@ -315,7 +334,8 @@
 <circle cx="518.0" cy="628.0" r="8" fill="#059669"/>
 <circle cx="589.0" cy="628.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="628.0" r="8" fill="#059669"/>
-<text x="747.0" y="629.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="629.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="629.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="663.0" fill="#111827" font-size="10" font-weight="500">Deno Sandbox</text>
 <circle cx="234.0" cy="659.0" r="8" fill="#059669"/>
 <circle cx="305.0" cy="659.0" r="8" fill="#059669"/>
@@ -326,7 +346,8 @@
 <circle cx="518.0" cy="659.0" r="8" fill="#059669"/>
 <circle cx="589.0" cy="659.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="659.0" r="8" fill="#059669"/>
-<text x="747.0" y="660.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="660.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="660.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="694.0" fill="#111827" font-size="10" font-weight="500">Deno Deploy</text>
 <circle cx="234.0" cy="690.0" r="8" fill="#059669"/>
 <circle cx="305.0" cy="690.0" r="8" fill="#059669"/>
@@ -337,7 +358,8 @@
 <circle cx="518.0" cy="690.0" r="8" fill="#059669"/>
 <circle cx="589.0" cy="690.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="690.0" r="8" fill="#059669"/>
-<text x="747.0" y="691.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="691.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="691.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="725.0" fill="#111827" font-size="10" font-weight="500">Cloudflare Workers</text>
 <circle cx="234.0" cy="721.0" r="8" fill="#059669"/>
 <circle cx="305.0" cy="721.0" r="8" fill="#059669"/>
@@ -350,7 +372,8 @@
 <path d="M 589.0,713.0 A 8,8 0 0,0 589.0,729.0 Z" fill="#d97706"/>
 <circle cx="589.0" cy="721.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="660.0" cy="721.0" r="8" fill="#059669"/>
-<text x="747.0" y="722.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="737.0" y="722.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="722.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="10" y="752" fill="#6b7280" font-size="9" font-weight="600" letter-spacing="1">COVERAGE</text>
 <circle cx="87" cy="748" r="6" fill="#059669"/>
 <text x="99" y="752" fill="#6b7280" font-size="9">Addressed</text>

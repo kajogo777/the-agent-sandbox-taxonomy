@@ -293,6 +293,8 @@ Use these tables to determine the correct S and G scores for each mechanism you 
 
 Follow this procedure to evaluate any sandbox product and produce a score card and fingerprint.
 
+> **⚠ Confidence notice.** Scoring from documentation and source code alone produces a **preliminary score card**. Scores at S:3+ are architectural claims that ideally require hands-on verification (running the sandbox, testing bypass attempts, inspecting enforcement at runtime). Flag any score where evidence is indirect or incomplete — a preliminary score card is useful for comparison but should not be treated as a security audit.
+
 ### Step 1: Gather Evidence
 
 For each of the 7 layers, determine what the product does. Research its documentation, architecture, and security model. Ask these questions:
@@ -306,6 +308,48 @@ For each of the 7 layers, determine what the product does. Research its document
 | **L5** | How are credentials delivered? Env vars, mounted files, proxy, ephemeral tokens? Are secrets visible inside the sandbox at all? |
 | **L6** | Are operations governed? Human-in-the-loop, command blocklists, policy engine, declarative-only? Can the agent perform destructive actions with the access it has? |
 | **L7** | What's logged? Nothing, session-level, command-level, full telemetry? Tamper-evident? Real-time visibility? |
+
+#### Where to Look (in priority order)
+
+1. **Source code** — The authoritative source. Look for sandbox setup, isolation config, network rules, seccomp profiles, Dockerfile/VM config. If open source, this is ground truth.
+2. **Architecture / security documentation** — Whitepapers, security model docs, threat models. Look for enforcement mechanism descriptions, not feature lists.
+3. **API / CLI reference** — Configuration options reveal what's actually controllable. If there's no config for network policy, there's probably no network policy.
+4. **README and docs site** — Good for understanding intent and scope. Cross-reference claims against source code or API surface.
+5. **Blog posts and announcements** — Lowest priority. Treat as claims requiring corroboration, not evidence.
+
+#### Evidence Trust Levels
+
+Evidence quality is **independent of the strength score being assigned**. A blog post claiming S:1 is just as suspect as a blog post claiming S:4 — the trust level describes the *source*, not the *score*.
+
+Each product in the score card carries an `evidence_level` tag from this scale:
+
+| Level | Source | How to Use |
+|---|---|---|
+| **verified** | Hands-on testing, runtime inspection, bypass attempts | Score directly. Highest confidence. No flag needed. |
+| **source-code** | Open-source repo: sandbox config, seccomp profiles, Dockerfile, VM setup | Score directly. Ground truth for mechanism identification, but no runtime verification. Flag if code is ambiguous or experimental (`WARNING:`). |
+| **docs** | Official documentation — architecture docs, API/CLI reference, README, security whitepapers | Score, but flag for review if claims cannot be cross-referenced against source code or API surface (`NEEDS REVIEW:`). |
+| **inferred** | Indirect evidence — blog posts, marketing pages, changelog mentions, or reasonable inference from related products | Flag with `WARNING:` and note the evidence gap. Score based on what can be corroborated; uncorroborated claims alone are insufficient. Lowest confidence. |
+
+If a layer has no evidence at all (not mentioned anywhere), mark it `—` (not addressed).
+
+> **🔍 NEEDS HUMAN REVIEW:** Any score where the best available evidence is `docs` or `inferred` should be flagged for human verification. This applies equally to S:1 and S:4 — low trust evidence is low trust regardless of the score it supports.
+
+#### Conservative Scoring Rules
+
+- **Undocumented = not scored.** If a layer has no documentation and no source code evidence, mark it `—` (not addressed), not `0`.
+- **Uncorroborated claims → flag, don't inflate.** If a blog says "we use hypervisor-enforced network isolation" but no API/config/source confirms it, flag with `WARNING:` and note the evidence gap. Score based on what *is* verifiable, not what is claimed.
+- **Roadmap features = 0.** Features described as "coming soon," "on roadmap," or "planned" do not count. Score current state only.
+- **"Default off" features score the default.** If network filtering exists but is disabled by default and most users won't enable it, note both the default score and the configured score. The fingerprint uses the **configured** score (what the product *can* do), but flag the default gap.
+- **Compliance certifications (SOC 2, ISO 27001) are not layer scores.** They indicate organizational controls, not sandbox enforcement mechanisms. Note them but don't let them inflate S/G scores.
+- **When in doubt, score lower.** A score can always be revised upward with better evidence. An inflated score misleads.
+
+#### Handling Ambiguity
+
+- **Multiple deployment modes** — Score the strongest available mode but note the weakest (e.g., "S:4 (microVM); WARNING: Linux legacy mode is S:2 (container)").
+- **Platform-managed vs self-hosted** — If the product has both, score the platform-managed version unless the user specifies otherwise. Note differences.
+- **Shared kernel vs dedicated kernel** — If docs say "container" without specifying the runtime, assume shared kernel (S:2). Only score S:3+ with evidence of gVisor, Kata, Firecracker, or equivalent.
+
+> **🔍 NEEDS HUMAN REVIEW:** When documentation is ambiguous or contradictory (e.g., blog claims a feature that API docs don't expose), flag the affected layers for human review rather than guessing. Use `WARNING:` prefix in the score card notes and explain the discrepancy.
 
 ### Step 2: Score Each Layer
 
@@ -385,21 +429,25 @@ Output the score card in this format:
 ```
 ### [Product Name]
 **Fingerprint: `L1:S/L2:S/L3:S/L4:S/L5:S/L6:S/L7:S`** · Portability: `[tags]`
+**Confidence: preliminary | verified** (preliminary = documentation/source review only; verified = includes hands-on testing)
 
 | Layer | S.G | Notes |
 |---|---|---|
-| L1 Compute | S.G | [mechanism and key details] |
-| L2 Resource | S.G | [mechanism and key details] |
-| L3 Filesystem | S.G | [mechanism and key details] |
-| L4 Network | S.G | [mechanism and key details] |
-| L5 Credentials | S.G | [mechanism and key details] |
-| L6 Action | S.G | [mechanism and key details] |
-| L7 Observability | S.G | [mechanism and key details] |
+| L1 Compute | S.G | [mechanism, enforcement method, evidence source] |
+| L2 Resource | S.G | [mechanism, enforcement method, evidence source] |
+| L3 Filesystem | S.G | [mechanism, enforcement method, evidence source] |
+| L4 Network | S.G | [mechanism, enforcement method, evidence source] |
+| L5 Credentials | S.G | [mechanism, enforcement method, evidence source] |
+| L6 Action | S.G | [mechanism, enforcement method, evidence source] |
+| L7 Observability | S.G | [mechanism, enforcement method, evidence source] |
 
 Threats: T1[●◐○] T2[●◐○] T3[●◐○](L[●◐○]/R[●◐○]) T4[●◐○] T5[●◐○] T6[●◐○] T7[●◐○]
 Gaps: [identify layers with 0 or — that matter]
 Complements: [what kind of tool would fill the gaps]
+Review flags: [list any layers needing human verification, with reasons]
 ```
+
+For each layer note, include: (1) the mechanism name, (2) how enforcement works, and (3) where the evidence came from — source code, docs, API reference, or blog. Use `WARNING:` prefix for layers where documentation is ambiguous or enforcement is unverified. Use `NEEDS REVIEW:` prefix for layers where the score depends on an assumption that should be verified by a human.
 
 ### Step 5: Validate
 
@@ -411,6 +459,11 @@ Run these sanity checks on your score card:
 - **No product should have T7:○ if L1 >= 2.** Strong compute isolation provides partial DoS defense even without dedicated resource caps.
 - **Every product with L1 >= 2 AND L3 >= 2 gets T3-Local ●.** If you have any isolation at all, local destructive operations are addressed at baseline.
 - **T2 is universally hard.** Requires L3 >= 2, L4 >= 2, AND L7 >= 2 for ●. Most products score ◐.
+- **Every S:3+ score has architectural evidence.** If you scored S:3 or S:4 but your evidence is only marketing copy or a blog post, downgrade and flag for review.
+- **Check for blog-to-docs gaps.** If a security feature is described in a blog but absent from API/CLI docs, flag it with `WARNING:` and score conservatively.
+- **Evidence trust matches confidence.** Review every layer's trust level (see Step 1). Any layer scored from architecture docs or lower without corroboration should carry a `NEEDS REVIEW:` flag — regardless of the strength score assigned.
+
+> **🔍 NEEDS HUMAN REVIEW:** After completing the score card, list all layers where (a) the best evidence is architecture docs or lower (no source code, no hands-on testing), (b) documentation was ambiguous or contradictory, or (c) a feature was claimed but could not be verified. These are candidates for hands-on verification before the score card is considered final.
 
 ---
 
