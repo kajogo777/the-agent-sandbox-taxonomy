@@ -448,10 +448,9 @@ Catalogs mechanisms at each layer with strength and granularity. Products listed
 |---|---|---|---|
 | No restriction | 0 | 0 | Full network access |
 | Proxy env vars | 1 | 2 | **Cooperative**: trivially bypassed via raw sockets |
-| Transparent proxy (iptables redirect) | 2 | 3 | **Opaque**: all traffic redirected regardless of process |
 | Kernel/hypervisor network filter | 3 | 2 | **Opaque**: iptables, eBPF, or Network Extension |
-| MITM proxy (kernel-redirected) | 2–3 | 3 | **Opaque**: TLS-terminating; per-URL/method policies |
-| Default-deny + exceptions | 3–4 | 2–3 | **Opaque/Structural**: all egress blocked; allowlist only |
+| MITM proxy (iptables redirect) | 2 | 3 | **Opaque**: all traffic redirected regardless of process |
+| MITM proxy (kernel-redirected) | 3 | 3 | **Opaque**: TLS-terminating; per-URL/method policies |
 | Network disabled | 4 | 1 | **Structural**: no network interface exists |
 
 ## A.5 — L5 Credentials
