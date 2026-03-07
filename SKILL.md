@@ -236,10 +236,9 @@ Use these tables to determine the correct S and G scores for each mechanism you 
 |---|---|---|---|
 | No restriction | 0 | 0 | Full network access |
 | Proxy env vars | 1 | 2 | **Cooperative**: trivially bypassed via raw sockets |
-| Transparent proxy (iptables redirect) | 2 | 3 | **Opaque**: all traffic redirected regardless of process |
 | Kernel/hypervisor network filter | 3 | 2 | **Opaque**: iptables, eBPF, or Network Extension |
-| MITM proxy (kernel-redirected) | 2–3 | 3 | **Opaque**: TLS-terminating; per-URL/method policies |
-| Default-deny + exceptions | 3–4 | 2–3 | **Opaque/Structural**: all egress blocked; allowlist only |
+| MITM proxy (iptables redirect) | 2 | 3 | **Opaque**: all traffic redirected regardless of process |
+| MITM proxy (kernel-redirected) | 3 | 3 | **Opaque**: TLS-terminating; per-URL/method policies |
 | Network disabled | 4 | 1 | **Structural**: no network interface exists |
 
 ### L5 — Credential & Secret Management Mechanisms
@@ -491,16 +490,11 @@ Use these archetypes to guide recommendations:
 - Kubernetes sandbox CRD (L1/L2/L3) + NetworkPolicy (L4) + policy engine (L6) + secrets manager (L5) + monitoring stack (L7)
 - Result: full stack, self-hosted
 
-### Anti-Patterns to Flag
+### Anti-Pattern: Platform Without Network Controls
 
-**Anti-Pattern: Platform Without Network Controls**
-A cloud platform provides excellent L1/L2/L3 but deploys with default (unrestricted) network access and passes cloud credentials as env vars. The agent runs in a perfect microVM but can still exfiltrate credentials, delete cloud resources, and reach internal services. **This is the most common configuration in practice and a false sense of security.** If L4 is `0`, flag it.
+A cloud platform provides excellent L1/L2/L3, but the user deploys with default (unrestricted) network access and passes cloud credentials as env vars. The agent runs in a perfect microVM but can still exfiltrate credentials, delete cloud resources, and reach internal services.
 
-**Anti-Pattern: Strong Isolation, No Observability**
-Perfect L1–L5 but no L7. You cannot detect misuse, investigate incidents, or improve policies. The sandbox is a black box.
-
-**Anti-Pattern: Cooperative Network "Enforcement"**
-A sophisticated HTTP proxy that relies on the process honoring `HTTP_PROXY` env vars. Looks impressive in a demo but the process can bypass it trivially. Always S:1.
+**This is the most common configuration in practice and a false sense of security.** Strong L1 is necessary but not sufficient. Look at the fingerprint: if L4 is `0`, you have a problem.
 
 ### Recommendation Procedure
 
