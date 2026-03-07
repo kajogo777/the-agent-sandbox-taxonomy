@@ -417,7 +417,7 @@ Catalogs mechanisms at each layer with strength and granularity. Products listed
 | MicroVM — minimal VMM (Firecracker) | 4 | 1 | Dedicated kernel per workload via KVM; ~50K line Rust VMM |
 | MicroVM — container-shaped (Kata) | 4 | 1 | Container-shaped VM; CRI compatible; needs KVM |
 | Unikernel | 4 | 1 | Single-app custom kernel; ~1MB image; needs KVM |
-| Library OS | 3–4 | 1 | Embedded minimal OS library; experimental |
+| Library OS | 3 | 1 | Embedded minimal OS library; experimental |
 | Confidential VM (SEV-SNP/TDX) | 4 | 1 | Hardware-encrypted memory; even hypervisor cannot read |
 
 ## A.2 — L2 Resource Limits
