@@ -1,4 +1,5 @@
 # Stakpak session files
+.stakpak
 .stakpak/session*
 
 # Python
