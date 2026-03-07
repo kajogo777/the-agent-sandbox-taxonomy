@@ -50,6 +50,7 @@ The document has two halves:
 5. [Glossary](#5-glossary)
 
 **The Framework**
+
 6. [Why Composition Is Necessary](#6-why-composition-is-necessary)
 7. [Composition Patterns](#7-composition-patterns)
 8. [Decision Checklist](#8-decision-checklist)
