@@ -129,14 +129,93 @@ def get_granularity(product, layer):
     return layer_data.get("g")
 
 
-def get_threat_level(product, threat):
-    raw = product.get("threats", {}).get(threat, "none")
-    if raw == "full":
-        return "full"
-    elif raw == "none":
+def _get_layer_s(product, layer):
+    """Get strength score for a layer, treating null/None/~ as 0."""
+    layer_data = product["layers"].get(layer, {})
+    if layer_data is None:
+        return 0
+    s = layer_data.get("s")
+    return s if s is not None else 0
+
+
+def compute_threats(product):
+    """Mechanically derive threat coverage from layer scores using AST threshold rules.
+
+    Returns a dict with T1–T7 keys and values "full", "partial", or "none",
+    plus a "T3_detail" key with the L/R breakdown string.
+
+    Rules (from SKILL.md / README.md):
+      T1 (Exfiltration):  primary L3, L4, L5 — all >= 2 → ●; any → ◐; none → ○
+      T2 (Supply Chain):  primary L3, L4, L7 — all >= 2 → ●; any → ◐; none → ○
+      T3-Local:           primary L1, L3     — both >= 2 → ●; one → ◐; none → ○
+      T3-Remote:          primary L4, L6     — both >= 2 → ●; one → ◐; none → ○
+      T3 combined:        lower of T3-L and T3-R
+      T4 (Lateral):       primary L4, L1     — both >= 2 → ●; one → ◐; none → ○
+      T5 (Persistence):   ephemeral (L1 >= 4) → ●; OR all of L1, L3, L6 >= 2 → ●;
+                          any >= 2 → ◐; none → ○
+      T6 (Priv Esc):      L1 >= 3 AND L2 >= 2 → ●; any of L1 >= 2, L2 >= 2 → ◐; none → ○
+      T7 (DoS):           primary L2, L1     — both >= 2 → ●; any → ◐; none → ○
+    """
+    L1 = _get_layer_s(product, "L1")
+    L2 = _get_layer_s(product, "L2")
+    L3 = _get_layer_s(product, "L3")
+    L4 = _get_layer_s(product, "L4")
+    L5 = _get_layer_s(product, "L5")
+    L6 = _get_layer_s(product, "L6")
+    L7 = _get_layer_s(product, "L7")
+
+    def _rate(conditions):
+        """all met → full; any met → partial; none → none."""
+        if all(conditions):
+            return "full"
+        if any(conditions):
+            return "partial"
         return "none"
+
+    threats = {}
+
+    # T1 — Data Exfiltration
+    threats["T1"] = _rate([L3 >= 2, L4 >= 2, L5 >= 2])
+
+    # T2 — Supply Chain Compromise
+    threats["T2"] = _rate([L3 >= 2, L4 >= 2, L7 >= 2])
+
+    # T3 — Destructive Operations (split local/remote, combine as lower)
+    t3_local = _rate([L1 >= 2, L3 >= 2])
+    t3_remote = _rate([L4 >= 2, L6 >= 2])
+    _order = {"full": 2, "partial": 1, "none": 0}
+    _reverse = {2: "full", 1: "partial", 0: "none"}
+    _sym = {"full": "●", "partial": "◐", "none": "○"}
+    threats["T3"] = _reverse[min(_order[t3_local], _order[t3_remote])]
+    threats["T3_detail"] = f"L{_sym[t3_local]}/R{_sym[t3_remote]}"
+
+    # T4 — Lateral Movement
+    threats["T4"] = _rate([L4 >= 2, L1 >= 2])
+
+    # T5 — Persistence (ephemeral shortcut: L1 >= 4 → ●)
+    is_ephemeral = L1 >= 4
+    if is_ephemeral:
+        threats["T5"] = "full"
     else:
-        return "partial"
+        threats["T5"] = _rate([L1 >= 2, L3 >= 2, L6 >= 2])
+
+    # T6 — Privilege Escalation (stricter: L1 >= 3 AND L2 >= 2 for ●)
+    if L1 >= 3 and L2 >= 2:
+        threats["T6"] = "full"
+    elif L1 >= 2 or L2 >= 2:
+        threats["T6"] = "partial"
+    else:
+        threats["T6"] = "none"
+
+    # T7 — Denial of Service
+    threats["T7"] = _rate([L2 >= 2, L1 >= 2])
+
+    return threats
+
+
+def get_threat_level(product, threat):
+    """Get computed threat level for a product."""
+    return product.get("_computed_threats", {}).get(threat, "none")
 
 
 def escape_xml(text):
@@ -355,6 +434,10 @@ def generate_threat_coverage(products):
 
 def main():
     products = load_products()
+
+    # Compute threat coverage mechanically from layer scores
+    for p in products:
+        p["_computed_threats"] = compute_threats(p)
 
     heatmap_svg = generate_heatmap(products)
     heatmap_path = OUTPUT_DIR / "fingerprint-heatmap.svg"

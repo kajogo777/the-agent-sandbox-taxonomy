@@ -7,28 +7,23 @@ products:
     L1:
       s: 4
       g: 1
-      note: Firecracker microVM (KVM); dedicated Linux guest kernel; minimal VMM (~50K
-        LOC Rust)
+      note: Firecracker microVM (KVM); dedicated Linux guest kernel; minimal VMM (~50K LOC Rust)
     L2:
       s: 4
       g: 2
-      note: Hypervisor-enforced; CPU/memory configurable per template; timeout max
-        24h; auto-kill on expiry
+      note: Hypervisor-enforced; CPU/memory configurable per template; timeout max 24h; auto-kill on expiry
     L3:
       s: 4
       g: 1
-      note: Isolated guest FS; no host exposure; crypto-signed file access; ephemeral
-        on kill
+      note: Isolated guest FS; no host exposure; crypto-signed file access; ephemeral on kill
     L4:
       s: 2
       g: 2
-      note: 'Host-level domain+CIDR allowlist/denylist; HTTPS requires SNI; default:
-        internet enabled'
+      note: 'Host-level domain+CIDR allowlist/denylist; HTTPS requires SNI; default: internet enabled'
     L5:
       s: 1
       g: 1
-      note: Env vars injected via SDK; visible inside sandbox; no credential proxy
-        or vault
+      note: Env vars injected via SDK; visible inside sandbox; no credential proxy or vault
     L6:
       s: null
       g: null
@@ -36,18 +31,9 @@ products:
     L7:
       s: 1
       g: 1
-      note: Session-level metrics (CPU/mem/disk); no command-level audit or tamper-evident
-        logging
-  threats:
-    T1: partial
-    T2: partial
-    T3: partial L●/R◐
-    T4: full
-    T5: full
-    T6: full
-    T7: full
-  notes: 'Gaps: L5 (env vars exposed), L6 (no governance), L7 (session-level only).
-    Complements: Credential proxy, governance overlay, external SIEM'
+      note: Session-level metrics (CPU/mem/disk); no command-level audit or tamper-evident logging
+  notes: 'Gaps: L5 (env vars exposed), L6 (no governance), L7 (session-level only). Complements: Credential proxy, governance
+    overlay, external SIEM'
   last_reviewed: null
   evidence_level: docs
 - name: Daytona
@@ -58,8 +44,7 @@ products:
     L1:
       s: 2
       g: 1
-      note: Sysbox container runtime (NOT Kata); user-namespace isolation; shared
-        host kernel
+      note: Sysbox container runtime (NOT Kata); user-namespace isolation; shared host kernel
     L2:
       s: 2
       g: 2
@@ -67,18 +52,15 @@ products:
     L3:
       s: 2
       g: 2
-      note: Read-only root where applicable; dedicated namespaces; procfs/sysfs partially
-        virtualized
+      note: Read-only root where applicable; dedicated namespaces; procfs/sysfs partially virtualized
     L4:
       s: 2
       g: 2
-      note: 'Tiered egress: Tier 1-2 restricted, Tier 3-4 open; networkAllowList (CIDR)
-        and networkBlockAll'
+      note: 'Tiered egress: Tier 1-2 restricted, Tier 3-4 open; networkAllowList (CIDR) and networkBlockAll'
     L5:
       s: 1
       g: 1
-      note: API key auth via SDK; session-scoped tokens; TLS 1.2+ in transit; no sandbox-level
-        credential proxy
+      note: API key auth via SDK; session-scoped tokens; TLS 1.2+ in transit; no sandbox-level credential proxy
     L6:
       s: null
       g: null
@@ -86,18 +68,9 @@ products:
     L7:
       s: 2
       g: 2
-      note: Comprehensive audit logs; 12-month retention, tamper-protected; OTel experimental;
-        SOC 2 Type I
-  threats:
-    T1: partial
-    T2: full
-    T3: partial L●/R◐
-    T4: full
-    T5: partial
-    T6: partial
-    T7: full
-  notes: 'Gaps: L1 (shared kernel), L5 (env var delivery), L6 (no governance). Complements:
-    Kata for L1 upgrade, credential proxy for L5, Warden/Leash for L6'
+      note: Comprehensive audit logs; 12-month retention, tamper-protected; OTel experimental; SOC 2 Type I
+  notes: 'Gaps: L1 (shared kernel), L5 (env var delivery), L6 (no governance). Complements: Kata for L1 upgrade, credential
+    proxy for L5, Warden/Leash for L6'
   last_reviewed: null
   evidence_level: docs
 - name: Modal
@@ -107,28 +80,23 @@ products:
     L1:
       s: 3
       g: 1
-      note: gVisor user-space kernel; Sentry intercepts all ~340 syscalls; ~70 filtered
-        reach host
+      note: gVisor user-space kernel; Sentry intercepts all ~340 syscalls; ~70 filtered reach host
     L2:
       s: 3
       g: 2
-      note: cgroups via gVisor delegation; configurable CPU/memory/GPU; default timeout
-        5min, max 24h
+      note: cgroups via gVisor delegation; configurable CPU/memory/GPU; default timeout 5min, max 24h
     L3:
       s: 3
       g: 2
-      note: Empty mount namespace; all FS ops mediated by Gofer process via 9P; procfs/sysfs
-        virtualized
+      note: Empty mount namespace; all FS ops mediated by Gofer process via 9P; procfs/sysfs virtualized
     L4:
       s: 2
       g: 2
-      note: Deny-by-default inbound; block_network=True blocks all outbound; cidr_allowlist;
-        default outbound unrestricted
+      note: Deny-by-default inbound; block_network=True blocks all outbound; cidr_allowlist; default outbound unrestricted
     L5:
       s: 1
       g: 2
-      note: Platform Secrets objects injected as env vars; OIDC for external auth;
-        secrets visible inside container
+      note: Platform Secrets objects injected as env vars; OIDC for external auth; secrets visible inside container
     L6:
       s: null
       g: null
@@ -136,18 +104,8 @@ products:
     L7:
       s: 2
       g: 1
-      note: Datadog + OTel integrations; sandbox stdout/stderr streaming; SOC 2 Type
-        2; no command-level audit
-  threats:
-    T1: partial
-    T2: full
-    T3: partial L●/R◐
-    T4: full
-    T5: full
-    T6: full
-    T7: full
-  notes: 'Gaps: L5 (env var delivery), L6 (no governance). Complements: Credential
-    proxy for L5, governance overlay for L6'
+      note: Datadog + OTel integrations; sandbox stdout/stderr streaming; SOC 2 Type 2; no command-level audit
+  notes: 'Gaps: L5 (env var delivery), L6 (no governance). Complements: Credential proxy for L5, governance overlay for L6'
   last_reviewed: null
   evidence_level: docs
 - name: Fly.io Sprites
@@ -157,28 +115,24 @@ products:
     L1:
       s: 4
       g: 1
-      note: Firecracker microVM + inner container (double isolation); own Linux kernel
-        per Sprite
+      note: Firecracker microVM + inner container (double isolation); own Linux kernel per Sprite
     L2:
       s: 4
       g: 2
-      note: Up to 8 vCPU, 16GB RAM, 100GB ext4 (NVMe + S3); cgroup-enforced; auto-sleep
-        when inactive
+      note: Up to 8 vCPU, 16GB RAM, 100GB ext4 (NVMe + S3); cgroup-enforced; auto-sleep when inactive
     L3:
       s: 4
       g: 1
-      note: Inner container own FS; ext4 on NVMe backed by S3; data wiped on destruction;
-        checkpoint/restore ~300ms
+      note: Inner container own FS; ext4 on NVMe backed by S3; data wiped on destruction; checkpoint/restore ~300ms
     L4:
       s: 2
       g: 2
-      note: L3 network policies via REST API; domain allowlists (wildcard); default
-        deny-all once any rule created; host-level enforcement
+      note: L3 network policies via REST API; domain allowlists (wildcard); default deny-all once any rule created; host-level
+        enforcement
     L5:
       s: 1
       g: 0
-      note: Bearer tokens for API auth only; no credential management for sandbox
-        contents; no first-party credential proxy
+      note: Bearer tokens for API auth only; no credential management for sandbox contents; no first-party credential proxy
     L6:
       s: null
       g: null
@@ -186,18 +140,9 @@ products:
     L7:
       s: 1
       g: 1
-      note: Logging in root namespace; checkpoint history provides state audit trail;
-        no detailed audit logging
-  threats:
-    T1: partial
-    T2: partial
-    T3: partial L●/R◐
-    T4: full
-    T5: partial
-    T6: full
-    T7: full
-  notes: 'Gaps: L5 (no credential management), L6 (no governance), L7 (basic logging).
-    Complements: Credential proxy, governance overlay, external audit/SIEM'
+      note: Logging in root namespace; checkpoint history provides state audit trail; no detailed audit logging
+  notes: 'Gaps: L5 (no credential management), L6 (no governance), L7 (basic logging). Complements: Credential proxy, governance
+    overlay, external audit/SIEM'
   last_reviewed: null
   evidence_level: docs
 - name: Blaxel
@@ -207,48 +152,34 @@ products:
     L1:
       s: 4
       g: 1
-      note: Firecracker microVM (same tech as AWS Lambda); root FS in memory; hardware-enforced
-        tenant separation via KVM
+      note: Firecracker microVM (same tech as AWS Lambda); root FS in memory; hardware-enforced tenant separation via KVM
     L2:
       s: 4
       g: 2
-      note: Configurable memory (CPU proportional); TTL/expiration policies; 15-min
-        max execution timeout; hypervisor-level
+      note: Configurable memory (CPU proportional); TTL/expiration policies; 15-min max execution timeout; hypervisor-level
     L3:
       s: 4
       g: 1
-      note: In-memory rootfs, wiped on destruction; full memory snapshots on standby;
-        Zero Data Retention compliance
+      note: In-memory rootfs, wiped on destruction; full memory snapshots on standby; Zero Data Retention compliance
     L4:
       s: 1
       g: 1
-      note: Blog claims hypervisor-enforced network isolation but API docs lack network
-        policy config; conservative score
+      note: Blog claims hypervisor-enforced network isolation but API docs lack network policy config; conservative score
     L5:
       s: 1
       g: 2
-      note: Env vars via blaxel.toml + platform secrets syntax; blog recommends hypervisor-injected
-        secrets but unclear if implemented
+      note: Env vars via blaxel.toml + platform secrets syntax; blog recommends hypervisor-injected secrets but unclear if
+        implemented
     L6:
       s: 1
       g: 1
-      note: Deployment policies and model gateway with token cost control; not runtime
-        command-level governance
+      note: Deployment policies and model gateway with token cost control; not runtime command-level governance
     L7:
       s: 2
       g: 2
-      note: Auto-implemented logging and tracing; distributed tracing with spans;
-        SOC 2 Type II, HIPAA, ISO 27001
-  threats:
-    T1: partial
-    T2: partial
-    T3: partial L●/R○
-    T4: partial
-    T5: partial
-    T6: full
-    T7: full
-  notes: 'Gaps: L4 (undocumented enforcement), L5 (env var delivery), L6 (deployment-level
-    only). Blog-to-docs gap on security features'
+      note: Auto-implemented logging and tracing; distributed tracing with spans; SOC 2 Type II, HIPAA, ISO 27001
+  notes: 'Gaps: L4 (undocumented enforcement), L5 (env var delivery), L6 (deployment-level only). Blog-to-docs gap on security
+    features'
   last_reviewed: null
   evidence_level: docs
 - name: Unikraft Cloud
@@ -259,28 +190,24 @@ products:
     L1:
       s: 4
       g: 1
-      note: Unikernel VM on KVM; single-address-space, single-application; minimal
-        TCB; no shell in production
+      note: Unikernel VM on KVM; single-address-space, single-application; minimal TCB; no shell in production
     L2:
       s: 4
       g: 2
-      note: Configurable vCPU and memory; persistent volumes with size limits; restart
-        policies; scale-to-zero
+      note: Configurable vCPU and memory; persistent volumes with size limits; restart policies; scale-to-zero
     L3:
       s: 4
       g: 1
-      note: Immutable unikernel image (no runtime modification); volumes provide optional
-        mutable storage; minimal rootfs
+      note: Immutable unikernel image (no runtime modification); volumes provide optional mutable storage; minimal rootfs
     L4:
       s: 1
       g: 1
-      note: Service-based networking with port mapping; private instances available;
-        IP whitelisting ON ROADMAP; no egress filtering
+      note: Service-based networking with port mapping; private instances available; IP whitelisting ON ROADMAP; no egress
+        filtering
     L5:
       s: 1
       g: 0
-      note: Env vars via CLI or Kraftfile only; no secrets management system; env
-        var groups on roadmap
+      note: Env vars via CLI or Kraftfile only; no secrets management system; env var groups on roadmap
     L6:
       s: null
       g: null
@@ -288,18 +215,9 @@ products:
     L7:
       s: 0
       g: 0
-      note: Audit trail and metrics monitoring both ON ROADMAP; instance state tracking
-        with timestamps exists
-  threats:
-    T1: partial
-    T2: partial
-    T3: partial L●/R○
-    T4: partial
-    T5: partial
-    T6: full
-    T7: full
-  notes: 'Gaps: L4 (no egress filtering), L5 (no secrets management), L6 (no governance),
-    L7 (roadmap only). Not designed as agent sandbox'
+      note: Audit trail and metrics monitoring both ON ROADMAP; instance state tracking with timestamps exists
+  notes: 'Gaps: L4 (no egress filtering), L5 (no secrets management), L6 (no governance), L7 (roadmap only). Not designed
+    as agent sandbox'
   last_reviewed: null
   evidence_level: docs
 - name: Docker Sandbox
@@ -311,29 +229,27 @@ products:
     L1:
       s: 4
       g: 1
-      note: 'Dedicated microVM per sandbox; Apple Virtualization.framework (macOS),
-        Hyper-V (Windows); own Linux kernel + private Docker daemon. WARNING: Linux:
-        legacy container mode (shared kernel, S:2)'
+      note: 'Dedicated microVM per sandbox; Apple Virtualization.framework (macOS), Hyper-V (Windows); own Linux kernel +
+        private Docker daemon. WARNING: Linux: legacy container mode (shared kernel, S:2)'
     L2:
       s: 4
       g: 1
-      note: VM-inherent resource boundary (hypervisor-allocated); not configurable
-        per-sandbox; Docker Desktop settings control overall
+      note: VM-inherent resource boundary (hypervisor-allocated); not configurable per-sandbox; Docker Desktop settings control
+        overall
     L3:
       s: 4
       g: 2
-      note: Project-only workspace directory mounted; all other FS ephemeral to VM;
-        no host sensitive paths unless explicitly mounted
+      note: Project-only workspace directory mounted; all other FS ephemeral to VM; no host sensitive paths unless explicitly
+        mounted
     L4:
       s: 2
       g: 2
-      note: HTTP/HTTPS filtering proxy on host; raw TCP/UDP blocked; domain allow/deny
-        configurable; blocks RFC1918, loopback, cloud metadata
+      note: HTTP/HTTPS filtering proxy on host; raw TCP/UDP blocked; domain allow/deny configurable; blocks RFC1918, loopback,
+        cloud metadata
     L5:
       s: 4
       g: 2
-      note: 'Credential proxy: keys NEVER enter sandbox; proxy auto-injects auth headers
-        for OpenAI, Anthropic, Google, GitHub'
+      note: 'Credential proxy: keys NEVER enter sandbox; proxy auto-injects auth headers for OpenAI, Anthropic, Google, GitHub'
     L6:
       s: null
       g: null
@@ -341,18 +257,9 @@ products:
     L7:
       s: 1
       g: 1
-      note: Network proxy logs (domain-level HTTP/HTTPS visibility); no command-level
-        audit; no tamper-evident logging
-  threats:
-    T1: full
-    T2: partial
-    T3: partial L●/R◐
-    T4: full
-    T5: partial
-    T6: full
-    T7: full
-  notes: 'Gaps: L6 (no governance), L7 (network logs only). T1 fully addressed by
-    credential proxy + network filtering. Complements: Governance engine (Leash/Warden)'
+      note: Network proxy logs (domain-level HTTP/HTTPS visibility); no command-level audit; no tamper-evident logging
+  notes: 'Gaps: L6 (no governance), L7 (network logs only). T1 fully addressed by credential proxy + network filtering. Complements:
+    Governance engine (Leash/Warden)'
   last_reviewed: null
   evidence_level: docs
 - name: Google Agent Sandbox
@@ -363,52 +270,41 @@ products:
     L1:
       s: 3
       g: 1
-      note: gVisor (primary) or Kata (optional); Sentry intercepts all ~340 syscalls;
-        GKE Autopilot enables gVisor by default; open-source kubernetes-sigs/agent-sandbox
+      note: gVisor (primary) or Kata (optional); Sentry intercepts all ~340 syscalls; GKE Autopilot enables gVisor by default;
+        open-source kubernetes-sigs/agent-sandbox
     L2:
       s: 3
       g: 3
-      note: 'K8s-native resource limits: cpu_limit, mem_limit, timeout_seconds per
-        executor; WarmPool CRD pre-warms with defined budgets'
+      note: 'K8s-native resource limits: cpu_limit, mem_limit, timeout_seconds per executor; WarmPool CRD pre-warms with defined
+        budgets'
     L3:
       s: 3
       g: 2
-      note: Ephemeral pod per execution; code injected via ConfigMap, not host mount;
-        gVisor virtualizes FS; optional PVC
+      note: Ephemeral pod per execution; code injected via ConfigMap, not host mount; gVisor virtualizes FS; optional PVC
     L4:
       s: 3
       g: 2
-      note: K8s NetworkPolicy via eBPF (GKE Dataplane v2); default-deny egress; blocks
-        cloud metadata + lateral pod movement; VPC Service Controls. Packet-level
-        filter (IP/port/protocol) — cannot inspect HTTP method, URL path, headers,
-        or body; G:2 not G:3
+      note: K8s NetworkPolicy via eBPF (GKE Dataplane v2); default-deny egress; blocks cloud metadata + lateral pod movement;
+        VPC Service Controls. Packet-level filter (IP/port/protocol) — cannot inspect HTTP method, URL path, headers, or body;
+        G:2 not G:3
     L5:
       s: 3
       g: 3
-      note: 'Workload Identity Federation: ephemeral, least-privilege IAM per sandbox;
-        network blocks metadata server; ADK PII redaction; OAuth token delegation'
+      note: 'Workload Identity Federation: ephemeral, least-privilege IAM per sandbox; network blocks metadata server; ADK
+        PII redaction; OAuth token delegation'
     L6:
       s: 2
       g: 3
-      note: ADK callbacks validate model/tool calls before/after execution; in-tool
-        guardrails; Model Armor plugin; Gemini-as-Judge via callbacks
+      note: ADK callbacks validate model/tool calls before/after execution; in-tool guardrails; Model Armor plugin; Gemini-as-Judge
+        via callbacks
     L7:
       s: 2
       g: 2
-      note: K8s logging (Cloud Logging on GKE); ADK evaluation and tracing; Cloud
-        Audit Logs; Cloud Monitoring; pod-level stdout/stderr
-  threats:
-    T1: full
-    T2: full
-    T3: full L+R
-    T4: full
-    T5: full
-    T6: full
-    T7: full
-  notes: 'Strong coverage across all layers. gVisor L1 is S:3 (not S:4
-    hardware isolation), which caps all layers. L4 is kernel-enforced (S:3) but packet-level
-    only (G:2) — cannot inspect HTTP content. Complements: Kata for L1:4 upgrade,
-    MITM proxy for L4 G:3 content-aware filtering'
+      note: K8s logging (Cloud Logging on GKE); ADK evaluation and tracing; Cloud Audit Logs; Cloud Monitoring; pod-level
+        stdout/stderr
+  notes: 'Strong coverage across all layers. gVisor L1 is S:3 (not S:4 hardware isolation), which caps all layers. L4 is kernel-enforced
+    (S:3) but packet-level only (G:2) — cannot inspect HTTP content. Complements: Kata for L1:4 upgrade, MITM proxy for L4
+    G:3 content-aware filtering'
   last_reviewed: null
   evidence_level: docs
 - name: StrongDM Leash
@@ -420,8 +316,7 @@ products:
     L1:
       s: 2
       g: 1
-      note: 'Standard Docker containers (shared kernel); two containers: agent + leash
-        (monitoring/policy); Docker/Podman/OrbStack'
+      note: 'Standard Docker containers (shared kernel); two containers: agent + leash (monitoring/policy); Docker/Podman/OrbStack'
     L2:
       s: 0
       g: 0
@@ -429,38 +324,29 @@ products:
     L3:
       s: 2
       g: 1
-      note: Working directory bind-mounted (read/write, changes reflect on host);
-        optional agent config mounts
+      note: Working directory bind-mounted (read/write, changes reflect on host); optional agent config mounts
     L4:
       s: 2
       g: 3
-      note: Kernel-level network interception in leash container; Cedar policies evaluate
-        traffic before connection; context-aware rules; capped by L1:2
+      note: Kernel-level network interception in leash container; Cedar policies evaluate traffic before connection; context-aware
+        rules; capped by L1:2
     L5:
       s: 1
       g: 1
-      note: 'Env var forwarding: ANTHROPIC_API_KEY, OPENAI_API_KEY etc. mapped automatically;
-        keys directly accessible inside agent container'
+      note: 'Env var forwarding: ANTHROPIC_API_KEY, OPENAI_API_KEY etc. mapped automatically; keys directly accessible inside
+        agent container'
     L6:
       s: 2
       g: 3
-      note: Cedar policy engine; hot-reloadable; governs filesystem access, network
-        connections, MCP tool calls; MCP observer; capped by L1:2
+      note: Cedar policy engine; hot-reloadable; governs filesystem access, network connections, MCP tool calls; MCP observer;
+        capped by L1:2
     L7:
       s: 2
       g: 3
-      note: Full syscall-level telemetry; every FS access and network connection captured;
-        MCP observer correlates tool calls; control UI at localhost:18080; not tamper-evident
-  threats:
-    T1: partial
-    T2: full
-    T3: full L+R
-    T4: full
-    T5: full
-    T6: partial
-    T7: partial
-  notes: 'Gaps: L1 (shared kernel caps everything at S:2), L2 (no resource limits
-    → T7 unaddressed), L5 (env var exposure). Primary value is L6/L7 governance overlay'
+      note: Full syscall-level telemetry; every FS access and network connection captured; MCP observer correlates tool calls;
+        control UI at localhost:18080; not tamper-evident
+  notes: 'Gaps: L1 (shared kernel caps everything at S:2), L2 (no resource limits → T7 unaddressed), L5 (env var exposure).
+    Primary value is L6/L7 governance overlay'
   last_reviewed: null
   evidence_level: docs
 - name: Stakpak Warden
@@ -472,8 +358,8 @@ products:
     L1:
       s: 2
       g: 1
-      note: Docker container (stakpak warden mode) or native Rust binary (no isolation);
-        ships with Docker, kubectl, AWS/GCP/Azure CLIs; mTLS on all MCP comms
+      note: Docker container (stakpak warden mode) or native Rust binary (no isolation); ships with Docker, kubectl, AWS/GCP/Azure
+        CLIs; mTLS on all MCP comms
     L2:
       s: 0
       g: 0
@@ -481,40 +367,30 @@ products:
     L3:
       s: 2
       g: 2
-      note: Volume mounts with explicit read-only option; cloud credentials mountable
-        as read-only; standard Docker namespace isolation
+      note: Volume mounts with explicit read-only option; cloud credentials mountable as read-only; standard Docker namespace
+        isolation
     L4:
       s: 2
       g: 3
-      note: Transparent proxy with Cedar policies; every network request routed through
-        proxy; deterministic guardrails; capped by L1:2
+      note: Transparent proxy with Cedar policies; every network request routed through proxy; deterministic guardrails; capped
+        by L1:2
     L5:
       s: 2
       g: 3
-      note: 210+ secret types detected and substituted with placeholders before LLM
-        sees them; real values restored at execution by proxy; privacy mode; capped
-        by L1:2
+      note: 210+ secret types detected and substituted with placeholders before LLM sees them; real values restored at execution
+        by proxy; privacy mode; capped by L1:2
     L6:
       s: 2
       g: 2
-      note: Per-profile allowed_tools configuration; auto-approve per tool; custom
-        Warden policies (enterprise); rulebooks for SOPs; bulk message approval for
-        HITL
+      note: Per-profile allowed_tools configuration; auto-approve per tool; custom Warden policies (enterprise); rulebooks
+        for SOPs; bulk message approval for HITL
     L7:
       s: 2
       g: 2
-      note: Full action logging with context; file changes backed up before modification;
-        session replay capability; autopilot logs
-  threats:
-    T1: full
-    T2: full
-    T3: full L+R
-    T4: full
-    T5: full
-    T6: partial
-    T7: partial
-  notes: 'Gaps: L1 (shared kernel), L2 (no resource limits → T7 unaddressed). Secret
-    substitution (L5) is most sophisticated credential handling among governance tools'
+      note: Full action logging with context; file changes backed up before modification; session replay capability; autopilot
+        logs
+  notes: 'Gaps: L1 (shared kernel), L2 (no resource limits → T7 unaddressed). Secret substitution (L5) is most sophisticated
+    credential handling among governance tools'
   last_reviewed: null
   evidence_level: docs
 - name: nono
@@ -525,9 +401,8 @@ products:
     L1:
       s: 3
       g: 1
-      note: Landlock (Linux 5.13+) + Seatbelt (macOS); kernel-enforced process sandbox;
-        irreversible once applied; seccomp-BPF for syscall interception; no root required;
-        early alpha
+      note: Landlock (Linux 5.13+) + Seatbelt (macOS); kernel-enforced process sandbox; irreversible once applied; seccomp-BPF
+        for syscall interception; no root required; early alpha
     L2:
       s: null
       g: null
@@ -535,44 +410,30 @@ products:
     L3:
       s: 3
       g: 3
-      note: Default-deny; granular per-path read/write; sensitive paths blocked by
-        default (~/.ssh, ~/.aws, shell configs, browser cookies); atomic rollback
-        snapshots with integrity
+      note: Default-deny; granular per-path read/write; sensitive paths blocked by default (~/.ssh, ~/.aws, shell configs,
+        browser cookies); atomic rollback snapshots with integrity
     L4:
       s: 3
       g: 2
-      note: Network blocked by default (--net-block); allowlist-based host filtering
-        via local proxy; seccomp blocks raw socket creation; proxy enforcement outside
-        sandbox
+      note: Network blocked by default (--net-block); allowlist-based host filtering via local proxy; seccomp blocks raw socket
+        creation; proxy enforcement outside sandbox
     L5:
       s: 3
       g: 2
-      note: 'Two modes: (1) proxy injection — real credentials never enter sandbox;
-        (2) env injection from OS keystore/1Password; phantom keys when access blocked;
-        capped by L1:3'
+      note: 'Two modes: (1) proxy injection — real credentials never enter sandbox; (2) env injection from OS keystore/1Password;
+        phantom keys when access blocked; capped by L1:3'
     L6:
       s: 3
       g: 2
-      note: Destructive syscalls (unlink, rmdir) blocked at kernel level; seccomp-BPF
-        supervisor intercepts syscalls; fd-injection after user approval; built-in
-        audited profiles; dry-run mode
+      note: Destructive syscalls (unlink, rmdir) blocked at kernel level; seccomp-BPF supervisor intercepts syscalls; fd-injection
+        after user approval; built-in audited profiles; dry-run mode
     L7:
       s: 3
       g: 3
-      note: Sigstore cryptographic audit chain; DSSE envelopes with in-toto/SLSA attestations;
-        keyed or keyless signing (OIDC + Fulcio + Rekor); instruction files cryptographically
-        signed
-  threats:
-    T1: full
-    T2: full
-    T3: full L+R
-    T4: full
-    T5: full
-    T6: partial
-    T7: partial
-  notes: 'ALL restrictions IRREVERSIBLE. Only gap is L2 (resource capping). Highest
-    per-layer scores among all local-first tools. Complements: cgroups/ulimits wrapper
-    for L2'
+      note: Sigstore cryptographic audit chain; DSSE envelopes with in-toto/SLSA attestations; keyed or keyless signing (OIDC
+        + Fulcio + Rekor); instruction files cryptographically signed
+  notes: 'ALL restrictions IRREVERSIBLE. Only gap is L2 (resource capping). Highest per-layer scores among all local-first
+    tools. Complements: cgroups/ulimits wrapper for L2'
   last_reviewed: null
   evidence_level: docs
 - name: packnplay
@@ -583,8 +444,7 @@ products:
     L1:
       s: 2
       g: 1
-      note: Docker/OrbStack container; standard namespace/cgroup isolation, shared
-        kernel; devcontainer support
+      note: Docker/OrbStack container; standard namespace/cgroup isolation, shared kernel; devcontainer support
     L2:
       s: 0
       g: 0
@@ -592,38 +452,29 @@ products:
     L3:
       s: 2
       g: 1
-      note: Project source mounted at same absolute host path; separate .claude.json;
-        git worktree management; no sensitive path blocking
+      note: Project source mounted at same absolute host path; separate .claude.json; git worktree management; no sensitive
+        path blocking
     L4:
       s: 0
       g: 0
-      note: 'No network restrictions documented; containers have full outbound access;
-        WARNING: L4:0 + credentials present = T1 exfiltration risk'
+      note: 'No network restrictions documented; containers have full outbound access; WARNING: L4:0 + credentials present
+        = T1 exfiltration risk'
     L5:
       s: 1
       g: 1
-      note: AWS/GCP credential config, Git/GitHub credential proxying, env var bundles;
-        all cooperative — credentials accessible inside container
+      note: AWS/GCP credential config, Git/GitHub credential proxying, env var bundles; all cooperative — credentials accessible
+        inside container
     L6:
       s: 0
       g: 0
-      note: Container IS the permission boundary; agents run with --dangerously-skip-permissions;
-        no command blocklist or policy engine
+      note: Container IS the permission boundary; agents run with --dangerously-skip-permissions; no command blocklist or
+        policy engine
     L7:
       s: 0
       g: 0
       note: No logging beyond Docker native; no audit trail, no session replay
-  threats:
-    T1: partial
-    T2: partial
-    T3: partial L●/R○
-    T4: partial
-    T5: partial
-    T6: partial
-    T7: partial
-  notes: 'WARNING: L4:0 with credentials present is a T1 exfiltration risk. Designed
-    for developer convenience, not security. Complements: Network proxy, governance
-    overlay, nono inside container'
+  notes: 'WARNING: L4:0 with credentials present is a T1 exfiltration risk. Designed for developer convenience, not security.
+    Complements: Network proxy, governance overlay, nono inside container'
   last_reviewed: null
   evidence_level: docs
 - name: Claude Code (local)
@@ -634,8 +485,7 @@ products:
     L1:
       s: 3
       g: 1
-      note: macOS Seatbelt + Linux bubblewrap (Flatpak runtime); process-level sandbox
-        on bash tool; open source sandbox-runtime
+      note: macOS Seatbelt + Linux bubblewrap (Flatpak runtime); process-level sandbox on bash tool; open source sandbox-runtime
     L2:
       s: null
       g: null
@@ -643,42 +493,30 @@ products:
     L3:
       s: 3
       g: 3
-      note: 'Write: CWD and subdirs only; read: entire system EXCEPT denied paths;
-        deny rules accumulate across 3 config levels; global denies cannot be overridden'
+      note: 'Write: CWD and subdirs only; read: entire system EXCEPT denied paths; deny rules accumulate across 3 config levels;
+        global denies cannot be overridden'
     L4:
       s: 3
       g: 2
-      note: All internet routed through Unix domain socket to proxy outside sandbox;
-        Seatbelt/bubblewrap blocks direct network; domain allowlist/denylist; curl/wget
-        blocked by default
+      note: All internet routed through Unix domain socket to proxy outside sandbox; Seatbelt/bubblewrap blocks direct network;
+        domain allowlist/denylist; curl/wget blocked by default
     L5:
       s: 1
       g: 1
-      note: 'Protected indirectly: filesystem denies on ~/.ssh, ~/.aws; network proxy
-        prevents exfiltration; but env vars in shell session are visible; no vault
-        or credential proxy'
+      note: 'Protected indirectly: filesystem denies on ~/.ssh, ~/.aws; network proxy prevents exfiltration; but env vars
+        in shell session are visible; no vault or credential proxy'
     L6:
       s: 2
       g: 3
-      note: 5 permission modes (Normal → Bypass); two sandbox modes; command blocklist
-        (curl, wget); PreToolUse hooks for programmatic approval/denial; enterprise
-        managed settings
+      note: 5 permission modes (Normal → Bypass); two sandbox modes; command blocklist (curl, wget); PreToolUse hooks for
+        programmatic approval/denial; enterprise managed settings
     L7:
       s: 2
       g: 2
-      note: Session transcripts (30-day retention); Sentry error logging (TLS + AES-256);
-        enterprise Compliance API for real-time usage/conversation data
-  threats:
-    T1: partial
-    T2: full
-    T3: full L+R
-    T4: full
-    T5: full
-    T6: partial
-    T7: partial
-  notes: 'Gaps: L2 (no resource limits), L5 (env vars visible). Complements: Resource
-    limits (ulimits/cgroups), credential proxy, ephemeral wrapper (Docker Sandbox
-    or VM). MIT'
+      note: Session transcripts (30-day retention); Sentry error logging (TLS + AES-256); enterprise Compliance API for real-time
+        usage/conversation data
+  notes: 'Gaps: L2 (no resource limits), L5 (env vars visible). Complements: Resource limits (ulimits/cgroups), credential
+    proxy, ephemeral wrapper (Docker Sandbox or VM). MIT'
   last_reviewed: null
   evidence_level: docs
 - name: Claude Code (web)
@@ -688,50 +526,38 @@ products:
     L1:
       s: 4
       g: 1
-      note: Isolated Anthropic-managed VM per session; runs --dangerously-skip-permissions
-        inside — VM IS the security boundary
+      note: Isolated Anthropic-managed VM per session; runs --dangerously-skip-permissions inside — VM IS the security boundary
     L2:
       s: 2
       g: 0
-      note: Shared rate limits with all Claude usage; multiple parallel tasks consume
-        proportionally; no documented per-session CPU/memory caps
+      note: Shared rate limits with all Claude usage; multiple parallel tasks consume proportionally; no documented per-session
+        CPU/memory caps
     L3:
       s: 4
       g: 1
-      note: VM-scoped; repo cloned at task start; changes persist only via git (PR
-        creation); ephemeral
+      note: VM-scoped; repo cloned at task start; changes persist only via git (PR creation); ephemeral
     L4:
       s: 2
       g: 2
-      note: 'HTTP/HTTPS proxy for all outbound; default: allowlisted domains only;
-        configurable to disable network or allow specific domains; git ops through
-        credential proxy with branch validation'
+      note: 'HTTP/HTTPS proxy for all outbound; default: allowlisted domains only; configurable to disable network or allow
+        specific domains; git ops through credential proxy with branch validation'
     L5:
       s: 4
       g: 2
-      note: Credentials NEVER placed inside sandbox VM; git auth via scoped-credential
-        proxy that translates to real GitHub tokens outside sandbox; branch restrictions
-        enforced by proxy
+      note: Credentials NEVER placed inside sandbox VM; git auth via scoped-credential proxy that translates to real GitHub
+        tokens outside sandbox; branch restrictions enforced by proxy
     L6:
       s: 2
       g: 1
-      note: 'PR-as-checkpoint: human reviews diffs before merge; agent cannot approve
-        own PRs; sessions can be teleported to local terminal; GitHub-only'
+      note: 'PR-as-checkpoint: human reviews diffs before merge; agent cannot approve own PRs; sessions can be teleported
+        to local terminal; GitHub-only'
     L7:
       s: 2
       g: 2
-      note: All operations logged for compliance; network proxy audit logging; sessions
-        archivable/deletable; enterprise Compliance API
-  threats:
-    T1: full
-    T2: full
-    T3: full L+R
-    T4: full
-    T5: full
-    T6: full
-    T7: full
-  notes: 'Credentials never enter sandbox. L6 limited to PR-level governance (agent
-    autonomous within session). Complements: Runtime action governance within VM'
+      note: All operations logged for compliance; network proxy audit logging; sessions archivable/deletable; enterprise Compliance
+        API
+  notes: 'Credentials never enter sandbox. L6 limited to PR-level governance (agent autonomous within session). Complements:
+    Runtime action governance within VM'
   last_reviewed: null
   evidence_level: docs
 - name: Codex CLI (agent phase)
@@ -742,52 +568,39 @@ products:
     L1:
       s: 3
       g: 1
-      note: macOS Seatbelt + Linux Landlock+seccomp-BPF + Windows AppContainer (experimental);
-        Rust implementation; process hardening (prctl, RLIMIT_CORE=0, LD_* stripping)
+      note: macOS Seatbelt + Linux Landlock+seccomp-BPF + Windows AppContainer (experimental); Rust implementation; process
+        hardening (prctl, RLIMIT_CORE=0, LD_* stripping)
     L2:
       s: 0
       g: 0
-      note: No CPU/memory/disk caps; 1800s worker timeout in multi-agent mode (agent-level,
-        not sandbox-level)
+      note: No CPU/memory/disk caps; 1800s worker timeout in multi-agent mode (agent-level, not sandbox-level)
     L3:
       s: 3
       g: 3
-      note: 'Three modes: read-only, workspace-write (CWD + /tmp only, default), danger-full-access;
-        Landlock ruleset whitelists writable roots; requires git repo'
+      note: 'Three modes: read-only, workspace-write (CWD + /tmp only, default), danger-full-access; Landlock ruleset whitelists
+        writable roots; requires git repo'
     L4:
       s: 3
       g: 1
-      note: 'Network disabled by default; seccomp blocks socket, connect, bind syscalls
-        (except AF_UNIX); opt-in via config; when enabled: unrestricted (no domain
-        filtering)'
+      note: 'Network disabled by default; seccomp blocks socket, connect, bind syscalls (except AF_UNIX); opt-in via config;
+        when enabled: unrestricted (no domain filtering)'
     L5:
       s: 2
       g: 3
-      note: 'shell_environment_policy: automatic KEY/SECRET/TOKEN pattern filtering;
-        inherit=none or core options; explicit exclude patterns; LD_* stripping; in
-        Codex Cloud: secrets removed before agent phase'
+      note: 'shell_environment_policy: automatic KEY/SECRET/TOKEN pattern filtering; inherit=none or core options; explicit
+        exclude patterns; LD_* stripping; in Codex Cloud: secrets removed before agent phase'
     L6:
       s: 2
       g: 3
-      note: '4 approval policies: untrusted, on-request, never (CI mode), reject;
-        separate execpolicy rule files; --full-auto shortcut; untrusted projects skip
-        project-scoped config'
+      note: '4 approval policies: untrusted, on-request, never (CI mode), reject; separate execpolicy rule files; --full-auto
+        shortcut; untrusted projects skip project-scoped config'
     L7:
       s: 2
       g: 3
-      note: OpenTelemetry export (OTLP-HTTP/gRPC); JSONL event streaming; thread/turn
-        lifecycle, command executions, file changes, MCP calls; session persistence/resume;
-        notification hooks
-  threats:
-    T1: full
-    T2: full
-    T3: full L+R
-    T4: full
-    T5: full
-    T6: partial
-    T7: partial
-  notes: 'Gaps: L2 (no resource caps), L4 binary (network on = unrestricted). Complements:
-    Resource wrapper (cgroups), domain-level network filtering, ephemeral container'
+      note: OpenTelemetry export (OTLP-HTTP/gRPC); JSONL event streaming; thread/turn lifecycle, command executions, file
+        changes, MCP calls; session persistence/resume; notification hooks
+  notes: 'Gaps: L2 (no resource caps), L4 binary (network on = unrestricted). Complements: Resource wrapper (cgroups), domain-level
+    network filtering, ephemeral container'
   last_reviewed: null
   evidence_level: docs
 - name: Cursor (sandboxed)
@@ -798,8 +611,8 @@ products:
     L1:
       s: 3
       g: 1
-      note: 'macOS Seatbelt + Linux Landlock+seccomp-BPF; dynamic sandbox profiles
-        from workspace settings; Windows: runs Linux sandbox inside WSL2'
+      note: 'macOS Seatbelt + Linux Landlock+seccomp-BPF; dynamic sandbox profiles from workspace settings; Windows: runs
+        Linux sandbox inside WSL2'
     L2:
       s: null
       g: null
@@ -807,41 +620,30 @@ products:
     L3:
       s: 2
       g: 2
-      note: 'Writes: workspace-scoped (kernel-enforced); denies .vscode/, .cursor/,
-        .git/config, .git/hooks/; WARNING: reads broad — shell commands bypass .cursorignore'
+      note: 'Writes: workspace-scoped (kernel-enforced); denies .vscode/, .cursor/, .git/config, .git/hooks/; WARNING: reads
+        broad — shell commands bypass .cursorignore'
     L4:
       s: 1
       g: 1
-      note: 'Network gated by permission prompt, NOT kernel-enforced; cooperative
-        gate only; background agents: full internet, no restrictions'
+      note: 'Network gated by permission prompt, NOT kernel-enforced; cooperative gate only; background agents: full internet,
+        no restrictions'
     L5:
       s: 0
       g: 0
-      note: 'No credential management; agent can read sensitive files including .env,
-        SSH keys, cloud credentials; background agents: KMS-encrypted env vars but
-        accessible'
+      note: 'No credential management; agent can read sensitive files including .env, SSH keys, cloud credentials; background
+        agents: KMS-encrypted env vars but accessible'
     L6:
       s: 2
       g: 2
-      note: 'Commands inside sandbox: auto-approved; elevated operations: HITL approval;
-        hooks for lifecycle validation; WARNING: historical shell builtin bypass (fixed
-        Cursor 2.3)'
+      note: 'Commands inside sandbox: auto-approved; elevated operations: HITL approval; hooks for lifecycle validation; WARNING:
+        historical shell builtin bypass (fixed Cursor 2.3)'
     L7:
       s: 1
       g: 1
-      note: Code evolution snapshots with rollback; SOC 2 Type II; no documented command-level
-        audit; no enterprise log export API
-  threats:
-    T1: partial
-    T2: partial
-    T3: partial L●/R◐
-    T4: partial
-    T5: full
-    T6: partial
-    T7: partial
-  notes: 'WARNING: L4:1 + L5:0 = T1 exfiltration risk. Sensitive files readable via
-    shell + cooperative network gate. Complements: Kernel-enforced network blocking,
-    credential isolation, nono as inner sandbox'
+      note: Code evolution snapshots with rollback; SOC 2 Type II; no documented command-level audit; no enterprise log export
+        API
+  notes: 'WARNING: L4:1 + L5:0 = T1 exfiltration risk. Sensitive files readable via shell + cooperative network gate. Complements:
+    Kernel-enforced network blocking, credential isolation, nono as inner sandbox'
   last_reviewed: null
   evidence_level: docs
 - name: Copilot coding agent
@@ -851,52 +653,40 @@ products:
     L1:
       s: 4
       g: 1
-      note: GitHub Actions runner — ephemeral Azure VM per task; fresh VM, clean environment;
-        compatible with self-hosted runners
+      note: GitHub Actions runner — ephemeral Azure VM per task; fresh VM, clean environment; compatible with self-hosted
+        runners
     L2:
       s: 4
       g: 2
-      note: 'Actions runner specs: 2-core CPU, 7GB RAM, 14GB SSD (standard Ubuntu);
-        job timeouts; usage metered against Actions minutes'
+      note: 'Actions runner specs: 2-core CPU, 7GB RAM, 14GB SSD (standard Ubuntu); job timeouts; usage metered against Actions
+        minutes'
     L3:
       s: 4
       g: 2
-      note: Repo-scoped access; can only push to copilot/* branches; subject to branch
-        protections; environment ephemeral; customizable via copilot-setup-steps.yml
+      note: Repo-scoped access; can only push to copilot/* branches; subject to branch protections; environment ephemeral;
+        customizable via copilot-setup-steps.yml
     L4:
       s: 2
       g: 2
-      note: 'Built-in firewall (default enabled); domain allowlist covers package/container
-        registries; per-repo customizable; WARNING: only applies to Bash-started processes;
-        MCP servers exempt'
+      note: 'Built-in firewall (default enabled); domain allowlist covers package/container registries; per-repo customizable;
+        WARNING: only applies to Bash-started processes; MCP servers exempt'
     L5:
       s: 2
       g: 2
-      note: 'Outside-collaborator model: agent treated as external contributor; can''t
-        see repo secrets during agent execution (available in setup-steps only); can''t
-        approve/merge own work'
+      note: 'Outside-collaborator model: agent treated as external contributor; can''t see repo secrets during agent execution
+        (available in setup-steps only); can''t approve/merge own work'
     L6:
       s: 2
       g: 3
-      note: 'PR-level HITL: agent cannot approve or merge; draft PRs require human
-        approval before Actions run; CodeQL + secret scanning + GitHub Advisory DB
-        before completion'
+      note: 'PR-level HITL: agent cannot approve or merge; draft PRs require human approval before Actions run; CodeQL + secret
+        scanning + GitHub Advisory DB before completion'
     L7:
       s: 2
       g: 2
-      note: Session logs (every commit, decision, step); PR-based audit trail with
-        co-authoring; firewall-blocked requests logged; GitHub enterprise audit log;
-        agents panel
-  threats:
-    T1: full
-    T2: full
-    T3: full L+R
-    T4: full
-    T5: full
-    T6: full
-    T7: full
-  notes: 'L4 firewall has documented MCP server gap and acknowledged bypass potential.
-    Otherwise comprehensive coverage. Complements: MCP server network isolation'
+      note: Session logs (every commit, decision, step); PR-based audit trail with co-authoring; firewall-blocked requests
+        logged; GitHub enterprise audit log; agents panel
+  notes: 'L4 firewall has documented MCP server gap and acknowledged bypass potential. Otherwise comprehensive coverage. Complements:
+    MCP server network isolation'
   last_reviewed: null
   evidence_level: docs
 - name: Devin
@@ -906,54 +696,40 @@ products:
     L1:
       s: 4
       g: 1
-      note: 'Cloud VM (Devbox) per session; isolated machine with shell, editor, browser;
-        three deployment models: multi-tenant SaaS, customer-dedicated SaaS, customer-hosted
-        VPC'
+      note: 'Cloud VM (Devbox) per session; isolated machine with shell, editor, browser; three deployment models: multi-tenant
+        SaaS, customer-dedicated SaaS, customer-hosted VPC'
     L2:
       s: 2
       g: 2
-      note: ACU-metered (~1 ACU ≈ 15min active work); auto-sleep after ~0.1 ACU inactivity;
-        Large Performant VM option; ACU budgets configurable
+      note: ACU-metered (~1 ACU ≈ 15min active work); auto-sleep after ~0.1 ACU inactivity; Large Performant VM option; ACU
+        budgets configurable
     L3:
       s: 4
       g: 2
-      note: VM-scoped workspace; resets to saved Machine Snapshot at session start;
-        repo selection configurable; ephemeral within session scope
+      note: VM-scoped workspace; resets to saved Machine Snapshot at session start; repo selection configurable; ephemeral
+        within session scope
     L4:
       s: 0
       g: 0
-      note: 'Internet access required for Devin to function; no built-in firewall
-        or egress restrictions; WARNING: L4:0 + secrets present = T1 exfiltration
-        risk'
+      note: 'Internet access required for Devin to function; no built-in firewall or egress restrictions; WARNING: L4:0 +
+        secrets present = T1 exfiltration risk'
     L5:
       s: 1
       g: 3
-      note: Built-in Secrets Manager with org/repo/session scopes; Key-Value, JSON,
-        TOTP, Site Cookies; encrypted at rest; RBAC + SSO; but secrets accessible
-        as normal env vars in Devbox
+      note: Built-in Secrets Manager with org/repo/session scopes; Key-Value, JSON, TOTP, Site Cookies; encrypted at rest;
+        RBAC + SSO; but secrets accessible as normal env vars in Devbox
     L6:
       s: 2
       g: 2
-      note: 'Two non-negotiable checkpoints: (1) planning checkpoint — human reviews
-        plan; (2) PR checkpoint — human reviews code; playbooks with guardrails; chat
-        intervention mid-session'
+      note: 'Two non-negotiable checkpoints: (1) planning checkpoint — human reviews plan; (2) PR checkpoint — human reviews
+        code; playbooks with guardrails; chat intervention mid-session'
     L7:
       s: 2
       g: 3
-      note: 'Full replay timeline: every command, file diff, browser interaction;
-        session insights; real-time monitoring dashboard; SOC 2 Type II (since Sep
-        2024); continuous logging'
-  threats:
-    T1: partial
-    T2: partial
-    T3: partial L●/R◐
-    T4: partial
-    T5: full
-    T6: full
-    T7: full
-  notes: 'WARNING: L4:0 is the critical gap. Unrestricted network + secrets as env
-    vars = T1 exfiltration risk. Complements: Network egress firewall (critical),
-    credential proxy, SIEM integration'
+      note: 'Full replay timeline: every command, file diff, browser interaction; session insights; real-time monitoring dashboard;
+        SOC 2 Type II (since Sep 2024); continuous logging'
+  notes: 'WARNING: L4:0 is the critical gap. Unrestricted network + secrets as env vars = T1 exfiltration risk. Complements:
+    Network egress firewall (critical), credential proxy, SIEM integration'
   last_reviewed: null
   evidence_level: docs
 - name: Replit
@@ -963,8 +739,7 @@ products:
     L1:
       s: 3
       g: 1
-      note: Docker namespaces + cgroups; one container per Repl; shared host kernel
-        on GCP VMs; Nix-based full Linux runtime
+      note: Docker namespaces + cgroups; one container per Repl; shared host kernel on GCP VMs; Nix-based full Linux runtime
     L2:
       s: 3
       g: 2
@@ -972,39 +747,26 @@ products:
     L3:
       s: 3
       g: 1
-      note: Persistent btrfs filesystem; Docker mount namespaces; Margarine/NBD from
-        GCS for storage; not ephemeral
+      note: Persistent btrfs filesystem; Docker mount namespaces; Margarine/NBD from GCS for storage; not ephemeral
     L4:
       s: 2
       g: 1
-      note: Permissive egress by default; rate-limited; Cloud Armor DDoS protection;
-        no user-configurable firewall or allowlist
+      note: Permissive egress by default; rate-limited; Cloud Armor DDoS protection; no user-configurable firewall or allowlist
     L5:
       s: 2
       g: 2
-      note: AES-256 encryption at rest; env var injection for secrets; secret scanner;
-        SOC 2 Type 2; secrets visible inside container
+      note: AES-256 encryption at rest; env var injection for secrets; secret scanner; SOC 2 Type 2; secrets visible inside
+        container
     L6:
       s: 3
       g: 1
-      note: Seccomp profile with ~44 blocked syscalls; capabilities dropped; runs
-        as non-root runner user; kernel-enforced
+      note: Seccomp profile with ~44 blocked syscalls; capabilities dropped; runs as non-root runner user; kernel-enforced
     L7:
       s: 2
       g: 1
-      note: Console logs; resource monitor; enterprise audit logging; no OTel or Logpush
-        integration
-  threats:
-    T1: full
-    T2: full
-    T3: full L+R
-    T4: full
-    T5: full
-    T6: full
-    T7: full
-  notes: 'All layers at S:2+. Persistent filesystem means T5 relies on L1+L3+L6
-    (all met). L4 permissive egress is weakest link — rate-limited but no allowlist.
-    Complements: Egress allowlist for L4 upgrade'
+      note: Console logs; resource monitor; enterprise audit logging; no OTel or Logpush integration
+  notes: 'All layers at S:2+. Persistent filesystem means T5 relies on L1+L3+L6 (all met). L4 permissive egress is weakest
+    link — rate-limited but no allowlist. Complements: Egress allowlist for L4 upgrade'
   last_reviewed: null
   evidence_level: docs
 - name: Deno Sandbox
@@ -1015,8 +777,7 @@ products:
     L1:
       s: 4
       g: 1
-      note: Firecracker microVM (same tech as AWS Lambda); own kernel per sandbox;
-        KVM hypervisor; <200ms cold boot
+      note: Firecracker microVM (same tech as AWS Lambda); own kernel per sandbox; KVM hypervisor; <200ms cold boot
     L2:
       s: 4
       g: 2
@@ -1024,8 +785,7 @@ products:
     L3:
       s: 3
       g: 2
-      note: Ephemeral full Linux filesystem; volumes and snapshots opt-in; per-VM
-        mount isolation
+      note: Ephemeral full Linux filesystem; volumes and snapshots opt-in; per-VM mount isolation
     L4:
       s: 3
       g: 2
@@ -1033,28 +793,18 @@ products:
     L5:
       s: 3
       g: 3
-      note: Credential proxying — placeholder injected in env, real value substituted
-        on-wire only; secrets never fully present in sandbox
+      note: Credential proxying — placeholder injected in env, real value substituted on-wire only; secrets never fully present
+        in sandbox
     L6:
       s: 3
       g: 1
-      note: Firecracker minimal VMM; seccomp on host process; no dedicated policy
-        engine; kernel-enforced at VMM level
+      note: Firecracker minimal VMM; seccomp on host process; no dedicated policy engine; kernel-enforced at VMM level
     L7:
       s: 2
       g: 2
       note: Deploy OTel inherited; SDK lifecycle events; no dedicated audit logs
-  threats:
-    T1: full
-    T2: full
-    T3: full L+R
-    T4: full
-    T5: full
-    T6: full
-    T7: full
-  notes: 'Strongest isolation tier (Firecracker). Ephemeral VMs inherently address
-    T5. L5 credential proxying is best-in-class. Complements: Dedicated audit logging
-    for L7 upgrade'
+  notes: 'Strongest isolation tier (Firecracker). Ephemeral VMs inherently address T5. L5 credential proxying is best-in-class.
+    Complements: Dedicated audit logging for L7 upgrade'
   last_reviewed: null
   evidence_level: docs
 - name: Deno Deploy
@@ -1064,49 +814,34 @@ products:
     L1:
       s: 3
       g: 1
-      note: V8 isolates with one OS process per deployment; per-process namespaces
-        + seccomp; separate VPCs; Rust runtime
+      note: V8 isolates with one OS process per deployment; per-process namespaces + seccomp; separate VPCs; Rust runtime
     L2:
       s: 3
       g: 2
-      note: 512 MB memory (cgroup-enforced); 15–40h CPU/month; 1s event-loop limit;
-        WatchDog process monitor
+      note: 512 MB memory (cgroup-enforced); 15–40h CPU/month; 1s event-loop limit; WatchDog process monitor
     L3:
       s: 3
       g: 1
-      note: Read-only virtualized filesystem; write operations blocked; Deno KV for
-        persistence
+      note: Read-only virtualized filesystem; write operations blocked; Deno KV for persistence
     L4:
       s: 2
       g: 1
-      note: fetch() unrestricted; port 443 raw TCP blocked; no egress allowlist or
-        domain filtering
+      note: fetch() unrestricted; port 443 raw TCP blocked; no egress allowlist or domain filtering
     L5:
       s: 2
       g: 2
-      note: Env vars + secrets (write-only in dashboard); 3 deployment contexts; SOC
-        2 Type 1; secrets visible at runtime
+      note: Env vars + secrets (write-only in dashboard); 3 deployment contexts; SOC 2 Type 1; secrets visible at runtime
     L6:
       s: 2
       g: 1
-      note: No subprocess, FFI, or process.exit; fixed capability set enforced by
-        runtime; CLI permission flags don't apply in Deploy
+      note: No subprocess, FFI, or process.exit; fixed capability set enforced by runtime; CLI permission flags don't apply
+        in Deploy
     L7:
       s: 2
       g: 3
-      note: Native OTel support; auto-instrumentation; log streaming; immutable deploy
-        IDs for traceability
-  threats:
-    T1: full
-    T2: full
-    T3: full L+R
-    T4: full
-    T5: full
-    T6: full
-    T7: full
-  notes: 'V8 isolate model with process-level namespaces. L4 fetch() unrestricted
-    is the weakest link — no domain filtering. Read-only FS (L3) is strong. Complements:
-    Egress allowlist for L4 upgrade'
+      note: Native OTel support; auto-instrumentation; log streaming; immutable deploy IDs for traceability
+  notes: 'V8 isolate model with process-level namespaces. L4 fetch() unrestricted is the weakest link — no domain filtering.
+    Read-only FS (L3) is strong. Complements: Egress allowlist for L4 upgrade'
   last_reviewed: null
   evidence_level: docs
 - name: Cloudflare Workers
@@ -1116,49 +851,35 @@ products:
     L1:
       s: 2
       g: 1
-      note: V8 isolate in shared OS process; PKU (Protection Keys for Userspace) hardening;
-        seccomp on process; workerd open-source runtime
+      note: V8 isolate in shared OS process; PKU (Protection Keys for Userspace) hardening; seccomp on process; workerd open-source
+        runtime
     L2:
       s: 2
       g: 2
-      note: 128 MB memory (V8 heap limit); 10ms–300s CPU time; 50–10M subrequest
-        limits; platform-enforced
+      note: 128 MB memory (V8 heap limit); 10ms–300s CPU time; 50–10M subrequest limits; platform-enforced
     L3:
       s: 3
       g: 1
-      note: No filesystem access (seccomp-blocked); in-memory VFS only; structural
-        absence of host FS
+      note: No filesystem access (seccomp-blocked); in-memory VFS only; structural absence of host FS
     L4:
       s: 2
       g: 1
-      note: fetch() unrestricted; SSRF to internal services blocked; no user-configurable
-        egress policy
+      note: fetch() unrestricted; SSRF to internal services blocked; no user-configurable egress policy
     L5:
       s: 2
       g: 2
-      note: Write-only secrets (not readable via API after set); per-Worker scope;
-        Secrets Store (beta) for shared secrets
+      note: Write-only secrets (not readable via API after set); per-Worker scope; Secrets Store (beta) for shared secrets
     L6:
       s: 2
       g: 2
-      note: eval() disabled; capability-based bindings model (explicit resource access);
-        no SharedArrayBuffer; software-enforced
+      note: eval() disabled; capability-based bindings model (explicit resource access); no SharedArrayBuffer; software-enforced
     L7:
       s: 2
       g: 3
-      note: Workers Logs; Tail Workers for real-time streaming; Logpush to external
-        destinations; OTel support; 18-month audit log retention
-  threats:
-    T1: full
-    T2: full
-    T3: full L+R
-    T4: full
-    T5: full
-    T6: partial
-    T7: full
-  notes: 'T6 partial: L1:2 (shared process, not kernel/hardware isolation) caps privilege
-    escalation defense. No filesystem is a structural strength (L3). Complements:
-    Stronger compute isolation for L1 upgrade'
+      note: Workers Logs; Tail Workers for real-time streaming; Logpush to external destinations; OTel support; 18-month audit
+        log retention
+  notes: 'T6 partial: L1:2 (shared process, not kernel/hardware isolation) caps privilege escalation defense. No filesystem
+    is a structural strength (L3). Complements: Stronger compute isolation for L1 upgrade'
   last_reviewed: null
   evidence_level: docs
 - name: Ona
@@ -1169,66 +890,49 @@ products:
     L1:
       s: 4
       g: 1
-      note: Each environment = dedicated EC2 instance (AWS) or GCP VM via cloud hypervisor
-        (Nitro/KVM); own kernel, memory space, network stack; Dev Container runs inside
-        the VM; AMI gitpod/images/gitpod-next/ec2-runner-ami-*
+      note: Each environment = dedicated EC2 instance (AWS) or GCP VM via cloud hypervisor (Nitro/KVM); own kernel, memory
+        space, network stack; Dev Container runs inside the VM; AMI gitpod/images/gitpod-next/ec2-runner-ami-*
     L2:
       s: 4
       g: 2
-      note: Hypervisor-enforced via EC2 instance type selection; fixed vCPU/RAM/disk
-        at VM creation; environment classes (m6i.large to m6i.8xlarge, custom supported);
-        timeout and auto-delete policies; environment count limits per user
+      note: Hypervisor-enforced via EC2 instance type selection; fixed vCPU/RAM/disk at VM creation; environment classes (m6i.large
+        to m6i.8xlarge, custom supported); timeout and auto-delete policies; environment count limits per user
     L3:
       s: 4
       g: 1
-      note: Full independent VM filesystem; no host paths visible; ephemeral by design
-        (wiped on destruction); EBS volume per instance; Veto BPF LSM provides kernel-level
-        file access enforcement (exec gate shipped, file access gate planned). NEEDS
-        REVIEW — filesystem protection granularity not fully documented in API/CLI
+      note: Full independent VM filesystem; no host paths visible; ephemeral by design (wiped on destruction); EBS volume
+        per instance; Veto BPF LSM provides kernel-level file access enforcement (exec gate shipped, file access gate planned).
+        NEEDS REVIEW — filesystem protection granularity not fully documented in API/CLI
     L4:
       s: 2
       g: 2
-      note: VPC security groups and NACLs; customer VPC with native network access;
-        host/port/protocol allowlists via guardrails page; PrivateLink to management
-        plane. WARNING — BPF LSM network enforcement is roadmap (next quarter), current
-        enforcement is VPC-level (software-enforced)
+      note: VPC security groups and NACLs; customer VPC with native network access; host/port/protocol allowlists via guardrails
+        page; PrivateLink to management plane. WARNING — BPF LSM network enforcement is roadmap (next quarter), current enforcement
+        is VPC-level (software-enforced)
     L5:
       s: 2
       g: 2
-      note: Three-tier secrets (user/project/org) as env vars or files; AES256-GCM
-        at rest + TLS in transit; OIDC for short-lived scoped cloud tokens (eliminates
-        static creds for AWS/GCP). WARNING — memory controls claimed on marketing
-        page but undocumented in API/CLI; default delivery is env vars visible inside
-        VM
+      note: Three-tier secrets (user/project/org) as env vars or files; AES256-GCM at rest + TLS in transit; OIDC for short-lived
+        scoped cloud tokens (eliminates static creds for AWS/GCP). WARNING — memory controls claimed on marketing page but
+        undocumented in API/CLI; default delivery is env vars visible inside VM
     L6:
-      s: 3
+      s: 2
       g: 2
-      note: 'Veto executable deny list: BPF LSM kernel enforcement; SHA-256 content-addressable
-        hashing; rename/symlink/copy resistant; pre-execution blocking; TOCTOU-free;
-        audit+block modes; max 20 entries. Also command deny list (userspace, agent-only,
-        S:1). CrowdStrike Falcon EDR as sidecar. WARNING — Veto is early access/feature
-        flag (Enterprise); dynamic linker bypass acknowledged'
+      note: 'Veto executable deny list: BPF LSM kernel enforcement; SHA-256 content-addressable hashing; rename/symlink/copy
+        resistant; pre-execution blocking; TOCTOU-free; audit+block modes; max 20 entries. Also command deny list (userspace,
+        agent-only, S:1). CrowdStrike Falcon EDR as sidecar. WARNING — Veto is early access/feature flag (Enterprise only);
+        dynamic linker bypass acknowledged (ld.so can load blocked binaries); max 20 entries limits coverage. Scored S:2 not
+        S:3 due to known bypass and feature-flag status. NEEDS REVIEW — re-evaluate when dynamic linker bypass is fixed and
+        Veto exits feature flag'
     L7:
       s: 2
       g: 2
-      note: Comprehensive audit logs (all CRUD on infra/execution/security/org resources);
-        actor types include users, service accounts, runners, environments, agent
-        executions; CLI + REST API + real-time streaming (WatchEvents); Veto events
-        with SHA-256 digest, PID/PPID, timestamps; CrowdStrike Falcon EDR; SOC 2;
-        no tamper-evident chain
-  threats:
-    T1: full
-    T2: full
-    T3: full L+R
-    T4: full
-    T5: full
-    T6: full
-    T7: full
-  notes: 'Gaps: L4 (VPC-level, not kernel-level; BPF network is roadmap), L5 (env
-    var delivery; memory controls undocumented). Complements: Kernel-level network
-    filtering (Ona roadmap) for L4 upgrade, external credential proxy/vault for L5
-    upgrade. Review flags: L3 filesystem granularity undocumented, L4 BPF network
-    is roadmap, L5 memory controls marketing-only, L6 Veto early access with dynamic
-    linker bypass'
+      note: Comprehensive audit logs (all CRUD on infra/execution/security/org resources); actor types include users, service
+        accounts, runners, environments, agent executions; CLI + REST API + real-time streaming (WatchEvents); Veto events
+        with SHA-256 digest, PID/PPID, timestamps; CrowdStrike Falcon EDR; SOC 2; no tamper-evident chain
+  notes: 'Gaps: L4 (VPC-level, not kernel-level; BPF network is roadmap), L5 (env var delivery; memory controls undocumented).
+    Complements: Kernel-level network filtering (Ona roadmap) for L4 upgrade, external credential proxy/vault for L5 upgrade.
+    Review flags: L3 filesystem granularity undocumented, L4 BPF network is roadmap, L5 memory controls marketing-only, L6
+    Veto early access with dynamic linker bypass'
   last_reviewed: '2026-03-07'
   evidence_level: docs

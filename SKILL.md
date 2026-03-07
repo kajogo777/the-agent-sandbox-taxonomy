@@ -59,7 +59,7 @@ Agents can cause seven categories of harm. Sandboxes exist to contain them.
 | **T2** | Supply Chain Compromise | Introduces malicious code: compromised deps, binary replacement, build artifact poisoning | Malicious install script exfiltrates env vars |
 | **T3** | Destructive Operations | Destroys or misconfigures resources, **both local and remote** | `rm -rf /`, cloud resource deletion via API, `kubectl delete namespace` |
 | **T4** | Lateral Movement | Reaches systems beyond its intended scope | Scans local network, hits cloud metadata endpoint |
-| **T5** | Persistence | Survives sandbox destruction | Writes cron job, modifies shell init files, installs git hooks |
+| **T5** | Persistence | Agent's effects survive sandbox destruction | Writes cron job on host, modifies host shell init files, installs git hooks outside sandbox. Note: user data persisting via volumes/snapshots is NOT T5 — persistence means the agent *process or its side-effects* survive the sandbox boundary, not that user files are durable |
 | **T6** | Privilege Escalation | Escapes the sandbox entirely | Exploits kernel CVE, container escape |
 | **T7** | Denial of Service | Consumes excessive resources, degrading host or other tenants | Fork bomb, memory bomb, disk filling |
 
@@ -99,7 +99,7 @@ Use this when scoring. For each threat, identify which layers provide defense an
 | **T2 Supply Chain** | L3 + L4 + L7 | L4 controls download sources, L3 protects filesystem integrity, L7 detects compromises after the fact. |
 | **T3 Destructive Ops** | L3 + **L4** + L6 | L3 covers local destruction. **Remote destruction is a network operation**: needs L4 to block access or L6 to block the action semantically. L1 alone does NOT protect remote resources. |
 | **T4 Lateral Movement** | L4 + L1 | L4 blocks outbound access. L1 provides network namespace isolation as secondary. |
-| **T5 Persistence** | L3 + L1 + L6 | Ephemeral sandboxes (L1 destroyed) inherently prevent persistence. Persistent sandboxes need L3 to block init file writes and L6 to block scheduled task creation. |
+| **T5 Persistence** | L3 + L1 + L6 | Sandboxes with structural isolation (L1 >= 4: microVMs, unikernels) inherently prevent persistence — the agent process and its side-effects cannot survive sandbox destruction regardless of whether user data volumes persist. Sandboxes with weaker isolation (L1 < 4) need L3 to block init file writes and L6 to block scheduled task creation. |
 | **T6 Privilege Escalation** | L1 + L2 | L1 strength directly determines escape resistance. Hardware boundaries are fundamentally harder to escape than software. |
 | **T7 Denial of Service** | L2 + L1 | L2 caps resources. Enforcement must be outside the sandbox. |
 
@@ -369,6 +369,8 @@ For each layer:
 
 ### Step 3: Assess Threat Coverage
 
+Threat coverage is **computed mechanically** from layer scores — it is derived data, not manually authored. The `scripts/generate.py` script computes threats at generation time using the threshold rules below. When scoring a new product, you only need to provide layer scores; threats are derived automatically.
+
 Apply the threshold rules below **mechanically** for each threat. Do not eyeball — use the layer scores from Step 2 and the rules to determine the symbol. Treat `~` (not addressed) as 0 for threshold comparisons.
 
 | Rating | Symbol | Meaning |
@@ -401,8 +403,8 @@ For each threat, the **primary defense layers** and their **thresholds** are lis
 - ◐ if **one** of L4 >= 2, L1 >= 2
 - ○ if **neither** meets the threshold
 
-**T5 — Persistence** (primary: L1, L3, L6; OR ephemeral)
-- ● if sandbox is **ephemeral** (destroyed after session, L1 >= 4 with ephemeral lifecycle), OR if **all three** of L1 >= 2, L3 >= 2, L6 >= 2
+**T5 — Persistence** (primary: L1, L3, L6)
+- ● if **L1 >= 4** (structural isolation — microVM/unikernel boundary means the agent process cannot survive sandbox destruction, regardless of whether user data volumes persist), OR if **all three** of L1 >= 2, L3 >= 2, L6 >= 2
 - ◐ if **at least one** of L1 >= 2, L3 >= 2, L6 >= 2
 - ○ if **none** meet the threshold
 
@@ -444,9 +446,43 @@ Output the score card in this format:
 | L7 Observability | S.G | [mechanism, enforcement method, evidence source] |
 
 Threats: T1[●◐○] T2[●◐○] T3[●◐○](L[●◐○]/R[●◐○]) T4[●◐○] T5[●◐○] T6[●◐○] T7[●◐○]
+         (derived mechanically from layer scores — do not override manually)
 Gaps: [identify layers with 0 or — that matter]
 Complements: [what kind of tool would fill the gaps]
 Review flags: [list any layers needing human verification, with reasons]
+```
+
+#### Note Format — Score Justification Required
+
+Every layer note in `products.yaml` must include **explicit reasoning for both the S and G scores**. The note is the audit trail — a future reviewer should be able to read the note alone and understand *why* this mechanism earned this score without needing to re-research the product.
+
+Each note must contain these elements in order:
+
+1. **Mechanism**: What the product uses (e.g., "Firecracker microVM via KVM")
+2. **S justification**: Why this mechanism earns its strength score, referencing the scoring criteria:
+   - For S:1 — state what makes it cooperative/bypassable
+   - For S:2 — state what separate process enforces it and why the sandbox can't circumvent it
+   - For S:3 — state which kernel mechanism enforces it and why it's irreversible
+   - For S:4 — state what doesn't exist inside the sandbox or what hardware boundary applies
+3. **G justification**: Why this mechanism earns its granularity score:
+   - For G:1 — state that control is binary (on/off)
+   - For G:2 — state what allowlists/blocklists are available
+   - For G:3 — state what per-resource/content-aware policies are supported
+4. **Evidence source**: Where the information came from (source code, docs, API reference, blog)
+5. **Flags**: `WARNING:` for ambiguous/unverified enforcement, `NEEDS REVIEW:` for assumptions needing human verification, or reasoning for scoring *lower* than the mechanism might suggest (e.g., "Scored S:2 not S:3 due to known bypass")
+
+**Good note example:**
+```
+Firecracker microVM via KVM; dedicated Linux guest kernel per sandbox.
+S:4 — hardware boundary: host kernel attack surface doesn't exist inside
+the VM (hypervisor-enforced isolation). G:1 — binary: sandbox is either
+running or not, no per-workload isolation tuning. Evidence: architecture
+docs + open-source Firecracker VMM.
+```
+
+**Bad note example (mechanism only, no reasoning):**
+```
+Firecracker microVM (KVM); dedicated Linux guest kernel; minimal VMM
 ```
 
 For each layer note, include: (1) the mechanism name, (2) how enforcement works, and (3) where the evidence came from — source code, docs, API reference, or blog. Use `WARNING:` prefix for layers where documentation is ambiguous or enforcement is unverified. Use `NEEDS REVIEW:` prefix for layers where the score depends on an assumption that should be verified by a human.
@@ -500,8 +536,8 @@ Walk the user through these 8 questions in order. Each answer maps to layer requ
 - Regulatory → consider cryptographic audit chains
 
 **7. Ephemeral or persistent sandbox?**
-- Ephemeral → inherently addresses T5
-- Persistent → must explicitly address T5 via immutable filesystem or monitored mutation
+- Structural isolation (L1 >= 4: microVM/unikernel) → inherently addresses T5 because the agent process cannot survive sandbox destruction (user data volumes persisting is not T5)
+- Weaker isolation (L1 < 4) → must explicitly address T5 via L3 (block init file writes) and L6 (block scheduled task creation)
 
 **8. What are your portability constraints?**
 - No infrastructure → process wrappers (no infra tag needed)
