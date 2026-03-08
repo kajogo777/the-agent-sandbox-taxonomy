@@ -541,10 +541,10 @@ products:
       g: 1
       note: Isolated Anthropic-managed VM per session; runs --dangerously-skip-permissions inside — VM IS the security boundary
     L2:
-      s: 2
-      g: 0
-      note: Shared rate limits with all Claude usage; multiple parallel tasks consume proportionally; no documented per-session
-        CPU/memory caps
+      s: null
+      g: null
+      note: 'No documented per-session CPU/memory/disk caps on the sandbox VM. Shared API rate limits
+        are not L2 (L2 is host resource enforcement on the sandbox, not API usage quotas)'
     L3:
       s: 4
       g: 1
