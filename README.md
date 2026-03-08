@@ -6,13 +6,13 @@
 >
 > This taxonomy and the product scores within it are still a work in progress and have **not yet been reviewed by the community**. The agent sandbox space is evolving quickly and some information may already be out of date. Product scores in [`products.yaml`](products.yaml) include a `last_reviewed` timestamp — entries showing `null` have not been independently verified. We welcome contributions, corrections, and review from the community. Please open an issue or PR if you spot inaccuracies.
 
-An open taxonomy and scoring framework for evaluating AI agent sandboxes. It decomposes sandboxing into **7 defense layers**, maps them against **7 threat categories**, and scores each mechanism on **3 dimensions** (strength, granularity, portability), producing comparable fingerprints for any product. Includes score cards for 22 sandbox tools, a composition framework for stacking complementary products, and a decision checklist for choosing the right sandbox stack.
+An open taxonomy and scoring framework for evaluating AI agent sandboxes. It decomposes sandboxing into **7 defense layers**, maps them against **7 threat categories**, and scores each mechanism on **3 dimensions** (strength, granularity, portability), producing comparable fingerprints for any product. Includes score cards for 23 sandbox tools, a composition framework for stacking complementary products, and a decision checklist for choosing the right sandbox stack.
 
 <p align="center">
   <img src="assets/ast-infographic.svg" alt="AST 7-7-3 Infographic: 7 Defense Layers, 7 Threat Categories, 3 Evaluation Dimensions" width="960"/>
 </p>
 
-> **Looking for product scores?** Jump straight to the [22 Product Score Cards](#appendix-b-product-score-cards).
+> **Looking for product scores?** Jump straight to the [23 Product Score Cards](#appendix-b-product-score-cards).
 ---
 
 ## How to Use This
