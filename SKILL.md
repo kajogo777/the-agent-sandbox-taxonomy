@@ -373,6 +373,20 @@ For each layer:
 4. If a layer is not addressed at all by the product → mark as `—`.
 5. If the product operates at the layer but provides no enforcement → mark as `0`.
 
+### Step 2b: Cross-Layer Verification
+
+Mechanisms often enforce multiple layers simultaneously. After scoring each layer independently, verify that you haven't missed enforcement at adjacent layers by checking these common cross-layer patterns:
+
+| If you found this... | ...also check for this |
+|---|---|
+| **L4 MITM proxy** (TLS-terminating) | Does the proxy also inject/strip credentials? → **L5** (placeholder substitution, auth header rewriting). Does it evaluate request content against policies? → **L6** (action governance). Does it log decisions? → **L7** (audit). |
+| **L1 container/VM** with custom entrypoint | Does the entrypoint apply filesystem restrictions? → **L3**. Does it set up network namespaces? → **L4**. Does it drop privileges or filter syscalls? → **L1** (may be stronger than the container alone). |
+| **L3 filesystem restrictions** (Landlock, mount namespaces) | Do they block credential paths (`~/.ssh`, `~/.aws`)? → **L5**. Do they block persistence paths (cron, shell init)? → contributes to **T5** defense. |
+| **L6 policy engine** (OPA, Cedar) | Does it also log policy decisions? → **L7**. Does it govern network requests? → **L4** (content-aware filtering). |
+| **L1 language-level interpreter** | Does the interpreter mediate all I/O via host callbacks? → **L3**, **L4**, **L5** may all be structural (S:4) independently of L1. |
+
+**The key principle:** A single component (proxy, supervisor, interpreter, policy engine) can enforce multiple layers. Score each layer based on the strongest mechanism that applies to it, regardless of which component provides it. Don't stop investigating a component once you've scored one layer — trace its full enforcement surface.
+
 ### Step 3: Assess Threat Coverage
 
 Threat coverage is **computed mechanically** from layer scores — it is derived data, not manually authored. The `scripts/generate.py` script computes threats at generation time using the threshold rules below. When scoring a new product, you only need to provide layer scores; threats are derived automatically.
