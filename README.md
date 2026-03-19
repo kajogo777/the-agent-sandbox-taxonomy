@@ -598,6 +598,22 @@ chmod +x ast-probe-linux-amd64
 
 See [`probe/README.md`](probe/README.md) for full documentation, safety guarantees, and known quirks.
 
+### Interactive Web Explorer
+
+Browse, filter, and compose sandbox products interactively at **[ast.georgebuilds.dev](https://ast.georgebuilds.dev)**. The explorer includes:
+
+- **Score Cards** — Filterable heatmap of all products by layer, sortable by any column
+- **Threat Coverage** — Visual threat matrix with ●/◐/○ indicators
+- **Composer** — Select two products, see the composed fingerprint and gap analysis
+
+Source is in [`web/`](web/). Deploy with `./scripts/deploy-web.sh`.
+
+---
+
+### Contributing
+
+We welcome contributions — score corrections, new products, and vendor self-assessments. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for guidelines, templates, and the review process.
+
 ---
 
 *Feedback welcome.*
