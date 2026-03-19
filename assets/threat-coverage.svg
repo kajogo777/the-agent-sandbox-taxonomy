@@ -363,9 +363,7 @@
 <text x="737.0" y="598.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
 <text x="827.0" y="598.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="632.0" fill="#111827" font-size="10" font-weight="500">NVIDIA OpenShell</text>
-<circle cx="234.0" cy="628.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 234.0,620.0 A 8,8 0 0,0 234.0,636.0 Z" fill="#d97706"/>
-<circle cx="234.0" cy="628.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="234.0" cy="628.0" r="8" fill="#059669"/>
 <circle cx="305.0" cy="628.0" r="8" fill="#059669"/>
 <circle cx="365.0" cy="626.0" r="6" fill="#059669"/>
 <text x="365.0" y="640.0" fill="#6b7280" font-size="7" text-anchor="middle">L</text>

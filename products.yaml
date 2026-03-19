@@ -1021,17 +1021,20 @@ products:
         inspection. Evidence: source code (crates/openshell-sandbox/src/proxy.rs), policy examples,
         architecture docs'
     L5:
-      s: 1
-      g: 1
-      note: 'Provider system stores credentials on gateway (encrypted at rest); supervisor fetches via gRPC
-        and injects as environment variables into child process; credentials never written to disk. For
-        inference.local: true credential isolation (agent never sees real API key). S:1 — general credentials
-        (GitHub tokens, API keys) injected as plain env vars, fully visible to agent process; agent can read,
-        embed, or exfiltrate them. Inference routing provides S:4 but only for inference endpoints. Overall
-        S:1 because non-inference credentials are cooperative (visible inside sandbox). G:1 — binary:
-        credentials either injected or not; no per-credential scoping or selective filtering for non-inference
-        credentials. Evidence: source code (crates/openshell-providers/), architecture docs.
-        WARNING: L5:1 + L4 network access = T1 exfiltration risk for non-inference credentials'
+      s: 3
+      g: 3
+      note: 'Placeholder substitution: supervisor fetches real secrets from gateway via gRPC, stores in
+        supervisor-only in-memory registry; child process receives placeholder env vars (e.g.,
+        ANTHROPIC_API_KEY=openshell:resolve:env:ANTHROPIC_API_KEY); proxy rewrites placeholder auth headers
+        to real secrets at request time (rewrite_forward_request). For inference.local: proxy strips all
+        authorization/x-api-key headers via sanitize_inference_request_headers(), router injects real API key.
+        S:3 — placeholder substitution: secrets swapped with tokens, restored at execution only by proxy
+        outside the sandbox process. Real credentials never written to child env or filesystem. Enforcement
+        is external (supervisor/proxy), not constrained by L1. G:3 — per-resource: proxy resolves
+        placeholders per-header per-request; inference routing injects per-backend auth (Bearer vs x-api-key);
+        route-level default headers (e.g., anthropic-version). Evidence: source code
+        (crates/openshell-sandbox/src/proxy.rs — rewrite_forward_request, sanitize_inference_request_headers;
+        crates/openshell-router/src/backend.rs), architecture docs (sandbox-providers.md, inference-routing.md)'
     L6:
       s: 2
       g: 3
@@ -1056,9 +1059,9 @@ products:
         network-focused audit. Evidence: source code, CLI reference, architecture docs.
         WARNING: logs not tamper-evident; best-effort delivery'
   notes: 'Strong defense-in-depth with kernel-level enforcement (Landlock, seccomp, netns) inside containers.
-    L4 network governance with L7 HTTP inspection is standout feature. Gaps: L5 (env var credential delivery
-    for non-inference keys), L1 (shared kernel caps dependent layers at S:2). Complements: Credential proxy
-    for general secrets (L5 upgrade), microVM runtime for L1:4 upgrade, command-level governance for local
+    L4 network governance with L7 HTTP inspection is standout feature. L5 placeholder substitution ensures
+    real credentials never enter sandbox (comparable to Warden S:3). Gaps: L1 (shared kernel caps dependent
+    layers at S:2). Complements: MicroVM runtime for L1:4 upgrade, command-level governance for local
     operations, tamper-evident logging'
   last_reviewed: '2026-03-19'
   evidence_level: source-code
