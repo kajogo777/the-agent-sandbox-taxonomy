@@ -6,13 +6,13 @@
 >
 > This taxonomy and the product scores within it are still a work in progress and have **not yet been reviewed by the community**. The agent sandbox space is evolving quickly and some information may already be out of date. Product scores in [`products.yaml`](products.yaml) include a `last_reviewed` timestamp — entries showing `null` have not been independently verified. We welcome contributions, corrections, and review from the community. Please open an issue or PR if you spot inaccuracies.
 
-An open taxonomy and scoring framework for evaluating AI agent sandboxes. It decomposes sandboxing into **7 defense layers**, maps them against **7 threat categories**, and scores each mechanism on **3 dimensions** (strength, granularity, portability), producing comparable fingerprints for any product. Includes score cards for 23 sandbox tools, a composition framework for stacking complementary products, and a decision checklist for choosing the right sandbox stack.
+An open taxonomy and scoring framework for evaluating AI agent sandboxes. It decomposes sandboxing into **7 defense layers**, maps them against **7 threat categories**, and scores each mechanism on **3 dimensions** (strength, granularity, portability), producing comparable fingerprints for any product. Includes score cards for 26 sandbox tools, a composition framework for stacking complementary products, and a decision checklist for choosing the right sandbox stack.
 
 <p align="center">
   <img src="assets/ast-infographic.svg" alt="AST 7-7-3 Infographic: 7 Defense Layers, 7 Threat Categories, 3 Evaluation Dimensions" width="960"/>
 </p>
 
-> **Looking for product scores?** Jump straight to the [23 Product Score Cards](#appendix-b-product-score-cards).
+> **Looking for product scores?** Jump straight to the [26 Product Score Cards](#appendix-b-product-score-cards).
 ---
 
 ## How to Use This
@@ -436,6 +436,7 @@ Catalogs mechanisms at each layer with strength and granularity. Products listed
 | Mechanism | S | G | How It Works |
 |---|---|---|---|
 | Bare process | 0 | 0 | No isolation; full user privileges |
+| Language-level interpreter | 0–4 | 1 | Reimplements a language runtime (e.g., Python in Rust, bash in TypeScript); host OS doesn't exist inside bytecode VM. S depends on boundary strength: in-process with no escape path = S:4 (structural); in-process with weaker guarantees = S:0 (no OS-level isolation). See WARNING below |
 | Linux namespaces + cgroups | 2 | 1 | PID/mount/net/user namespace separation; shared host kernel |
 | Namespaces + seccomp/Landlock/Seatbelt | 3 | 1–2 | Kernel-enforced syscall filtering or LSM; irreversible |
 | User-space kernel (gVisor) | 3 | 1 | Intercepts ~200 syscalls in userspace; ~60 host syscalls exposed |
@@ -445,11 +446,14 @@ Catalogs mechanisms at each layer with strength and granularity. Products listed
 | Library OS | 3 | 1 | Embedded minimal OS library; experimental |
 | Confidential VM (SEV-SNP/TDX) | 4 | 1 | Hardware-encrypted memory; even hypervisor cannot read |
 
+> **WARNING — Language-level interpreters:** These run inside the host process. A memory safety bug in the interpreter runtime = host compromise. This is a fundamentally different risk profile from hardware-isolated S:4 products (Firecracker, Hyper-V) where escape requires a hypervisor CVE. Score S based on the language's safety guarantees: Rust with no unsafe = strong; TypeScript with Proxy-based blocking = weak. Always flag the in-process risk.
+
 ## A.2 — L2 Resource Limits
 
 | Mechanism | S | G | How It Works |
 |---|---|---|---|
 | None | 0 | 0 | No limits |
+| In-interpreter resource tracking | 2 | 2 | Interpreter runtime checks allocations, memory, time, recursion at statement boundaries; sandboxed code cannot bypass (checks in host language, not interpreted language); not kernel-level |
 | cgroups v2 | 3 | 2 | Kernel-enforced CPU/memory/I/O caps |
 | VM resource allocation | 4 | 2 | Fixed vCPU/RAM/disk at VM creation |
 | Platform quotas | 2 | 2 | Per-session or per-account limits |
@@ -460,6 +464,8 @@ Catalogs mechanisms at each layer with strength and granularity. Products listed
 | Mechanism | S | G | How It Works |
 |---|---|---|---|
 | No restriction | 0 | 0 | Full user filesystem |
+| Virtual filesystem (in-process) | 2 | 2 | Software-enforced FS layer (InMemoryFs, OverlayFs, copy-on-write); path validation, symlink escape prevention; not kernel-level |
+| Capability-based I/O yield | 4 | 1 | No filesystem API inside interpreter; all I/O operations yield to host callback; host decides per-call. Structural — filesystem doesn't exist inside sandbox |
 | Working-dir-only mount | 3 | 2 | Only project dir visible; all else invisible |
 | Sensitive-path blocklist | 3 | 2 | Most paths accessible; ~/.ssh, ~/.aws etc. blocked |
 | Ephemeral root | 4 | 1 | Fresh OS per session; project mounted in |
@@ -472,6 +478,7 @@ Catalogs mechanisms at each layer with strength and granularity. Products listed
 |---|---|---|---|
 | No restriction | 0 | 0 | Full network access |
 | Proxy env vars | 1 | 2 | **Cooperative**: trivially bypassed via raw sockets |
+| Interpreter-mediated fetch | 2 | 3 | **Software-enforced**: interpreter has no raw socket API; all network goes through fetch wrapper with URL/method/header inspection; not kernel-level but not bypassable from within interpreter |
 | Kernel/hypervisor network filter | 3 | 2 | **Opaque**: iptables, eBPF, or Network Extension; IP/port/protocol only |
 | MITM proxy (iptables redirect) | 2 | 3 | **Opaque**: all traffic redirected; TLS-terminating; inspects HTTP content |
 | MITM proxy (kernel-redirected) | 3 | 3 | **Opaque**: kernel-redirected + TLS-terminating; per-URL/method/header/body policies |
@@ -485,6 +492,7 @@ Catalogs mechanisms at each layer with strength and granularity. Products listed
 | Sensitive file blocking | 3 | 2 | Credential files blocked via L3; env vars still visible |
 | Env-var filtering | 2 | 2 | Only approved variables forwarded |
 | Placeholder substitution | 3 | 3 | Secrets swapped with tokens; restored at execution only |
+| In-process header transform | 2 | 3 | Host injects auth headers at fetch boundary per-URL; sandbox code never sees credential values; in-process (not external proxy) |
 | External credential proxy | 4 | 3 | Credentials never enter sandbox |
 | Ephemeral per-session tokens | 4 | 3 | Time-bound, scoped credentials; auto-expire |
 

@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 921 839" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
-<rect width="921" height="839" fill="white" rx="8"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 921 932" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+<rect width="921" height="932" fill="white" rx="8"/>
 <text x="460.5" y="22" fill="#111827" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="-0.3">Product Score Cards — Strength · Granularity</text>
 <text x="236.0" y="36" fill="#6b7280" font-size="9" text-anchor="middle">Compute</text>
 <text x="236.0" y="50" fill="#6366f1" font-size="10" font-weight="700" text-anchor="middle">L1</text>
@@ -362,120 +362,122 @@
 <text x="686.0" y="505.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
 <text x="765.0" y="505.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
 <text x="855.0" y="505.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
-<text x="14" y="539.0" fill="#111827" font-size="10" font-weight="500">Modal</text>
-<rect x="200" y="521" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
-<rect x="204" y="543" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
-<text x="236.0" y="536.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.1</text>
-<rect x="275" y="521" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
-<rect x="279" y="543" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
-<text x="311.0" y="536.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.2</text>
-<rect x="350" y="521" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
-<rect x="354" y="543" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
-<text x="386.0" y="536.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.2</text>
+<text x="14" y="539.0" fill="#111827" font-size="10" font-weight="500">just-bash</text>
+<rect x="200" y="521" width="72" height="28" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+<text x="236.0" y="536.0" fill="#dc2626" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">0.0</text>
+<rect x="275" y="521" width="72" height="28" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+<text x="311.0" y="536.0" fill="#dc2626" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">0.0</text>
+<rect x="350" y="521" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="354" y="543" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="386.0" y="536.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
 <rect x="425" y="521" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="429" y="543" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="461.0" y="536.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
-<rect x="500" y="521" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
-<rect x="504" y="543" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
-<text x="536.0" y="536.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.2</text>
+<text x="461.0" y="536.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
+<rect x="500" y="521" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="504" y="543" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="536.0" y="536.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
 <rect x="575" y="521" width="72" height="28" rx="4" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
 <text x="611.0" y="536.0" fill="#9ca3af" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">—</text>
-<rect x="650" y="521" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<rect x="654" y="543" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="686.0" y="536.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
-<text x="765.0" y="536.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="855.0" y="536.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
-<text x="14" y="570.0" fill="#111827" font-size="10" font-weight="500">nono</text>
+<rect x="650" y="521" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
+<rect x="654" y="543" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
+<text x="686.0" y="536.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.1</text>
+<text x="765.0" y="536.0" fill="#2563eb" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Source Code</text>
+<text x="855.0" y="536.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-03-19</text>
+<text x="14" y="570.0" fill="#111827" font-size="10" font-weight="500">Modal</text>
 <rect x="200" y="552" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
 <rect x="204" y="574" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
 <text x="236.0" y="567.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.1</text>
-<rect x="275" y="552" width="72" height="28" rx="4" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
-<text x="311.0" y="567.0" fill="#9ca3af" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">—</text>
+<rect x="275" y="552" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
+<rect x="279" y="574" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
+<text x="311.0" y="567.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.2</text>
 <rect x="350" y="552" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
 <rect x="354" y="574" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
 <text x="386.0" y="567.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.2</text>
-<rect x="425" y="552" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
-<rect x="429" y="574" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
-<text x="461.0" y="567.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.2</text>
-<rect x="500" y="552" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
-<rect x="504" y="574" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
-<text x="536.0" y="567.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.3</text>
-<rect x="575" y="552" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
-<rect x="579" y="574" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
-<text x="611.0" y="567.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.2</text>
-<rect x="650" y="552" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
-<rect x="654" y="574" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
-<text x="686.0" y="567.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.3</text>
+<rect x="425" y="552" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="429" y="574" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="461.0" y="567.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
+<rect x="500" y="552" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
+<rect x="504" y="574" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
+<text x="536.0" y="567.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.2</text>
+<rect x="575" y="552" width="72" height="28" rx="4" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
+<text x="611.0" y="567.0" fill="#9ca3af" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">—</text>
+<rect x="650" y="552" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="654" y="574" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="686.0" y="567.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
 <text x="765.0" y="567.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
 <text x="855.0" y="567.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
-<text x="14" y="601.0" fill="#111827" font-size="10" font-weight="500">Ona</text>
-<rect x="200" y="583" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
-<rect x="204" y="605" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
-<text x="236.0" y="598.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.1</text>
-<rect x="275" y="583" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
-<rect x="279" y="605" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
-<text x="311.0" y="598.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.2</text>
-<rect x="350" y="583" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
-<rect x="354" y="605" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
-<text x="386.0" y="598.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.1</text>
-<rect x="425" y="583" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<rect x="429" y="605" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="461.0" y="598.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
-<rect x="500" y="583" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<rect x="504" y="605" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="536.0" y="598.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
-<rect x="575" y="583" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
-<rect x="579" y="605" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
-<text x="611.0" y="598.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.2</text>
-<rect x="650" y="583" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<rect x="654" y="605" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="686.0" y="598.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
+<text x="14" y="601.0" fill="#111827" font-size="10" font-weight="500">nono</text>
+<rect x="200" y="583" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
+<rect x="204" y="605" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
+<text x="236.0" y="598.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.1</text>
+<rect x="275" y="583" width="72" height="28" rx="4" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
+<text x="311.0" y="598.0" fill="#9ca3af" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">—</text>
+<rect x="350" y="583" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
+<rect x="354" y="605" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
+<text x="386.0" y="598.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.2</text>
+<rect x="425" y="583" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
+<rect x="429" y="605" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
+<text x="461.0" y="598.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.2</text>
+<rect x="500" y="583" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
+<rect x="504" y="605" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
+<text x="536.0" y="598.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.3</text>
+<rect x="575" y="583" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
+<rect x="579" y="605" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
+<text x="611.0" y="598.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.2</text>
+<rect x="650" y="583" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
+<rect x="654" y="605" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
+<text x="686.0" y="598.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.3</text>
 <text x="765.0" y="598.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="855.0" y="598.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-03-07</text>
-<text x="14" y="632.0" fill="#111827" font-size="10" font-weight="500">packnplay</text>
+<text x="855.0" y="598.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="14" y="632.0" fill="#111827" font-size="10" font-weight="500">NVIDIA OpenShell</text>
 <rect x="200" y="614" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="204" y="636" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
 <text x="236.0" y="629.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.1</text>
-<rect x="275" y="614" width="72" height="28" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
-<text x="311.0" y="629.0" fill="#dc2626" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">0.0</text>
-<rect x="350" y="614" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<rect x="354" y="636" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="386.0" y="629.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.1</text>
-<rect x="425" y="614" width="72" height="28" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
-<text x="461.0" y="629.0" fill="#dc2626" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">0.0</text>
+<rect x="275" y="614" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="279" y="636" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="311.0" y="629.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
+<rect x="350" y="614" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
+<rect x="354" y="636" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
+<text x="386.0" y="629.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.2</text>
+<rect x="425" y="614" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="429" y="636" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="461.0" y="629.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
 <rect x="500" y="614" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
 <rect x="504" y="636" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
 <text x="536.0" y="629.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.1</text>
-<rect x="575" y="614" width="72" height="28" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
-<text x="611.0" y="629.0" fill="#dc2626" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">0.0</text>
-<rect x="650" y="614" width="72" height="28" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
-<text x="686.0" y="629.0" fill="#dc2626" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">0.0</text>
-<text x="765.0" y="629.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="855.0" y="629.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
-<text x="14" y="663.0" fill="#111827" font-size="10" font-weight="500">Replit</text>
-<rect x="200" y="645" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<rect x="204" y="667" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="236.0" y="660.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.1</text>
-<rect x="275" y="645" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
-<rect x="279" y="667" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
-<text x="311.0" y="660.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.2</text>
-<rect x="350" y="645" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
-<rect x="354" y="667" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
-<text x="386.0" y="660.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.2</text>
+<rect x="575" y="614" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="579" y="636" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="611.0" y="629.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
+<rect x="650" y="614" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="654" y="636" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="686.0" y="629.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
+<text x="765.0" y="629.0" fill="#2563eb" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Source Code</text>
+<text x="855.0" y="629.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-03-19</text>
+<text x="14" y="663.0" fill="#111827" font-size="10" font-weight="500">Ona</text>
+<rect x="200" y="645" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
+<rect x="204" y="667" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
+<text x="236.0" y="660.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.1</text>
+<rect x="275" y="645" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
+<rect x="279" y="667" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
+<text x="311.0" y="660.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.2</text>
+<rect x="350" y="645" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
+<rect x="354" y="667" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
+<text x="386.0" y="660.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.1</text>
 <rect x="425" y="645" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="429" y="667" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="461.0" y="660.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.1</text>
+<text x="461.0" y="660.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
 <rect x="500" y="645" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="504" y="667" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
 <text x="536.0" y="660.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
-<rect x="575" y="645" width="72" height="28" rx="4" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
-<text x="611.0" y="660.0" fill="#9ca3af" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">—</text>
+<rect x="575" y="645" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
+<rect x="579" y="667" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
+<text x="611.0" y="660.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.2</text>
 <rect x="650" y="645" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="654" y="667" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
 <text x="686.0" y="660.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
 <text x="765.0" y="660.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="855.0" y="660.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
-<text x="14" y="694.0" fill="#111827" font-size="10" font-weight="500">Stakpak Warden</text>
+<text x="855.0" y="660.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-03-07</text>
+<text x="14" y="694.0" fill="#111827" font-size="10" font-weight="500">packnplay</text>
 <rect x="200" y="676" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="204" y="698" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
 <text x="236.0" y="691.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.1</text>
@@ -483,78 +485,144 @@
 <text x="311.0" y="691.0" fill="#dc2626" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">0.0</text>
 <rect x="350" y="676" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="354" y="698" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="386.0" y="691.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
-<rect x="425" y="676" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<rect x="429" y="698" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="461.0" y="691.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
-<rect x="500" y="676" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
-<rect x="504" y="698" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
-<text x="536.0" y="691.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.3</text>
-<rect x="575" y="676" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<rect x="579" y="698" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="611.0" y="691.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
-<rect x="650" y="676" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<rect x="654" y="698" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="686.0" y="691.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
+<text x="386.0" y="691.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.1</text>
+<rect x="425" y="676" width="72" height="28" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+<text x="461.0" y="691.0" fill="#dc2626" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">0.0</text>
+<rect x="500" y="676" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
+<rect x="504" y="698" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
+<text x="536.0" y="691.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.1</text>
+<rect x="575" y="676" width="72" height="28" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+<text x="611.0" y="691.0" fill="#dc2626" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">0.0</text>
+<rect x="650" y="676" width="72" height="28" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+<text x="686.0" y="691.0" fill="#dc2626" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">0.0</text>
 <text x="765.0" y="691.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
 <text x="855.0" y="691.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
-<text x="14" y="725.0" fill="#111827" font-size="10" font-weight="500">StrongDM Leash</text>
-<rect x="200" y="707" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<rect x="204" y="729" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="236.0" y="722.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.1</text>
-<rect x="275" y="707" width="72" height="28" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
-<text x="311.0" y="722.0" fill="#dc2626" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">0.0</text>
-<rect x="350" y="707" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<rect x="354" y="729" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="386.0" y="722.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
-<rect x="425" y="707" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<rect x="429" y="729" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="461.0" y="722.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
-<rect x="500" y="707" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
-<rect x="504" y="729" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
-<text x="536.0" y="722.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.1</text>
-<rect x="575" y="707" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<rect x="579" y="729" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="611.0" y="722.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
-<rect x="650" y="707" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<rect x="654" y="729" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="686.0" y="722.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
-<text x="765.0" y="722.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="855.0" y="722.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
-<text x="14" y="756.0" fill="#111827" font-size="10" font-weight="500">Unikraft Cloud</text>
-<rect x="200" y="738" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
-<rect x="204" y="760" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
-<text x="236.0" y="753.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.1</text>
-<rect x="275" y="738" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
-<rect x="279" y="760" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
-<text x="311.0" y="753.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.2</text>
-<rect x="350" y="738" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
-<rect x="354" y="760" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
-<text x="386.0" y="753.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.1</text>
-<rect x="425" y="738" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
-<rect x="429" y="760" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
-<text x="461.0" y="753.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.1</text>
-<rect x="500" y="738" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
-<rect x="504" y="760" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
-<text x="536.0" y="753.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.0</text>
+<text x="14" y="725.0" fill="#111827" font-size="10" font-weight="500">Pydantic Monty</text>
+<rect x="200" y="707" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
+<rect x="204" y="729" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
+<text x="236.0" y="722.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.1</text>
+<rect x="275" y="707" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="279" y="729" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="311.0" y="722.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
+<rect x="350" y="707" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
+<rect x="354" y="729" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
+<text x="386.0" y="722.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.1</text>
+<rect x="425" y="707" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
+<rect x="429" y="729" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
+<text x="461.0" y="722.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.1</text>
+<rect x="500" y="707" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
+<rect x="504" y="729" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
+<text x="536.0" y="722.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.1</text>
+<rect x="575" y="707" width="72" height="28" rx="4" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
+<text x="611.0" y="722.0" fill="#9ca3af" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">—</text>
+<rect x="650" y="707" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
+<rect x="654" y="729" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
+<text x="686.0" y="722.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.1</text>
+<text x="765.0" y="722.0" fill="#2563eb" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Source Code</text>
+<text x="855.0" y="722.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-03-19</text>
+<text x="14" y="756.0" fill="#111827" font-size="10" font-weight="500">Replit</text>
+<rect x="200" y="738" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="204" y="760" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="236.0" y="753.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.1</text>
+<rect x="275" y="738" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
+<rect x="279" y="760" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
+<text x="311.0" y="753.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.2</text>
+<rect x="350" y="738" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
+<rect x="354" y="760" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
+<text x="386.0" y="753.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.2</text>
+<rect x="425" y="738" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="429" y="760" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="461.0" y="753.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.1</text>
+<rect x="500" y="738" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="504" y="760" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="536.0" y="753.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
 <rect x="575" y="738" width="72" height="28" rx="4" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
 <text x="611.0" y="753.0" fill="#9ca3af" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">—</text>
-<rect x="650" y="738" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
-<rect x="654" y="760" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
-<text x="686.0" y="753.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.1</text>
+<rect x="650" y="738" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="654" y="760" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="686.0" y="753.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
 <text x="765.0" y="753.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
 <text x="855.0" y="753.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
-<text x="10" y="783" fill="#6b7280" font-size="9" font-weight="600" letter-spacing="1">STRENGTH</text>
-<rect x="80" y="773" width="14" height="14" rx="3" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
-<text x="99" y="783" fill="#6b7280" font-size="9">— N/A</text>
-<rect x="138" y="773" width="14" height="14" rx="3" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
-<text x="157" y="783" fill="#6b7280" font-size="9">0 None</text>
-<rect x="202" y="773" width="14" height="14" rx="3" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
-<text x="221" y="783" fill="#6b7280" font-size="9">1 Cooperative</text>
-<rect x="308" y="773" width="14" height="14" rx="3" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<text x="327" y="783" fill="#6b7280" font-size="9">2 Software</text>
-<rect x="396" y="773" width="14" height="14" rx="3" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
-<text x="415" y="783" fill="#6b7280" font-size="9">3 Kernel</text>
-<rect x="472" y="773" width="14" height="14" rx="3" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
-<text x="491" y="783" fill="#6b7280" font-size="9">4 Structural</text>
+<text x="14" y="787.0" fill="#111827" font-size="10" font-weight="500">Stakpak Warden</text>
+<rect x="200" y="769" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="204" y="791" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="236.0" y="784.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.1</text>
+<rect x="275" y="769" width="72" height="28" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+<text x="311.0" y="784.0" fill="#dc2626" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">0.0</text>
+<rect x="350" y="769" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="354" y="791" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="386.0" y="784.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
+<rect x="425" y="769" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="429" y="791" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="461.0" y="784.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
+<rect x="500" y="769" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
+<rect x="504" y="791" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
+<text x="536.0" y="784.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.3</text>
+<rect x="575" y="769" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="579" y="791" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="611.0" y="784.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
+<rect x="650" y="769" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="654" y="791" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="686.0" y="784.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
+<text x="765.0" y="784.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="855.0" y="784.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="14" y="818.0" fill="#111827" font-size="10" font-weight="500">StrongDM Leash</text>
+<rect x="200" y="800" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="204" y="822" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="236.0" y="815.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.1</text>
+<rect x="275" y="800" width="72" height="28" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+<text x="311.0" y="815.0" fill="#dc2626" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">0.0</text>
+<rect x="350" y="800" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="354" y="822" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="386.0" y="815.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
+<rect x="425" y="800" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="429" y="822" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="461.0" y="815.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
+<rect x="500" y="800" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
+<rect x="504" y="822" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
+<text x="536.0" y="815.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.1</text>
+<rect x="575" y="800" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="579" y="822" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="611.0" y="815.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
+<rect x="650" y="800" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="654" y="822" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="686.0" y="815.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
+<text x="765.0" y="815.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="855.0" y="815.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="14" y="849.0" fill="#111827" font-size="10" font-weight="500">Unikraft Cloud</text>
+<rect x="200" y="831" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
+<rect x="204" y="853" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
+<text x="236.0" y="846.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.1</text>
+<rect x="275" y="831" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
+<rect x="279" y="853" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
+<text x="311.0" y="846.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.2</text>
+<rect x="350" y="831" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
+<rect x="354" y="853" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
+<text x="386.0" y="846.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.1</text>
+<rect x="425" y="831" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
+<rect x="429" y="853" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
+<text x="461.0" y="846.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.1</text>
+<rect x="500" y="831" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
+<rect x="504" y="853" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
+<text x="536.0" y="846.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.0</text>
+<rect x="575" y="831" width="72" height="28" rx="4" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
+<text x="611.0" y="846.0" fill="#9ca3af" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">—</text>
+<rect x="650" y="831" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
+<rect x="654" y="853" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
+<text x="686.0" y="846.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.1</text>
+<text x="765.0" y="846.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="855.0" y="846.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="10" y="876" fill="#6b7280" font-size="9" font-weight="600" letter-spacing="1">STRENGTH</text>
+<rect x="80" y="866" width="14" height="14" rx="3" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
+<text x="99" y="876" fill="#6b7280" font-size="9">— N/A</text>
+<rect x="138" y="866" width="14" height="14" rx="3" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+<text x="157" y="876" fill="#6b7280" font-size="9">0 None</text>
+<rect x="202" y="866" width="14" height="14" rx="3" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
+<text x="221" y="876" fill="#6b7280" font-size="9">1 Cooperative</text>
+<rect x="308" y="866" width="14" height="14" rx="3" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<text x="327" y="876" fill="#6b7280" font-size="9">2 Software</text>
+<rect x="396" y="866" width="14" height="14" rx="3" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
+<text x="415" y="876" fill="#6b7280" font-size="9">3 Kernel</text>
+<rect x="472" y="866" width="14" height="14" rx="3" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
+<text x="491" y="876" fill="#6b7280" font-size="9">4 Structural</text>
 </svg>

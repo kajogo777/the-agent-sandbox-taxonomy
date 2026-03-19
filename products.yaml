@@ -973,3 +973,266 @@ products:
     Veto early access with dynamic linker bypass'
   last_reviewed: '2026-03-07'
   evidence_level: docs
+- name: NVIDIA OpenShell
+  portability:
+  - linux
+  - mac
+  - docker
+  layers:
+    L1:
+      s: 2
+      g: 1
+      note: 'Docker container running K3s with one pod per sandbox; two-process model (privileged supervisor
+        + unprivileged child as sandbox user); Landlock LSM + seccomp-BPF + Linux network namespaces applied
+        to child process. S:2 — outermost isolation boundary is a standard Docker container with shared host
+        kernel; Landlock/seccomp are in-container hardening (defense-in-depth), not the primary L1 boundary.
+        On macOS, Docker Desktop adds a hypervisor layer, but on Linux the host kernel is directly shared.
+        G:1 — binary: sandbox is either running or not, no per-workload isolation tuning.
+        Evidence: source code (crates/openshell-sandbox/), architecture docs, support matrix'
+    L2:
+      s: 2
+      g: 2
+      note: 'Kubernetes pod resource limits (CPU/memory configurable via Helm chart); K3s scheduler enforces
+        allocation; process timeout configurable (default: 0 = no timeout). S:2 — platform-enforced quotas
+        via K3s/cgroups, outside the sandbox process; agent cannot bypass from inside; reconfigurable by
+        operator. G:2 — per-sandbox CPU, memory, and timeout limits are individually configurable.
+        Evidence: architecture docs, Helm chart.
+        NEEDS REVIEW: exact default resource limits not documented in public README'
+    L3:
+      s: 3
+      g: 2
+      note: 'Landlock LSM kernel-enforced filesystem access control; declarative YAML policy defines read_only
+        and read_write path lists; default: only /sandbox and /tmp writable; system paths read-only; path
+        traversal rejected; overly broad paths rejected. S:3 — Landlock is a Linux kernel LSM; once applied
+        in pre_exec, restrictions are irreversible for the process lifetime; kernel denies operations outside
+        allowed paths. G:2 — per-path read/write allowlists; max 256 paths; include_workdir flag; path-level
+        granularity, not content-aware. Evidence: source code (Landlock application in pre_exec), policy
+        examples, architecture docs'
+    L4:
+      s: 2
+      g: 3
+      note: 'Linux network namespace + HTTP CONNECT proxy (supervisor); all traffic forced through proxy via
+        veth pair; seccomp blocks raw socket creation; OPA/Rego policy evaluation per connection; TLS
+        termination for L7 HTTP method/path inspection; SSRF protection blocks RFC 1918/loopback/link-local/
+        metadata IPs; binary identity via /proc + SHA256 TOFU. S:2 — opaque enforcement (netns + seccomp
+        prevents bypass), but proxy runs inside container (L1:2 boundary); capped at S:2 per AST rule that
+        no layer depending on L1 can exceed L1. G:3 — with tls:terminate + protocol:rest, proxy inspects
+        HTTP method, URL path, headers; per-method/per-path rules; binary identity binding; content-aware
+        inspection. Evidence: source code (crates/openshell-sandbox/src/proxy.rs), policy examples,
+        architecture docs'
+    L5:
+      s: 1
+      g: 1
+      note: 'Provider system stores credentials on gateway (encrypted at rest); supervisor fetches via gRPC
+        and injects as environment variables into child process; credentials never written to disk. For
+        inference.local: true credential isolation (agent never sees real API key). S:1 — general credentials
+        (GitHub tokens, API keys) injected as plain env vars, fully visible to agent process; agent can read,
+        embed, or exfiltrate them. Inference routing provides S:4 but only for inference endpoints. Overall
+        S:1 because non-inference credentials are cooperative (visible inside sandbox). G:1 — binary:
+        credentials either injected or not; no per-credential scoping or selective filtering for non-inference
+        credentials. Evidence: source code (crates/openshell-providers/), architecture docs.
+        WARNING: L5:1 + L4 network access = T1 exfiltration risk for non-inference credentials'
+    L6:
+      s: 2
+      g: 3
+      note: 'OPA (Open Policy Agent) with Rego rules evaluates every network request; declarative YAML
+        policies govern endpoints, HTTP methods, URL paths, and requesting binaries; access presets
+        (read-only, read-write, full); hot-reloadable without restart. S:2 — policy engine runs as separate
+        process (supervisor); agent cannot circumvent; evaluates structured actions semantically (HTTP method
+        + path); reconfigurable by operator. G:3 — per-resource content-aware policies: HTTP method, URL
+        path, binary identity, process ancestry. Evidence: source code (crates/openshell-policy/), policy
+        examples, architecture docs.
+        NEEDS REVIEW: L6 governance only applies to network actions — no command-level governance for local
+        shell operations'
+    L7:
+      s: 2
+      g: 2
+      note: 'Structured logging via tracing crate; every proxy CONNECT request logged with destination,
+        binary, decision, matched policy; L7 requests log HTTP method/path/decision; policy reload events
+        with version + SHA256 hash; bypass detection warnings; logs streamed to gateway via gRPC (batched);
+        file logging with daily rotation; TUI dashboard. S:2 — per-request audit logging goes beyond
+        session-level; not tamper-evident (no cryptographic commitments); best-effort delivery. G:2 —
+        per-network-request granularity; does not capture all syscalls, file ops, or MCP tool calls;
+        network-focused audit. Evidence: source code, CLI reference, architecture docs.
+        WARNING: logs not tamper-evident; best-effort delivery'
+  notes: 'Strong defense-in-depth with kernel-level enforcement (Landlock, seccomp, netns) inside containers.
+    L4 network governance with L7 HTTP inspection is standout feature. Gaps: L5 (env var credential delivery
+    for non-inference keys), L1 (shared kernel caps dependent layers at S:2). Complements: Credential proxy
+    for general secrets (L5 upgrade), microVM runtime for L1:4 upgrade, command-level governance for local
+    operations, tamper-evident logging'
+  last_reviewed: '2026-03-19'
+  evidence_level: source-code
+- name: Pydantic Monty
+  portability:
+  - any-os
+  layers:
+    L1:
+      s: 4
+      g: 1
+      note: 'Custom Rust interpreter; sandboxed code runs as Monty bytecode — no syscalls, no FFI,
+        no eval()/exec(), no __import__(), no class definitions, no third-party libraries.
+        S:4 — structural: host OS attack surface does not exist inside the interpreter; code cannot invoke
+        syscalls or escape to host runtime; Rust memory safety enforces boundary. The bytecode VM is a
+        complete reimplementation — the host kernel, process table, and memory space are architecturally
+        absent. G:1 — binary: code runs in Monty or not; no per-workload isolation tuning.
+        Evidence: source code (crates/monty/src/run.rs, crates/monty/src/lib.rs).
+        WARNING: runs inside host process — a Rust memory safety bug in the ~50K LOC TCB + ruff_python_parser
+        dependency could theoretically compromise the host. Different risk profile from hardware-isolated S:4
+        products (Firecracker, Hyper-V) where escape requires a hypervisor CVE'
+    L2:
+      s: 2
+      g: 2
+      note: 'ResourceTracker trait with LimitedTracker: tracks allocations, heap memory, execution time,
+        recursion depth, large result pre-checks. Time checks rate-limited (every 10th call).
+        S:2 — software-enforced: limits checked by Rust runtime at allocation points, statement boundaries,
+        and frame pushes; sandboxed code cannot bypass (checks are in Rust, not Python); but host configures
+        limits and could set unlimited. Not S:3 because enforcement is application-level, not kernel-level.
+        G:2 — per-resource: max_allocations, max_duration_secs, max_memory, gc_interval, max_recursion_depth
+        independently configurable. Evidence: source code (crates/monty/src/resource.rs)'
+    L3:
+      s: 4
+      g: 1
+      note: 'OsFunction enum enumerates exactly 17 filesystem operations; every I/O operation yields OsCall
+        to host. No open(), no file descriptors, no /proc, no /etc.
+        S:4 — structural: no filesystem exists inside interpreter; pathlib.Path pure methods work but any
+        I/O pauses execution and yields to host callback. Enforcement is independent of L1 — the filesystem
+        API is architecturally absent from the bytecode VM.
+        G:1 — binary: filesystem access either provided by host callback or not; no built-in path
+        allowlist/blocklist (host responsibility). Evidence: source code (crates/monty/src/os.rs)'
+    L4:
+      s: 4
+      g: 1
+      note: 'No network capability exists — no socket operations, no HTTP client, no DNS, no network modules.
+        S:4 — structural: network stack does not exist inside interpreter; no network device, no socket API.
+        Enforcement is independent of L1 — the network API is architecturally absent from the bytecode VM.
+        G:1 — binary: network absent by default; only available if host provides via external function
+        callbacks. Evidence: source code (exhaustive review of crates/monty/src/modules/)'
+    L5:
+      s: 4
+      g: 1
+      note: 'os.getenv() and os.environ yield OsFunction::Getenv/GetEnviron to host; interpreter cannot read
+        host environment directly.
+        S:4 — structural: host environment (env vars, credential files, cloud metadata) does not exist inside
+        interpreter; host decides what to return for each getenv call. Enforcement is independent of L1 —
+        the env var API yields to host regardless of interpreter state.
+        G:1 — binary: credentials either provided by host or not; no built-in credential filtering/scoping.
+        Evidence: source code (crates/monty/src/os.rs)'
+    L6:
+      s: null
+      g: null
+      note: 'No action governance. Interpreter executes any valid Python within its subset. No policy engine,
+        no command blocklist, no declarative-only mode. Host controls available external functions but no
+        semantic governance of agent actions. HITL possible via pause/resume but scored — per AST rules'
+    L7:
+      s: 1
+      g: 1
+      note: 'PrintWriter captures stdout/stderr via callback; exception tracebacks with full stack traces;
+        serializable snapshots. S:1 — cooperative: host must manually instrument logging by wrapping
+        callbacks; no built-in audit log or structured event stream. G:1 — binary: logging configured by
+        host or not; no structured per-command audit, no OTel, no tamper-evident logging.
+        Evidence: source code (crates/monty/src/io.rs)'
+  notes: 'Language-level interpreter sandbox (Rust reimplementation of Python subset) — architecturally unique
+    in AST. Default-deny capability model: zero capabilities unless host explicitly grants via callbacks.
+    L3/L4/L5 are S:4 (structural) with enforcement independent of L1 — the APIs are architecturally absent
+    from the bytecode VM. G:1 across all layers (host bears granularity responsibility). Gaps: L6 (no
+    governance), L7 (minimal observability). Experimental status (v0.0.8). Complements: Policy engine
+    wrapping external function dispatch for L6, structured logging middleware for L7.
+    WARNING: in-process isolation — Rust memory safety bug = host compromise (different risk profile from
+    hardware-isolated S:4 products)'
+  last_reviewed: '2026-03-19'
+  evidence_level: source-code
+- name: just-bash
+  portability:
+  - any-os
+  layers:
+    L1:
+      s: 0
+      g: 0
+      note: 'No OS-level isolation. Pure TypeScript bash interpreter running in-process within Node.js or
+        browser. All commands execute as TypeScript functions — no process spawning, no containers, no VMs.
+        Defense-in-Depth Box patches dangerous globals with Proxy objects (blocking Function, eval, setTimeout,
+        process.env, process.binding, Module._load, WebAssembly, SharedArrayBuffer, etc.) — but this is
+        application-level hardening within the same process, not a compute isolation boundary.
+        S:0 — no isolation; agent code runs in same Node.js process as host application.
+        G:0 — no isolation means no granularity.
+        Evidence: source code (src/security/blocked-globals.ts, src/security/defense-in-depth-box.ts), README.
+        README explicitly recommends Vercel Sandbox for full VM isolation'
+    L2:
+      s: 0
+      g: 0
+      note: 'In-process execution limits exist (maxCallDepth:100, maxCommandCount:10000, maxLoopIterations:
+        10000, maxStringLength:10MB, maxOutputSize:10MB, maxFileDescriptors:1024, timeouts via AbortSignal)
+        but enforcement depends on L1 boundary (interpreter not being escaped). With L1:0, a prototype
+        pollution or interpreter escape bypasses all limits. S:0 — no effective host resource enforcement;
+        in-process limits are not host resource enforcement (cgroups, hypervisor). Consistent with
+        Leash/Warden/packnplay which also score L2:0. G:0 — no effective granularity.
+        Evidence: source code (src/limits.ts)'
+    L3:
+      s: 2
+      g: 2
+      note: 'Virtual filesystem with four implementations: InMemoryFs (default, complete isolation), OverlayFs
+        (copy-on-write over real FS), ReadWriteFs (sandboxed real access), MountableFs (multi-mount). Path
+        validation, symlink escape prevention (ELOOP detection), TOCTOU defense (O_NOFOLLOW), null byte
+        rejection. S:2 — software-enforced: virtual FS layer that interpreted code cannot circumvent from
+        within the interpreter; InMemoryFs provides complete host isolation; OverlayFs provides read-only
+        host + COW writes. Not S:3 because enforcement is software-level within Node.js process, not
+        kernel-level (no Landlock, no mount namespaces). G:2 — configurable per-mount read/write/read-only
+        policies; MountableFs supports different FS types at different mount points.
+        Evidence: source code (src/fs/), src/fs/cross-fs-security.test.ts (31+ security scenarios)'
+    L4:
+      s: 2
+      g: 3
+      note: 'Network disabled by default (curl command not registered unless network config provided). When
+        enabled: URL prefix allow-list with HTTP method restrictions, private IP blocking (SSRF protection
+        covering IPv4 RFC 1918/loopback/link-local/CGNAT and IPv6 equivalents), DNS rebinding defense,
+        redirect validation per-hop against allow-list, response size limits, header transforms for credential
+        injection. S:2 — software-enforced: the interpreter has no raw socket capability (no socket module,
+        no net module); the fetch wrapper is the only network path available; Defense-in-Depth Box blocks
+        process.binding and process.dlopen which would be needed to access raw network. The agent cannot
+        bypass the wrapper from within the interpreter. Comparable to Leash/Warden (S:2) where a separate
+        process mediates all network — here the interpreter architecture mediates instead. Not S:3 because
+        enforcement is application-level, not kernel-level. G:3 — content-aware: URL prefix matching
+        (origin + path), HTTP method restrictions (default GET/HEAD only), header transforms inject/override
+        credentials per-URL, redirect validation per-hop.
+        Evidence: source code (src/network/fetch.ts, src/network/allow-list.ts), README'
+    L5:
+      s: 2
+      g: 3
+      note: 'Two credential modes: (1) env vars via BashOptions.env Map — visible inside interpreter (S:1
+        path); (2) header transforms — credentials set by host application and injected at the fetch wrapper
+        boundary; sandbox code never sees credential values; firewall headers override user-supplied headers
+        preventing substitution from inside; headers re-evaluated on each redirect so credentials never
+        leaked to non-transform hosts. S:2 — software-enforced: header transforms provide credential
+        isolation for network auth (in-process, not external proxy — compare Docker Sandbox S:4 which uses
+        external credential proxy where secrets never enter sandbox process). Env vars are visible inside
+        interpreter (S:1). Combined S:2 reflects the stronger mechanism capped by in-process enforcement.
+        G:3 — per-URL credential injection with header-level granularity; different URLs get different
+        credentials; replaceEnv:true starts with empty env.
+        Evidence: source code (src/network/fetch.ts header transform logic), README'
+    L6:
+      s: null
+      g: null
+      note: 'No action governance. No command blocklist, no policy engine, no declarative-only mode. Agent
+        can execute any command in the registry (100+ commands). AST Transform plugins provide observability
+        (what commands will run), not governance (blocking them). Defense-in-Depth Box blocks dangerous
+        JavaScript APIs but that is compute isolation hardening, not semantic action governance'
+    L7:
+      s: 1
+      g: 1
+      note: 'SecurityViolationLogger records Defense-in-Depth violations with timestamps, types, messages,
+        stack traces (capped at 100/type, 1000 total). AST Transform plugins (CommandCollector, Tee) are
+        opt-in. ExecResult returns stdout/stderr/exitCode per execution. S:1 — session-level: host must
+        implement actual logging; no persistent log, no structured audit format, no tamper-evident logging,
+        no automatic command-level recording. G:1 — binary: observability either configured by host or not;
+        no per-command audit granularity built in.
+        Evidence: source code (src/security/security-violation-logger.ts, src/transform/), README'
+  notes: 'Novel approach: reimplements bash in TypeScript with virtual FS and in-process security controls.
+    Trades L1 strength for portability (runs in browsers, zero infrastructure). Sophisticated L3/L4/L5
+    for a library with no OS dependencies. WARNING: L1:0 means entire security model depends on TypeScript
+    interpreter and Proxy-based global blocking not being bypassed — a prototype pollution or interpreter
+    escape gives full host access. T6○ and T7○ are unmitigated. Gaps: L1 (critical — no compute isolation),
+    L2 (no effective resource enforcement), L6 (no governance), L7 (minimal). Complements: Docker Sandbox
+    or Vercel Sandbox for L1 upgrade (README explicitly recommends this), host-level cgroups for L2,
+    governance overlay for L6'
+  last_reviewed: '2026-03-19'
+  evidence_level: source-code

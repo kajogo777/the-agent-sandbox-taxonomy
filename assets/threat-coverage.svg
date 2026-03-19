@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 893 859" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
-<rect width="893" height="859" fill="white" rx="8"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 893 952" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+<rect width="893" height="952" fill="white" rx="8"/>
 <text x="446.5" y="22" fill="#111827" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="-0.3">Threat Coverage Matrix</text>
 <text x="234.0" y="36" fill="#6b7280" font-size="9" text-anchor="middle">Exfiltration</text>
 <text x="234.0" y="50" fill="#6366f1" font-size="10" font-weight="700" text-anchor="middle">T1</text>
@@ -303,85 +303,83 @@
 <circle cx="660.0" cy="504.0" r="8" fill="#059669"/>
 <text x="737.0" y="505.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
 <text x="827.0" y="505.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
-<text x="14" y="539.0" fill="#111827" font-size="10" font-weight="500">Modal</text>
-<circle cx="234.0" cy="535.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 234.0,527.0 A 8,8 0 0,0 234.0,543.0 Z" fill="#d97706"/>
-<circle cx="234.0" cy="535.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<circle cx="305.0" cy="535.0" r="8" fill="#059669"/>
-<circle cx="365.0" cy="533.0" r="6" fill="#059669"/>
+<text x="14" y="539.0" fill="#111827" font-size="10" font-weight="500">just-bash</text>
+<circle cx="234.0" cy="535.0" r="8" fill="#059669"/>
+<circle cx="305.0" cy="535.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 305.0,527.0 A 8,8 0 0,0 305.0,543.0 Z" fill="#d97706"/>
+<circle cx="305.0" cy="535.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="365.0" cy="533.0" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 365.0,527.0 A 6,6 0 0,0 365.0,539.0 Z" fill="#d97706"/>
+<circle cx="365.0" cy="533.0" r="6" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <text x="365.0" y="547.0" fill="#6b7280" font-size="7" text-anchor="middle">L</text>
 <circle cx="387.0" cy="533.0" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 387.0,527.0 A 6,6 0 0,0 387.0,539.0 Z" fill="#d97706"/>
 <circle cx="387.0" cy="533.0" r="6" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <text x="387.0" y="547.0" fill="#6b7280" font-size="7" text-anchor="middle">R</text>
-<circle cx="447.0" cy="535.0" r="8" fill="#059669"/>
+<circle cx="447.0" cy="535.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 447.0,527.0 A 8,8 0 0,0 447.0,543.0 Z" fill="#d97706"/>
+<circle cx="447.0" cy="535.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="518.0" cy="535.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 518.0,527.0 A 8,8 0 0,0 518.0,543.0 Z" fill="#d97706"/>
 <circle cx="518.0" cy="535.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<circle cx="589.0" cy="535.0" r="8" fill="#059669"/>
-<circle cx="660.0" cy="535.0" r="8" fill="#059669"/>
-<text x="737.0" y="536.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="827.0" y="536.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
-<text x="14" y="570.0" fill="#111827" font-size="10" font-weight="500">nono</text>
-<circle cx="234.0" cy="566.0" r="8" fill="#059669"/>
+<circle cx="589.0" cy="535.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<circle cx="660.0" cy="535.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<text x="737.0" y="536.0" fill="#2563eb" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Source Code</text>
+<text x="827.0" y="536.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-03-19</text>
+<text x="14" y="570.0" fill="#111827" font-size="10" font-weight="500">Modal</text>
+<circle cx="234.0" cy="566.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 234.0,558.0 A 8,8 0 0,0 234.0,574.0 Z" fill="#d97706"/>
+<circle cx="234.0" cy="566.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="305.0" cy="566.0" r="8" fill="#059669"/>
 <circle cx="365.0" cy="564.0" r="6" fill="#059669"/>
 <text x="365.0" y="578.0" fill="#6b7280" font-size="7" text-anchor="middle">L</text>
-<circle cx="387.0" cy="564.0" r="6" fill="#059669"/>
+<circle cx="387.0" cy="564.0" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 387.0,558.0 A 6,6 0 0,0 387.0,570.0 Z" fill="#d97706"/>
+<circle cx="387.0" cy="564.0" r="6" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <text x="387.0" y="578.0" fill="#6b7280" font-size="7" text-anchor="middle">R</text>
 <circle cx="447.0" cy="566.0" r="8" fill="#059669"/>
-<circle cx="518.0" cy="566.0" r="8" fill="#059669"/>
-<circle cx="589.0" cy="566.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 589.0,558.0 A 8,8 0 0,0 589.0,574.0 Z" fill="#d97706"/>
-<circle cx="589.0" cy="566.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<circle cx="660.0" cy="566.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 660.0,558.0 A 8,8 0 0,0 660.0,574.0 Z" fill="#d97706"/>
-<circle cx="660.0" cy="566.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="518.0" cy="566.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 518.0,558.0 A 8,8 0 0,0 518.0,574.0 Z" fill="#d97706"/>
+<circle cx="518.0" cy="566.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="589.0" cy="566.0" r="8" fill="#059669"/>
+<circle cx="660.0" cy="566.0" r="8" fill="#059669"/>
 <text x="737.0" y="567.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
 <text x="827.0" y="567.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
-<text x="14" y="601.0" fill="#111827" font-size="10" font-weight="500">Ona</text>
+<text x="14" y="601.0" fill="#111827" font-size="10" font-weight="500">nono</text>
 <circle cx="234.0" cy="597.0" r="8" fill="#059669"/>
 <circle cx="305.0" cy="597.0" r="8" fill="#059669"/>
 <circle cx="365.0" cy="595.0" r="6" fill="#059669"/>
 <text x="365.0" y="609.0" fill="#6b7280" font-size="7" text-anchor="middle">L</text>
-<circle cx="387.0" cy="595.0" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 387.0,589.0 A 6,6 0 0,0 387.0,601.0 Z" fill="#d97706"/>
-<circle cx="387.0" cy="595.0" r="6" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="387.0" cy="595.0" r="6" fill="#059669"/>
 <text x="387.0" y="609.0" fill="#6b7280" font-size="7" text-anchor="middle">R</text>
 <circle cx="447.0" cy="597.0" r="8" fill="#059669"/>
-<circle cx="518.0" cy="597.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 518.0,589.0 A 8,8 0 0,0 518.0,605.0 Z" fill="#d97706"/>
-<circle cx="518.0" cy="597.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<circle cx="589.0" cy="597.0" r="8" fill="#059669"/>
-<circle cx="660.0" cy="597.0" r="8" fill="#059669"/>
+<circle cx="518.0" cy="597.0" r="8" fill="#059669"/>
+<circle cx="589.0" cy="597.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 589.0,589.0 A 8,8 0 0,0 589.0,605.0 Z" fill="#d97706"/>
+<circle cx="589.0" cy="597.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="660.0" cy="597.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 660.0,589.0 A 8,8 0 0,0 660.0,605.0 Z" fill="#d97706"/>
+<circle cx="660.0" cy="597.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <text x="737.0" y="598.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="827.0" y="598.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-03-07</text>
-<text x="14" y="632.0" fill="#111827" font-size="10" font-weight="500">packnplay</text>
+<text x="827.0" y="598.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="14" y="632.0" fill="#111827" font-size="10" font-weight="500">NVIDIA OpenShell</text>
 <circle cx="234.0" cy="628.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 234.0,620.0 A 8,8 0 0,0 234.0,636.0 Z" fill="#d97706"/>
 <circle cx="234.0" cy="628.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<circle cx="305.0" cy="628.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 305.0,620.0 A 8,8 0 0,0 305.0,636.0 Z" fill="#d97706"/>
-<circle cx="305.0" cy="628.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="305.0" cy="628.0" r="8" fill="#059669"/>
 <circle cx="365.0" cy="626.0" r="6" fill="#059669"/>
 <text x="365.0" y="640.0" fill="#6b7280" font-size="7" text-anchor="middle">L</text>
-<circle cx="387.0" cy="626.0" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<circle cx="387.0" cy="626.0" r="6" fill="#059669"/>
 <text x="387.0" y="640.0" fill="#6b7280" font-size="7" text-anchor="middle">R</text>
-<circle cx="447.0" cy="628.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 447.0,620.0 A 8,8 0 0,0 447.0,636.0 Z" fill="#d97706"/>
-<circle cx="447.0" cy="628.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<circle cx="518.0" cy="628.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 518.0,620.0 A 8,8 0 0,0 518.0,636.0 Z" fill="#d97706"/>
-<circle cx="518.0" cy="628.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="447.0" cy="628.0" r="8" fill="#059669"/>
+<circle cx="518.0" cy="628.0" r="8" fill="#059669"/>
 <circle cx="589.0" cy="628.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 589.0,620.0 A 8,8 0 0,0 589.0,636.0 Z" fill="#d97706"/>
 <circle cx="589.0" cy="628.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<circle cx="660.0" cy="628.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 660.0,620.0 A 8,8 0 0,0 660.0,636.0 Z" fill="#d97706"/>
-<circle cx="660.0" cy="628.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<text x="737.0" y="629.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="827.0" y="629.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
-<text x="14" y="663.0" fill="#111827" font-size="10" font-weight="500">Replit</text>
+<circle cx="660.0" cy="628.0" r="8" fill="#059669"/>
+<text x="737.0" y="629.0" fill="#2563eb" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Source Code</text>
+<text x="827.0" y="629.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-03-19</text>
+<text x="14" y="663.0" fill="#111827" font-size="10" font-weight="500">Ona</text>
 <circle cx="234.0" cy="659.0" r="8" fill="#059669"/>
 <circle cx="305.0" cy="659.0" r="8" fill="#059669"/>
 <circle cx="365.0" cy="657.0" r="6" fill="#059669"/>
@@ -394,21 +392,27 @@
 <circle cx="518.0" cy="659.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 518.0,651.0 A 8,8 0 0,0 518.0,667.0 Z" fill="#d97706"/>
 <circle cx="518.0" cy="659.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<circle cx="589.0" cy="659.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 589.0,651.0 A 8,8 0 0,0 589.0,667.0 Z" fill="#d97706"/>
-<circle cx="589.0" cy="659.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="589.0" cy="659.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="659.0" r="8" fill="#059669"/>
 <text x="737.0" y="660.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="827.0" y="660.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
-<text x="14" y="694.0" fill="#111827" font-size="10" font-weight="500">Stakpak Warden</text>
-<circle cx="234.0" cy="690.0" r="8" fill="#059669"/>
-<circle cx="305.0" cy="690.0" r="8" fill="#059669"/>
+<text x="827.0" y="660.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-03-07</text>
+<text x="14" y="694.0" fill="#111827" font-size="10" font-weight="500">packnplay</text>
+<circle cx="234.0" cy="690.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 234.0,682.0 A 8,8 0 0,0 234.0,698.0 Z" fill="#d97706"/>
+<circle cx="234.0" cy="690.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="305.0" cy="690.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 305.0,682.0 A 8,8 0 0,0 305.0,698.0 Z" fill="#d97706"/>
+<circle cx="305.0" cy="690.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="365.0" cy="688.0" r="6" fill="#059669"/>
 <text x="365.0" y="702.0" fill="#6b7280" font-size="7" text-anchor="middle">L</text>
-<circle cx="387.0" cy="688.0" r="6" fill="#059669"/>
+<circle cx="387.0" cy="688.0" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <text x="387.0" y="702.0" fill="#6b7280" font-size="7" text-anchor="middle">R</text>
-<circle cx="447.0" cy="690.0" r="8" fill="#059669"/>
-<circle cx="518.0" cy="690.0" r="8" fill="#059669"/>
+<circle cx="447.0" cy="690.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 447.0,682.0 A 8,8 0 0,0 447.0,698.0 Z" fill="#d97706"/>
+<circle cx="447.0" cy="690.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="518.0" cy="690.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 518.0,682.0 A 8,8 0 0,0 518.0,698.0 Z" fill="#d97706"/>
+<circle cx="518.0" cy="690.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="589.0" cy="690.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 589.0,682.0 A 8,8 0 0,0 589.0,698.0 Z" fill="#d97706"/>
 <circle cx="589.0" cy="690.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
@@ -417,54 +421,109 @@
 <circle cx="660.0" cy="690.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <text x="737.0" y="691.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
 <text x="827.0" y="691.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
-<text x="14" y="725.0" fill="#111827" font-size="10" font-weight="500">StrongDM Leash</text>
-<circle cx="234.0" cy="721.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 234.0,713.0 A 8,8 0 0,0 234.0,729.0 Z" fill="#d97706"/>
-<circle cx="234.0" cy="721.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<circle cx="305.0" cy="721.0" r="8" fill="#059669"/>
+<text x="14" y="725.0" fill="#111827" font-size="10" font-weight="500">Pydantic Monty</text>
+<circle cx="234.0" cy="721.0" r="8" fill="#059669"/>
+<circle cx="305.0" cy="721.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 305.0,713.0 A 8,8 0 0,0 305.0,729.0 Z" fill="#d97706"/>
+<circle cx="305.0" cy="721.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="365.0" cy="719.0" r="6" fill="#059669"/>
 <text x="365.0" y="733.0" fill="#6b7280" font-size="7" text-anchor="middle">L</text>
-<circle cx="387.0" cy="719.0" r="6" fill="#059669"/>
+<circle cx="387.0" cy="719.0" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 387.0,713.0 A 6,6 0 0,0 387.0,725.0 Z" fill="#d97706"/>
+<circle cx="387.0" cy="719.0" r="6" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <text x="387.0" y="733.0" fill="#6b7280" font-size="7" text-anchor="middle">R</text>
 <circle cx="447.0" cy="721.0" r="8" fill="#059669"/>
-<circle cx="518.0" cy="721.0" r="8" fill="#059669"/>
-<circle cx="589.0" cy="721.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 589.0,713.0 A 8,8 0 0,0 589.0,729.0 Z" fill="#d97706"/>
-<circle cx="589.0" cy="721.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<circle cx="660.0" cy="721.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 660.0,713.0 A 8,8 0 0,0 660.0,729.0 Z" fill="#d97706"/>
-<circle cx="660.0" cy="721.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<text x="737.0" y="722.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="827.0" y="722.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
-<text x="14" y="756.0" fill="#111827" font-size="10" font-weight="500">Unikraft Cloud</text>
-<circle cx="234.0" cy="752.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 234.0,744.0 A 8,8 0 0,0 234.0,760.0 Z" fill="#d97706"/>
-<circle cx="234.0" cy="752.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<circle cx="305.0" cy="752.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 305.0,744.0 A 8,8 0 0,0 305.0,760.0 Z" fill="#d97706"/>
-<circle cx="305.0" cy="752.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="518.0" cy="721.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 518.0,713.0 A 8,8 0 0,0 518.0,729.0 Z" fill="#d97706"/>
+<circle cx="518.0" cy="721.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="589.0" cy="721.0" r="8" fill="#059669"/>
+<circle cx="660.0" cy="721.0" r="8" fill="#059669"/>
+<text x="737.0" y="722.0" fill="#2563eb" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Source Code</text>
+<text x="827.0" y="722.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-03-19</text>
+<text x="14" y="756.0" fill="#111827" font-size="10" font-weight="500">Replit</text>
+<circle cx="234.0" cy="752.0" r="8" fill="#059669"/>
+<circle cx="305.0" cy="752.0" r="8" fill="#059669"/>
 <circle cx="365.0" cy="750.0" r="6" fill="#059669"/>
 <text x="365.0" y="764.0" fill="#6b7280" font-size="7" text-anchor="middle">L</text>
 <circle cx="387.0" cy="750.0" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 387.0,744.0 A 6,6 0 0,0 387.0,756.0 Z" fill="#d97706"/>
+<circle cx="387.0" cy="750.0" r="6" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <text x="387.0" y="764.0" fill="#6b7280" font-size="7" text-anchor="middle">R</text>
-<circle cx="447.0" cy="752.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 447.0,744.0 A 8,8 0 0,0 447.0,760.0 Z" fill="#d97706"/>
-<circle cx="447.0" cy="752.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="447.0" cy="752.0" r="8" fill="#059669"/>
 <circle cx="518.0" cy="752.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 518.0,744.0 A 8,8 0 0,0 518.0,760.0 Z" fill="#d97706"/>
 <circle cx="518.0" cy="752.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<circle cx="589.0" cy="752.0" r="8" fill="#059669"/>
+<circle cx="589.0" cy="752.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 589.0,744.0 A 8,8 0 0,0 589.0,760.0 Z" fill="#d97706"/>
+<circle cx="589.0" cy="752.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="660.0" cy="752.0" r="8" fill="#059669"/>
 <text x="737.0" y="753.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
 <text x="827.0" y="753.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
-<text x="10" y="783" fill="#6b7280" font-size="9" font-weight="600" letter-spacing="1">COVERAGE</text>
-<circle cx="87" cy="779" r="6" fill="#059669"/>
-<text x="99" y="783" fill="#6b7280" font-size="9">Addressed</text>
-<circle cx="177" cy="779" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 177,773 A 6,6 0 0,0 177,785 Z" fill="#d97706"/>
-<circle cx="177" cy="779" r="6" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<text x="189" y="783" fill="#6b7280" font-size="9">Partial</text>
-<circle cx="255" cy="779" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<text x="267" y="783" fill="#6b7280" font-size="9">Not addressed</text>
-<text x="10" y="801" fill="#6b7280" font-size="8">T3: L = Local (L1+L3) · R = Remote (L4+L6) — combined T3 rating uses the lower of the two</text>
+<text x="14" y="787.0" fill="#111827" font-size="10" font-weight="500">Stakpak Warden</text>
+<circle cx="234.0" cy="783.0" r="8" fill="#059669"/>
+<circle cx="305.0" cy="783.0" r="8" fill="#059669"/>
+<circle cx="365.0" cy="781.0" r="6" fill="#059669"/>
+<text x="365.0" y="795.0" fill="#6b7280" font-size="7" text-anchor="middle">L</text>
+<circle cx="387.0" cy="781.0" r="6" fill="#059669"/>
+<text x="387.0" y="795.0" fill="#6b7280" font-size="7" text-anchor="middle">R</text>
+<circle cx="447.0" cy="783.0" r="8" fill="#059669"/>
+<circle cx="518.0" cy="783.0" r="8" fill="#059669"/>
+<circle cx="589.0" cy="783.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 589.0,775.0 A 8,8 0 0,0 589.0,791.0 Z" fill="#d97706"/>
+<circle cx="589.0" cy="783.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="660.0" cy="783.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 660.0,775.0 A 8,8 0 0,0 660.0,791.0 Z" fill="#d97706"/>
+<circle cx="660.0" cy="783.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<text x="737.0" y="784.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="784.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="14" y="818.0" fill="#111827" font-size="10" font-weight="500">StrongDM Leash</text>
+<circle cx="234.0" cy="814.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 234.0,806.0 A 8,8 0 0,0 234.0,822.0 Z" fill="#d97706"/>
+<circle cx="234.0" cy="814.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="305.0" cy="814.0" r="8" fill="#059669"/>
+<circle cx="365.0" cy="812.0" r="6" fill="#059669"/>
+<text x="365.0" y="826.0" fill="#6b7280" font-size="7" text-anchor="middle">L</text>
+<circle cx="387.0" cy="812.0" r="6" fill="#059669"/>
+<text x="387.0" y="826.0" fill="#6b7280" font-size="7" text-anchor="middle">R</text>
+<circle cx="447.0" cy="814.0" r="8" fill="#059669"/>
+<circle cx="518.0" cy="814.0" r="8" fill="#059669"/>
+<circle cx="589.0" cy="814.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 589.0,806.0 A 8,8 0 0,0 589.0,822.0 Z" fill="#d97706"/>
+<circle cx="589.0" cy="814.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="660.0" cy="814.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 660.0,806.0 A 8,8 0 0,0 660.0,822.0 Z" fill="#d97706"/>
+<circle cx="660.0" cy="814.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<text x="737.0" y="815.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="815.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="14" y="849.0" fill="#111827" font-size="10" font-weight="500">Unikraft Cloud</text>
+<circle cx="234.0" cy="845.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 234.0,837.0 A 8,8 0 0,0 234.0,853.0 Z" fill="#d97706"/>
+<circle cx="234.0" cy="845.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="305.0" cy="845.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 305.0,837.0 A 8,8 0 0,0 305.0,853.0 Z" fill="#d97706"/>
+<circle cx="305.0" cy="845.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="365.0" cy="843.0" r="6" fill="#059669"/>
+<text x="365.0" y="857.0" fill="#6b7280" font-size="7" text-anchor="middle">L</text>
+<circle cx="387.0" cy="843.0" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<text x="387.0" y="857.0" fill="#6b7280" font-size="7" text-anchor="middle">R</text>
+<circle cx="447.0" cy="845.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 447.0,837.0 A 8,8 0 0,0 447.0,853.0 Z" fill="#d97706"/>
+<circle cx="447.0" cy="845.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="518.0" cy="845.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 518.0,837.0 A 8,8 0 0,0 518.0,853.0 Z" fill="#d97706"/>
+<circle cx="518.0" cy="845.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="589.0" cy="845.0" r="8" fill="#059669"/>
+<circle cx="660.0" cy="845.0" r="8" fill="#059669"/>
+<text x="737.0" y="846.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="846.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="10" y="876" fill="#6b7280" font-size="9" font-weight="600" letter-spacing="1">COVERAGE</text>
+<circle cx="87" cy="872" r="6" fill="#059669"/>
+<text x="99" y="876" fill="#6b7280" font-size="9">Addressed</text>
+<circle cx="177" cy="872" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 177,866 A 6,6 0 0,0 177,878 Z" fill="#d97706"/>
+<circle cx="177" cy="872" r="6" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<text x="189" y="876" fill="#6b7280" font-size="9">Partial</text>
+<circle cx="255" cy="872" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<text x="267" y="876" fill="#6b7280" font-size="9">Not addressed</text>
+<text x="10" y="894" fill="#6b7280" font-size="8">T3: L = Local (L1+L3) · R = Remote (L4+L6) — combined T3 rating uses the lower of the two</text>
 </svg>
