@@ -35,6 +35,13 @@ func Probe() report.LayerResult {
 
 	// --- Protected path writability (proxy for unlink/overwrite) ---
 	// If we can open /etc/hostname for writing, we COULD unlink or corrupt it.
+	// NOTE: We use os.WriteFile to a temp file in the same directory rather than
+	// os.OpenFile(O_WRONLY) on the existing file. This gives a more reliable
+	// signal under seccomp-notify based sandboxes where openat(O_WRONLY) on
+	// existing files may succeed due to notify response timing but the
+	// actual write operation is blocked. Creating a new file via
+	// os.WriteFile (which uses O_WRONLY|O_CREAT|O_TRUNC) is reliably
+	// intercepted by seccomp file monitors.
 	protectedPaths := []struct {
 		path string
 		desc string
@@ -48,21 +55,35 @@ func Probe() report.LayerResult {
 		if _, err := os.Stat(pp.path); err != nil {
 			continue
 		}
-		f, err := os.OpenFile(pp.path, os.O_WRONLY, 0)
-		if err != nil {
+		// Try writing a temp file next to the protected file, then verify
+		// that the original file can be opened for writing.
+		dir := filepath.Dir(pp.path)
+		testFile := filepath.Join(dir, ".ast-probe-write-"+filepath.Base(pp.path))
+		if err := os.WriteFile(testFile, []byte("probe"), 0644); err != nil {
 			blocked++
 			r.Tests = append(r.Tests, report.TestResult{
 				Name: "protected_writable_" + sanitizeName(pp.path), Result: "blocked",
-				Detail: fmt.Sprintf("%s (%s) not writable: %v", pp.path, pp.desc, err),
+				Detail: fmt.Sprintf("%s (%s) directory not writable: %v", pp.path, pp.desc, err),
 			})
 		} else {
-			f.Close() // immediately close — zero bytes written
-			allowed++
-			r.Tests = append(r.Tests, report.TestResult{
-				Name: "protected_writable_" + sanitizeName(pp.path), Result: "allowed",
-				Detail: fmt.Sprintf("WARNING: %s (%s) is writable — destructive ops possible", pp.path, pp.desc),
-			})
-			r.Warnings = append(r.Warnings, fmt.Sprintf("%s is writable", pp.path))
+			os.Remove(testFile) // cleanup — safe, we created it
+			// Also verify we can open the actual file for writing
+			f, err := os.OpenFile(pp.path, os.O_WRONLY, 0)
+			if err != nil {
+				blocked++
+				r.Tests = append(r.Tests, report.TestResult{
+					Name: "protected_writable_" + sanitizeName(pp.path), Result: "blocked",
+					Detail: fmt.Sprintf("%s (%s) not writable: %v", pp.path, pp.desc, err),
+				})
+			} else {
+				f.Close()
+				allowed++
+				r.Tests = append(r.Tests, report.TestResult{
+					Name: "protected_writable_" + sanitizeName(pp.path), Result: "allowed",
+					Detail: fmt.Sprintf("WARNING: %s (%s) is writable — destructive ops possible", pp.path, pp.desc),
+				})
+				r.Warnings = append(r.Warnings, fmt.Sprintf("%s is writable", pp.path))
+			}
 		}
 	}
 
@@ -151,14 +172,13 @@ func Probe() report.LayerResult {
 		cronDir = "/var/at/tabs"
 	}
 	testPath := filepath.Join(cronDir, ".ast-probe-cron-test")
-	if f, err := os.OpenFile(testPath, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0600); err != nil {
+	if err := os.WriteFile(testPath, []byte("probe"), 0600); err != nil {
 		blocked++
 		r.Tests = append(r.Tests, report.TestResult{
 			Name: "persistence_cron", Result: "blocked",
 			Detail: fmt.Sprintf("Cannot write to cron directory %s: %v", cronDir, err),
 		})
 	} else {
-		f.Close()
 		os.Remove(testPath) // safe: we created it
 		allowed++
 		r.Tests = append(r.Tests, report.TestResult{
@@ -171,14 +191,13 @@ func Probe() report.LayerResult {
 	// Systemd service directory writability (Linux)
 	if runtime.GOOS == "linux" {
 		systemdTestPath := "/etc/systemd/system/.ast-probe-systemd-test"
-		if f, err := os.OpenFile(systemdTestPath, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0644); err != nil {
+		if err := os.WriteFile(systemdTestPath, []byte("probe"), 0644); err != nil {
 			blocked++
 			r.Tests = append(r.Tests, report.TestResult{
 				Name: "persistence_systemd", Result: "blocked",
 				Detail: fmt.Sprintf("Cannot write to systemd directory: %v", err),
 			})
 		} else {
-			f.Close()
 			os.Remove(systemdTestPath)
 			allowed++
 			r.Tests = append(r.Tests, report.TestResult{
@@ -195,14 +214,13 @@ func Probe() report.LayerResult {
 			// Don't create the directory — just check if it exists and is writable
 			if _, err := os.Stat(userSystemdDir); err == nil {
 				userTestPath := filepath.Join(userSystemdDir, ".ast-probe-user-systemd-test")
-				if f, err := os.OpenFile(userTestPath, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0644); err != nil {
+				if err := os.WriteFile(userTestPath, []byte("probe"), 0644); err != nil {
 					blocked++
 					r.Tests = append(r.Tests, report.TestResult{
 						Name: "persistence_systemd_user", Result: "blocked",
 						Detail: fmt.Sprintf("User systemd dir exists but not writable: %v", err),
 					})
 				} else {
-					f.Close()
 					os.Remove(userTestPath)
 					allowed++
 					r.Tests = append(r.Tests, report.TestResult{
@@ -219,14 +237,13 @@ func Probe() report.LayerResult {
 	if _, err := os.Stat(".git/hooks"); err == nil {
 		hookDir := ".git/hooks"
 		hookTestPath := filepath.Join(hookDir, ".ast-probe-hook-test")
-		if f, err := os.OpenFile(hookTestPath, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0755); err != nil {
+		if err := os.WriteFile(hookTestPath, []byte("probe"), 0755); err != nil {
 			blocked++
 			r.Tests = append(r.Tests, report.TestResult{
 				Name: "persistence_git_hook", Result: "blocked",
 				Detail: fmt.Sprintf("Cannot write to .git/hooks/: %v", err),
 			})
 		} else {
-			f.Close()
 			os.Remove(hookTestPath)
 			allowed++
 			r.Tests = append(r.Tests, report.TestResult{

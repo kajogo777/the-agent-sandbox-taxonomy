@@ -183,23 +183,32 @@ func Probe() report.LayerResult {
 	}
 
 	// --- Persistence path writes ---
+	// Test if shell init files can be written to (persistence vectors).
+	// We use os.WriteFile to create a temp sibling file rather than
+	// os.OpenFile(O_WRONLY|O_APPEND) on the existing init file. This gives
+	// a more reliable signal under seccomp-notify based sandboxes where
+	// openat(O_WRONLY) on existing files may succeed due to notify response
+	// timing but the actual write operation is blocked. Creating a new file
+	// via os.WriteFile (O_WRONLY|O_CREAT|O_TRUNC) is reliably intercepted.
 	persistenceWritable := 0
 	for _, p := range persistencePaths {
 		expanded := expandHome(p)
-		// Don't actually modify — just check if writable
-		if f, err := os.OpenFile(expanded, os.O_WRONLY|os.O_APPEND, 0); err == nil {
-			f.Close()
+		dir := filepath.Dir(expanded)
+		base := filepath.Base(expanded)
+		testFile := filepath.Join(dir, ".ast-probe-persist-"+base)
+		if err := os.WriteFile(testFile, []byte("probe"), 0644); err != nil {
+			r.Tests = append(r.Tests, report.TestResult{
+				Name: "write_persistence_" + sanitizeName(p), Result: "blocked",
+				Detail: fmt.Sprintf("Init file not writable: %s (%v)", p, err),
+			})
+		} else {
+			os.Remove(testFile) // cleanup — safe, we created it
 			persistenceWritable++
 			r.Tests = append(r.Tests, report.TestResult{
 				Name: "write_persistence_" + sanitizeName(p), Result: "allowed",
 				Detail: fmt.Sprintf("Init file writable (persistence vector): %s", p),
 			})
 			r.Warnings = append(r.Warnings, fmt.Sprintf("Persistence vector: %s is writable", p))
-		} else {
-			r.Tests = append(r.Tests, report.TestResult{
-				Name: "write_persistence_" + sanitizeName(p), Result: "blocked",
-				Detail: fmt.Sprintf("Init file not writable: %s (%v)", p, err),
-			})
 		}
 	}
 
