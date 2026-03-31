@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 893 952" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
-<rect width="893" height="952" fill="white" rx="8"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 893 983" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+<rect width="893" height="983" fill="white" rx="8"/>
 <text x="446.5" y="22" fill="#111827" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="-0.3">Threat Coverage Matrix</text>
 <text x="234.0" y="36" fill="#6b7280" font-size="9" text-anchor="middle">Exfiltration</text>
 <text x="234.0" y="50" fill="#6366f1" font-size="10" font-weight="700" text-anchor="middle">T1</text>
@@ -514,14 +514,31 @@
 <circle cx="660.0" cy="845.0" r="8" fill="#059669"/>
 <text x="737.0" y="846.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
 <text x="827.0" y="846.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
-<text x="10" y="876" fill="#6b7280" font-size="9" font-weight="600" letter-spacing="1">COVERAGE</text>
-<circle cx="87" cy="872" r="6" fill="#059669"/>
-<text x="99" y="876" fill="#6b7280" font-size="9">Addressed</text>
-<circle cx="177" cy="872" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 177,866 A 6,6 0 0,0 177,878 Z" fill="#d97706"/>
-<circle cx="177" cy="872" r="6" fill="none" stroke="#d97706" stroke-width="1.5"/>
-<text x="189" y="876" fill="#6b7280" font-size="9">Partial</text>
-<circle cx="255" cy="872" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<text x="267" y="876" fill="#6b7280" font-size="9">Not addressed</text>
-<text x="10" y="894" fill="#6b7280" font-size="8">T3: L = Local (L1+L3) · R = Remote (L4+L6) — combined T3 rating uses the lower of the two</text>
+<text x="14" y="880.0" fill="#111827" font-size="10" font-weight="500">Vercel Sandbox</text>
+<circle cx="234.0" cy="876.0" r="8" fill="#059669"/>
+<circle cx="305.0" cy="876.0" r="8" fill="#059669"/>
+<circle cx="365.0" cy="874.0" r="6" fill="#059669"/>
+<text x="365.0" y="888.0" fill="#6b7280" font-size="7" text-anchor="middle">L</text>
+<circle cx="387.0" cy="874.0" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 387.0,868.0 A 6,6 0 0,0 387.0,880.0 Z" fill="#d97706"/>
+<circle cx="387.0" cy="874.0" r="6" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<text x="387.0" y="888.0" fill="#6b7280" font-size="7" text-anchor="middle">R</text>
+<circle cx="447.0" cy="876.0" r="8" fill="#059669"/>
+<circle cx="518.0" cy="876.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 518.0,868.0 A 8,8 0 0,0 518.0,884.0 Z" fill="#d97706"/>
+<circle cx="518.0" cy="876.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="589.0" cy="876.0" r="8" fill="#059669"/>
+<circle cx="660.0" cy="876.0" r="8" fill="#059669"/>
+<text x="737.0" y="877.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="827.0" y="877.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-03-31</text>
+<text x="10" y="907" fill="#6b7280" font-size="9" font-weight="600" letter-spacing="1">COVERAGE</text>
+<circle cx="87" cy="903" r="6" fill="#059669"/>
+<text x="99" y="907" fill="#6b7280" font-size="9">Addressed</text>
+<circle cx="177" cy="903" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 177,897 A 6,6 0 0,0 177,909 Z" fill="#d97706"/>
+<circle cx="177" cy="903" r="6" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<text x="189" y="907" fill="#6b7280" font-size="9">Partial</text>
+<circle cx="255" cy="903" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<text x="267" y="907" fill="#6b7280" font-size="9">Not addressed</text>
+<text x="10" y="925" fill="#6b7280" font-size="8">T3: L = Local (L1+L3) · R = Remote (L4+L6) — combined T3 rating uses the lower of the two</text>
 </svg>

@@ -1075,6 +1075,77 @@ products:
   last_reviewed: '2026-03-19'
   evidence_level: source-code
   reviewed_by: null
+- name: Vercel Sandbox
+  portability:
+  - cloud-managed
+  - kvm
+  layers:
+    L1:
+      s: 4
+      g: 1
+      note: 'Firecracker microVM via KVM; dedicated Linux kernel per sandbox; Amazon Linux 2023 base image; same infrastructure
+        (Hive) that powers 2M+ Vercel builds/day. S:4 — hardware boundary: host kernel attack surface does not exist inside
+        the VM (hypervisor-enforced isolation via KVM). G:1 — binary: sandbox is either running or not, no per-workload isolation
+        tuning. Evidence: official docs (concepts page), GitHub README, Hive architecture blog post. Open-source SDK (Apache-2.0)'
+    L2:
+      s: 4
+      g: 2
+      note: 'Hypervisor-enforced vCPU/memory allocation at VM creation; 1–32 vCPUs (plan-dependent), 2 GB memory per vCPU;
+        configurable timeout (default 5min, max 45min Hobby / 5h Pro/Enterprise); auto-kill on expiry; extendTimeout() API.
+        S:4 — fixed VM resource allocation at creation (hypervisor-enforced); agent cannot modify allocation from inside. G:2
+        — per-sandbox CPU, memory, and timeout independently configurable. Evidence: pricing page (resource limits table), SDK
+        reference (resources.vcpus, timeout, extendTimeout)'
+    L3:
+      s: 4
+      g: 1
+      note: 'Ephemeral guest filesystem; Amazon Linux 2023 root; destroyed on sandbox stop unless snapshotted; no host paths
+        visible; /vercel/sandbox writable; code runs as vercel-sandbox user with sudo available. S:4 — ephemeral root: fresh
+        OS per session, project files loaded via git clone or SDK file ops, no host filesystem exposure. G:1 — binary: full
+        guest FS access with no per-path read/write controls or sensitive-path blocking; sudo grants root access to entire guest
+        FS. Evidence: system specifications page, concepts page'
+    L4:
+      s: 2
+      g: 2
+      note: 'Host-level network firewall outside the microVM; three modes: allow-all (default, unrestricted egress), deny-all
+        (blocks all egress including DNS), user-defined (default-deny with domain allowlist via SNI + CIDR subnet allow/deny).
+        Live policy updates without sandbox restart. S:2 — software-enforced: host-level proxy outside the VM that the sandbox
+        cannot circumvent (VM boundary prevents bypass); not kernel-level packet filtering (iptables/eBPF) but proxy-based SNI
+        matching. G:2 — domain allowlist/blocklist via SNI + CIDR subnet allow/deny; packet-level filtering (domain/IP), not
+        content-aware (no HTTP method, URL path, or body inspection). TLS termination for header injection is credential brokering
+        (scored under L5), not L4 network filtering. WARNING: default is allow-all (unrestricted egress). Evidence: firewall
+        docs, SDK reference (NetworkPolicy class), SDK source code (network-policy.ts)'
+    L5:
+      s: 4
+      g: 3
+      note: 'Credential brokering (Pro/Enterprise): TLS terminated at host-level proxy; secrets injected as HTTP headers per-domain;
+        credentials never enter sandbox scope; per-sandbox unique CA added to system certs. S:4 — external credential proxy:
+        secrets never enter the sandbox VM; proxy injects auth headers at network boundary outside the microVM. G:3 — per-domain
+        header injection with per-request granularity; different credentials for different services. WARNING: credential brokering
+        requires Pro/Enterprise plan; Hobby plan limited to env vars passed at creation (S:1, G:1). Scored at configured maximum.
+        Evidence: firewall docs (credentials brokering section), SDK reference (NetworkTransformer type)'
+    L6:
+      s: null
+      g: null
+      note: 'No runtime action governance. No policy engine, no command blocklist, no declarative-only mode. Network policies
+        are L4 (network boundary), resource limits are L2 (resource caps), timeouts are L2. The sandbox itself does not restrict
+        what the agent does with the access it has at a semantic level. Agent has full root access (sudo) inside the VM. Scored
+        — (not addressed)'
+    L7:
+      s: 2
+      g: 2
+      note: 'Per-command audit: stdout/stderr streaming and retrieval via SDK; command IDs, exit codes, start timestamps, working
+        directory tracked per execution; sandbox lifecycle events in Vercel Dashboard (Observability > Sandboxes); snapshot audit
+        trail (creation time, source sandbox, expiration, size). S:2 — command-level audit: every command execution logged with
+        structured metadata; goes beyond session-level; not tamper-evident (no cryptographic commitments). G:2 — per-command
+        granularity with structured metadata; no syscall-level telemetry, no OTel export, no network packet capture. Evidence:
+        SDK reference (Command class, CommandFinished class), working-with-sandbox docs (Monitor your sandbox section)'
+  notes: 'Firecracker microVM with strong L1-L3 (identical architecture to E2B). L4 firewall with credential brokering (Pro/Enterprise)
+    is standout feature — comparable to Docker Sandbox L5. WARNING: default network policy is allow-all; credential brokering
+    requires Pro/Enterprise. Gaps: L6 (no governance), L7 (no tamper-evident logging, no OTel). Complements: Governance overlay
+    (Leash/Warden) for L6, external SIEM for L7 upgrade'
+  last_reviewed: '2026-03-31'
+  evidence_level: docs
+  reviewed_by: null
 - name: Pydantic Monty
   portability:
   - any-os

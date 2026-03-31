@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 921 932" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
-<rect width="921" height="932" fill="white" rx="8"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 921 963" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+<rect width="921" height="963" fill="white" rx="8"/>
 <text x="460.5" y="22" fill="#111827" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="-0.3">Product Score Cards — Strength · Granularity</text>
 <text x="236.0" y="36" fill="#6b7280" font-size="9" text-anchor="middle">Compute</text>
 <text x="236.0" y="50" fill="#6366f1" font-size="10" font-weight="700" text-anchor="middle">L1</text>
@@ -612,17 +612,40 @@
 <text x="686.0" y="846.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.1</text>
 <text x="765.0" y="846.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
 <text x="855.0" y="846.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
-<text x="10" y="876" fill="#6b7280" font-size="9" font-weight="600" letter-spacing="1">STRENGTH</text>
-<rect x="80" y="866" width="14" height="14" rx="3" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
-<text x="99" y="876" fill="#6b7280" font-size="9">— N/A</text>
-<rect x="138" y="866" width="14" height="14" rx="3" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
-<text x="157" y="876" fill="#6b7280" font-size="9">0 None</text>
-<rect x="202" y="866" width="14" height="14" rx="3" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
-<text x="221" y="876" fill="#6b7280" font-size="9">1 Cooperative</text>
-<rect x="308" y="866" width="14" height="14" rx="3" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<text x="327" y="876" fill="#6b7280" font-size="9">2 Software</text>
-<rect x="396" y="866" width="14" height="14" rx="3" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
-<text x="415" y="876" fill="#6b7280" font-size="9">3 Kernel</text>
-<rect x="472" y="866" width="14" height="14" rx="3" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
-<text x="491" y="876" fill="#6b7280" font-size="9">4 Structural</text>
+<text x="14" y="880.0" fill="#111827" font-size="10" font-weight="500">Vercel Sandbox</text>
+<rect x="200" y="862" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
+<rect x="204" y="884" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
+<text x="236.0" y="877.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.1</text>
+<rect x="275" y="862" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
+<rect x="279" y="884" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
+<text x="311.0" y="877.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.2</text>
+<rect x="350" y="862" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
+<rect x="354" y="884" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
+<text x="386.0" y="877.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.1</text>
+<rect x="425" y="862" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="429" y="884" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="461.0" y="877.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
+<rect x="500" y="862" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
+<rect x="504" y="884" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
+<text x="536.0" y="877.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.3</text>
+<rect x="575" y="862" width="72" height="28" rx="4" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
+<text x="611.0" y="877.0" fill="#9ca3af" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">—</text>
+<rect x="650" y="862" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="654" y="884" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="686.0" y="877.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
+<text x="765.0" y="877.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
+<text x="855.0" y="877.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-03-31</text>
+<text x="10" y="907" fill="#6b7280" font-size="9" font-weight="600" letter-spacing="1">STRENGTH</text>
+<rect x="80" y="897" width="14" height="14" rx="3" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
+<text x="99" y="907" fill="#6b7280" font-size="9">— N/A</text>
+<rect x="138" y="897" width="14" height="14" rx="3" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+<text x="157" y="907" fill="#6b7280" font-size="9">0 None</text>
+<rect x="202" y="897" width="14" height="14" rx="3" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
+<text x="221" y="907" fill="#6b7280" font-size="9">1 Cooperative</text>
+<rect x="308" y="897" width="14" height="14" rx="3" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<text x="327" y="907" fill="#6b7280" font-size="9">2 Software</text>
+<rect x="396" y="897" width="14" height="14" rx="3" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
+<text x="415" y="907" fill="#6b7280" font-size="9">3 Kernel</text>
+<rect x="472" y="897" width="14" height="14" rx="3" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
+<text x="491" y="907" fill="#6b7280" font-size="9">4 Structural</text>
 </svg>
