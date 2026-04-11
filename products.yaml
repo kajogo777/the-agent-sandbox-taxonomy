@@ -19,7 +19,14 @@ products:
     L4:
       s: 2
       g: 2
-      note: 'Host-level domain+CIDR allowlist/denylist; HTTPS requires SNI; default: internet enabled'
+      note: 'Host-level domain+CIDR allowlist/denylist via PUT /sandboxes/{id}/network API; SNI inspection (port 443) and Host
+        header inspection (port 80) at host-level proxy outside Firecracker microVM; CIDR-based filtering on non-HTTP ports.
+        S:2 — software-enforced: host-level proxy outside the VM that the sandbox cannot circumvent (VM boundary prevents bypass);
+        not kernel-level packet filtering (iptables/eBPF) but proxy-based SNI matching; reconfigurable by operator at runtime.
+        Consistent with Vercel Sandbox L4 (same Firecracker + host proxy architecture). G:2 — domain allowlist/denylist + CIDR
+        blocks; not content-aware (no HTTP method/path/body inspection). WARNING: domain filtering only works on ports 80/443;
+        other ports fall back to CIDR only. Default: internet enabled. Evidence: API docs (PUT /sandboxes/{sandboxID}/network),
+        SDK reference'
     L5:
       s: 1
       g: 1
@@ -34,7 +41,7 @@ products:
       note: Session-level metrics (CPU/mem/disk); no command-level audit or tamper-evident logging
   notes: 'Gaps: L5 (env vars exposed), L6 (no governance), L7 (session-level only). Complements: Credential proxy, governance
     overlay, external SIEM'
-  last_reviewed: null
+  last_reviewed: '2026-04-11'
   evidence_level: docs
   reviewed_by: null
 - name: Daytona
@@ -173,10 +180,16 @@ products:
       g: 1
       note: Blog claims hypervisor-enforced network isolation but API docs lack network policy config; conservative score
     L5:
-      s: 1
-      g: 2
-      note: Env vars via blaxel.toml + platform secrets syntax; blog recommends hypervisor-injected secrets but unclear if
-        implemented
+      s: 3
+      g: 3
+      note: 'Placeholder substitution via MITM proxy: secrets defined per routing rule with {{SECRET:name}} syntax; proxy resolves
+        secrets server-side before forwarding requests; sandbox runtime never sees raw secret values; secrets are write-only
+        (stripped from API responses). S:3 — placeholder substitution: secrets swapped with tokens, restored at execution only
+        by proxy. G:3 — per-destination scoped secrets with per-request resolution; different endpoints get different credentials;
+        consistent with mechanism table (Placeholder substitution = S:3, G:3). WARNING:
+        proxy enforcement depends on cooperative HTTP_PROXY env vars (L4:1) — processes bypassing the proxy cannot get secrets
+        resolved but also cannot exfiltrate them via the proxy path. Feature in public preview (us-was-1 region only). Evidence:
+        docs (Sandboxes/Proxy-secrets-injection)'
     L6:
       s: null
       g: null
@@ -187,9 +200,9 @@ products:
       s: 2
       g: 2
       note: Auto-implemented logging and tracing; distributed tracing with spans; SOC 2 Type II, HIPAA, ISO 27001
-  notes: 'Gaps: L4 (undocumented enforcement), L5 (env var delivery), L6 (deployment-level only). Blog-to-docs gap on security
-    features'
-  last_reviewed: null
+  notes: 'Gaps: L4 (undocumented enforcement — proxy env vars are cooperative S:1), L6 (deployment-level only). L5 upgraded
+    to S:3 via proxy placeholder substitution (public preview). Blog-to-docs gap on security features'
+  last_reviewed: '2026-04-11'
   evidence_level: docs
   reviewed_by: null
 - name: Unikraft Cloud
@@ -283,10 +296,15 @@ products:
   - k8s
   layers:
     L1:
-      s: 3
+      s: 4
       g: 1
-      note: gVisor (primary) or Kata (optional); Sentry intercepts all ~340 syscalls; GKE Autopilot enables gVisor by default;
-        open-source kubernetes-sigs/agent-sandbox
+      note: 'gVisor (default) or Kata Containers (opt-in via runtimeClassName overlay); GKE Autopilot enables gVisor by default;
+        AKS supports Kata via kata-vm-isolation. S:4 — Kata Containers provides hardware-isolated microVM per sandbox (dedicated
+        kernel via KVM). Scored at strongest available mode per AST rules. WARNING: default is gVisor (S:3, user-space kernel);
+        Kata (S:4) requires explicit opt-in via kustomize overlay and nested virtualization support. Standard container runtime
+        (no runtimeClassName) is S:2. Consistent with Docker Sandbox scoring pattern (S:4 for strongest mode, WARNING for weaker
+        defaults). G:1 — binary: sandbox is either running or not. Evidence: agent-sandbox docs (gVisor/Kata examples), Kata
+        blog (Nov 2025), AKS sandbox support (v0.3.10). Open-source kubernetes-sigs/agent-sandbox'
     L2:
       s: 3
       g: 2
@@ -317,10 +335,10 @@ products:
       g: 2
       note: K8s logging (Cloud Logging on GKE); ADK evaluation and tracing; Cloud Audit Logs; Cloud Monitoring; pod-level
         stdout/stderr
-  notes: 'Strong coverage across all layers. gVisor L1 is S:3 (not S:4 hardware isolation), which caps all layers. L4 is kernel-enforced
-    (S:3) but packet-level only (G:2) — cannot inspect HTTP content. Complements: Kata for L1:4 upgrade, MITM proxy for L4
-    G:3 content-aware filtering'
-  last_reviewed: null
+  notes: 'Strong coverage across all layers. With Kata (L1:4), dependent layers are no longer capped. With gVisor default (L1:3),
+    layers enforced inside the sandbox are capped at S:3. L4 is kernel-enforced (S:3) but packet-level only (G:2) — cannot
+    inspect HTTP content. Complements: MITM proxy for L4 G:3 content-aware filtering'
+  last_reviewed: '2026-04-11'
   evidence_level: docs
   reviewed_by: null
 - name: StrongDM Leash
@@ -621,20 +639,24 @@ products:
       note: 'shell_environment_policy: automatic KEY/SECRET/TOKEN pattern filtering; inherit=none or core options; explicit
         exclude patterns; LD_* stripping; in Codex Cloud: secrets removed before agent phase'
     L6:
-      s: null
-      g: null
-      note: '4 approval policies: untrusted, on-request, never (CI mode), reject; separate execpolicy rule files; --full-auto
-        shortcut. Scored — (not addressed) because all L6 mechanisms are HITL gates — the sandbox delegates governance to
-        the human. With --ask-for-approval never, no L6 enforcement remains. The sandbox (Landlock/Seatbelt) is L1/L3/L4,
-        not L6'
+      s: 1
+      g: 2
+      note: 'requirements.toml command prefix rules: pattern-based matching on command arguments with allow/prompt/forbidden
+        decisions; MCP server identity allowlisting; admin-enforced (users cannot override). S:1 — command blocklist: prefix
+        rules match syntactic command patterns (e.g., pattern=["rm"]) but agents can trivially bypass via libraries, scripts,
+        or MCP tools that achieve the same effect without matching the blocked prefix. Guardian subagent (Smart Approvals) is
+        an LLM-based risk scorer replacing HITL, not a structured policy engine. G:2 — allowlist/blocklist: command prefix rules
+        + MCP server allowlists + allowed sandbox modes/approval policies. 4 approval policies (untrusted, on-request, never,
+        reject) are HITL gates scored separately. Evidence: requirements.toml docs, PR #8277 (Dec 2025)'
     L7:
       s: 2
       g: 3
       note: OpenTelemetry export (OTLP-HTTP/gRPC); JSONL event streaming; thread/turn lifecycle, command executions, file
         changes, MCP calls; session persistence/resume; notification hooks
-  notes: 'Gaps: L2 (no resource caps), L4 binary (network on = unrestricted). Complements: Resource wrapper (cgroups), domain-level
+  notes: 'Gaps: L2 (no resource caps), L4 binary (network on = unrestricted). L6 upgraded from — to S:1 via requirements.toml
+    command prefix rules (existed Dec 2025, missed in initial scoring). Complements: Resource wrapper (cgroups), domain-level
     network filtering, ephemeral container'
-  last_reviewed: null
+  last_reviewed: '2026-04-11'
   evidence_level: docs
   reviewed_by: null
 - name: Cursor (sandboxed)
@@ -657,10 +679,15 @@ products:
       note: 'Writes: workspace-scoped (kernel-enforced); denies .vscode/, .cursor/, .git/config, .git/hooks/; WARNING: reads
         broad — shell commands bypass .cursorignore'
     L4:
-      s: 1
-      g: 1
-      note: 'Network gated by permission prompt, NOT kernel-enforced; cooperative gate only; background agents: full internet,
-        no restrictions'
+      s: 3
+      g: 2
+      note: 'macOS Seatbelt denies network-outbound at kernel level; Linux Landlock+seccomp blocks socket/connect/bind syscalls;
+        all allowed traffic routed through proxy with domain allowlist/denylist via sandbox.json networkPolicy. S:3 — kernel-enforced:
+        Seatbelt/seccomp deny network syscalls; process cannot open raw sockets and bypass the filter; irreversible once sandbox
+        applied. Consistent with Claude Code local L4 (S:3, same Seatbelt/bubblewrap mechanism) and Codex CLI L4 (S:3, same
+        seccomp mechanism). G:2 — domain allowlist/denylist via networkPolicy; enterprise admin dashboard can lock network settings.
+        WARNING: background agents may still have full internet (no restrictions); score reflects sandboxed mode. Evidence: Cursor
+        blog (Feb 2026), Cursor 2.5 changelog (Feb 17, 2026)'
     L5:
       s: 0
       g: 0
@@ -677,9 +704,10 @@ products:
       g: 1
       note: Code evolution snapshots with rollback; SOC 2 Type II; no documented command-level audit; no enterprise log export
         API
-  notes: 'WARNING: L4:1 + L5:0 = T1 exfiltration risk. Sensitive files readable via shell + cooperative network gate. Complements:
-    Kernel-enforced network blocking, credential isolation, nono as inner sandbox'
-  last_reviewed: null
+  notes: 'L4 upgraded from S:1 to S:3: Cursor 2.5 (Feb 2026) shipped kernel-enforced network sandbox via Seatbelt/Landlock/seccomp
+    (existed at initial scoring, was underscored). WARNING: L5:0 = T1 exfiltration risk remains — sensitive files readable
+    via shell even with network restrictions. Complements: Credential isolation, nono as inner sandbox'
+  last_reviewed: '2026-04-11'
   evidence_level: docs
   reviewed_by: null
 - name: Copilot coding agent
@@ -918,12 +946,23 @@ products:
       note: No filesystem access (seccomp-blocked); in-memory VFS only; structural absence of host FS
     L4:
       s: 2
-      g: 1
-      note: fetch() unrestricted; SSRF to internal services blocked; no user-configurable egress policy
+      g: 3
+      note: 'Dynamic Workers: globalOutbound HttpGateway intercepts every fetch() and connect() call; Workers have no raw socket
+        API — fetch()/connect() are the only network primitives. S:2 — interpreter-mediated fetch: V8 runtime mediates all network;
+        no raw socket API exists; not bypassable from within the Worker; not kernel-level (V8 isolate runtime, not OS kernel).
+        G:3 — HttpGateway terminates requests and can inspect HTTP method, URL path, headers, body; per-hostname routing with
+        per-tenant context; content-aware inspection. Standard Workers (non-Dynamic): fetch() unrestricted, SSRF blocked (G:1).
+        Scored at Dynamic Workers configured maximum. Evidence: Dynamic Workers docs (egress-control), Workers security model'
     L5:
-      s: 2
-      g: 2
-      note: Write-only secrets (not readable via API after set); per-Worker scope; Secrets Store (beta) for shared secrets
+      s: 4
+      g: 3
+      note: 'Dynamic Workers: HttpGateway credential injection — loader Worker holds secrets and injects auth headers into outbound
+        requests from dynamic Workers; dynamic Worker code never sees credentials (not as env var, not as placeholder, not in
+        any form). S:4 — external credential proxy: credentials never enter the dynamic Worker isolate; the HttpGateway runs
+        in the loader Worker (separate V8 isolate) and injects credentials at the network boundary. Consistent with Vercel Sandbox
+        L5 (S:4 external credential proxy). G:3 — per-hostname header injection with per-tenant context (ctx.props); different
+        credentials for different services. Standard Workers: write-only secrets per-Worker scope (S:2, G:2). Scored at Dynamic
+        Workers configured maximum. Evidence: Dynamic Workers docs (egress-control), SDK reference'
     L6:
       s: 2
       g: 2
@@ -934,8 +973,10 @@ products:
       note: Workers Logs; Tail Workers for real-time streaming; Logpush to external destinations; OTel support; 18-month audit
         log retention
   notes: 'T6 partial: L1:2 (shared process, not kernel/hardware isolation) caps privilege escalation defense. No filesystem
-    is a structural strength (L3). Complements: Stronger compute isolation for L1 upgrade'
-  last_reviewed: null
+    is a structural strength (L3). Dynamic Workers (open beta Mar 2026) add globalOutbound egress control (L4 G:3) and credential
+    injection via HttpGateway (L5 S:4). Standard Workers retain original scores. Complements: Stronger compute isolation for
+    L1 upgrade'
+  last_reviewed: '2026-04-11'
   evidence_level: docs
   reviewed_by: null
 - name: Ona

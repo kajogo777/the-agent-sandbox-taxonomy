@@ -38,7 +38,7 @@
 <circle cx="589.0" cy="70.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="70.0" r="8" fill="#059669"/>
 <text x="737.0" y="71.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="827.0" y="71.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="827.0" y="71.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-04-11</text>
 <text x="14" y="105.0" fill="#111827" font-size="10" font-weight="500">Claude Code (local)</text>
 <circle cx="234.0" cy="101.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 234.0,93.0 A 8,8 0 0,0 234.0,109.0 Z" fill="#d97706"/>
@@ -97,7 +97,7 @@
 <circle cx="589.0" cy="163.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="660.0" cy="163.0" r="8" fill="#059669"/>
 <text x="737.0" y="164.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="827.0" y="164.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="827.0" y="164.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-04-11</text>
 <text x="14" y="198.0" fill="#111827" font-size="10" font-weight="500">Codex CLI (agent phase)</text>
 <circle cx="234.0" cy="194.0" r="8" fill="#059669"/>
 <circle cx="305.0" cy="194.0" r="8" fill="#059669"/>
@@ -118,7 +118,7 @@
 <path d="M 660.0,186.0 A 8,8 0 0,0 660.0,202.0 Z" fill="#d97706"/>
 <circle cx="660.0" cy="194.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <text x="737.0" y="195.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="827.0" y="195.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="827.0" y="195.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-04-11</text>
 <text x="14" y="229.0" fill="#111827" font-size="10" font-weight="500">Copilot coding agent</text>
 <circle cx="234.0" cy="225.0" r="8" fill="#059669"/>
 <circle cx="305.0" cy="225.0" r="8" fill="#059669"/>
@@ -142,10 +142,10 @@
 <circle cx="365.0" cy="254.0" r="6" fill="#059669"/>
 <text x="365.0" y="268.0" fill="#6b7280" font-size="7" text-anchor="middle">L</text>
 <circle cx="387.0" cy="254.0" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 387.0,248.0 A 6,6 0 0,0 387.0,260.0 Z" fill="#d97706"/>
+<circle cx="387.0" cy="254.0" r="6" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <text x="387.0" y="268.0" fill="#6b7280" font-size="7" text-anchor="middle">R</text>
-<circle cx="447.0" cy="256.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
-<path d="M 447.0,248.0 A 8,8 0 0,0 447.0,264.0 Z" fill="#d97706"/>
-<circle cx="447.0" cy="256.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+<circle cx="447.0" cy="256.0" r="8" fill="#059669"/>
 <circle cx="518.0" cy="256.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 518.0,248.0 A 8,8 0 0,0 518.0,264.0 Z" fill="#d97706"/>
 <circle cx="518.0" cy="256.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
@@ -156,7 +156,7 @@
 <path d="M 660.0,248.0 A 8,8 0 0,0 660.0,264.0 Z" fill="#d97706"/>
 <circle cx="660.0" cy="256.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <text x="737.0" y="257.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="827.0" y="257.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="827.0" y="257.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-04-11</text>
 <text x="14" y="291.0" fill="#111827" font-size="10" font-weight="500">Daytona</text>
 <circle cx="234.0" cy="287.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 234.0,279.0 A 8,8 0 0,0 234.0,295.0 Z" fill="#d97706"/>
@@ -268,7 +268,7 @@
 <circle cx="589.0" cy="442.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="442.0" r="8" fill="#059669"/>
 <text x="737.0" y="443.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="827.0" y="443.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="827.0" y="443.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-04-11</text>
 <text x="14" y="477.0" fill="#111827" font-size="10" font-weight="500">Fly.io Sprites</text>
 <circle cx="234.0" cy="473.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 234.0,465.0 A 8,8 0 0,0 234.0,481.0 Z" fill="#d97706"/>
@@ -302,7 +302,7 @@
 <circle cx="589.0" cy="504.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="504.0" r="8" fill="#059669"/>
 <text x="737.0" y="505.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="827.0" y="505.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="827.0" y="505.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-04-11</text>
 <text x="14" y="539.0" fill="#111827" font-size="10" font-weight="500">just-bash</text>
 <circle cx="234.0" cy="535.0" r="8" fill="#059669"/>
 <circle cx="305.0" cy="535.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
