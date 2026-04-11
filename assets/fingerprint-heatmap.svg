@@ -31,16 +31,16 @@
 <rect x="425" y="56" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
 <rect x="429" y="78" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
 <text x="461.0" y="71.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.1</text>
-<rect x="500" y="56" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
-<rect x="504" y="78" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
-<text x="536.0" y="71.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.2</text>
+<rect x="500" y="56" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
+<rect x="504" y="78" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
+<text x="536.0" y="71.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.3</text>
 <rect x="575" y="56" width="72" height="28" rx="4" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
 <text x="611.0" y="71.0" fill="#9ca3af" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">—</text>
 <rect x="650" y="56" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="654" y="78" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
 <text x="686.0" y="71.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
 <text x="765.0" y="71.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="855.0" y="71.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="855.0" y="71.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-04-11</text>
 <text x="14" y="105.0" fill="#111827" font-size="10" font-weight="500">Claude Code (local)</text>
 <rect x="200" y="87" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
 <rect x="204" y="109" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
@@ -98,10 +98,10 @@
 <text x="386.0" y="164.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.1</text>
 <rect x="425" y="149" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="429" y="171" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="461.0" y="164.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.1</text>
-<rect x="500" y="149" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<rect x="504" y="171" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="536.0" y="164.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
+<text x="461.0" y="164.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
+<rect x="500" y="149" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
+<rect x="504" y="171" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
+<text x="536.0" y="164.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.3</text>
 <rect x="575" y="149" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="579" y="171" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
 <text x="611.0" y="164.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
@@ -109,7 +109,7 @@
 <rect x="654" y="171" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
 <text x="686.0" y="164.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
 <text x="765.0" y="164.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="855.0" y="164.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="855.0" y="164.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-04-11</text>
 <text x="14" y="198.0" fill="#111827" font-size="10" font-weight="500">Codex CLI (agent phase)</text>
 <rect x="200" y="180" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
 <rect x="204" y="202" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
@@ -125,13 +125,14 @@
 <rect x="500" y="180" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="504" y="202" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
 <text x="536.0" y="195.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
-<rect x="575" y="180" width="72" height="28" rx="4" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
-<text x="611.0" y="195.0" fill="#9ca3af" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">—</text>
+<rect x="575" y="180" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
+<rect x="579" y="202" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
+<text x="611.0" y="195.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.2</text>
 <rect x="650" y="180" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="654" y="202" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
 <text x="686.0" y="195.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
 <text x="765.0" y="195.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="855.0" y="195.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="855.0" y="195.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-04-11</text>
 <text x="14" y="229.0" fill="#111827" font-size="10" font-weight="500">Copilot coding agent</text>
 <rect x="200" y="211" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
 <rect x="204" y="233" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
@@ -165,9 +166,9 @@
 <rect x="350" y="242" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="354" y="264" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
 <text x="386.0" y="257.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
-<rect x="425" y="242" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
-<rect x="429" y="264" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
-<text x="461.0" y="257.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.1</text>
+<rect x="425" y="242" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
+<rect x="429" y="264" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
+<text x="461.0" y="257.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.2</text>
 <rect x="500" y="242" width="72" height="28" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
 <text x="536.0" y="257.0" fill="#dc2626" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">0.0</text>
 <rect x="575" y="242" width="72" height="28" rx="4" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
@@ -176,7 +177,7 @@
 <rect x="654" y="264" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
 <text x="686.0" y="257.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.1</text>
 <text x="765.0" y="257.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="855.0" y="257.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="855.0" y="257.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-04-11</text>
 <text x="14" y="291.0" fill="#111827" font-size="10" font-weight="500">Daytona</text>
 <rect x="200" y="273" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="204" y="295" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
@@ -314,7 +315,7 @@
 <rect x="654" y="450" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
 <text x="686.0" y="443.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.1</text>
 <text x="765.0" y="443.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="855.0" y="443.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="855.0" y="443.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-04-11</text>
 <text x="14" y="477.0" fill="#111827" font-size="10" font-weight="500">Fly.io Sprites</text>
 <rect x="200" y="459" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
 <rect x="204" y="481" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
@@ -339,9 +340,9 @@
 <text x="765.0" y="474.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
 <text x="855.0" y="474.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
 <text x="14" y="508.0" fill="#111827" font-size="10" font-weight="500">Google Agent Sandbox</text>
-<rect x="200" y="490" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
-<rect x="204" y="512" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
-<text x="236.0" y="505.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.1</text>
+<rect x="200" y="490" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
+<rect x="204" y="512" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
+<text x="236.0" y="505.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.1</text>
 <rect x="275" y="490" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
 <rect x="279" y="512" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
 <text x="311.0" y="505.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.2</text>
@@ -361,7 +362,7 @@
 <rect x="654" y="512" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
 <text x="686.0" y="505.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
 <text x="765.0" y="505.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="855.0" y="505.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="855.0" y="505.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-04-11</text>
 <text x="14" y="539.0" fill="#111827" font-size="10" font-weight="500">just-bash</text>
 <rect x="200" y="521" width="72" height="28" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
 <text x="236.0" y="536.0" fill="#dc2626" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">0.0</text>
