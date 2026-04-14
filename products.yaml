@@ -810,42 +810,112 @@ products:
     L1:
       s: 2
       g: 1
-      note: Docker namespaces + cgroups; one container per Repl; shared host kernel on GCP VMs; Nix-based full Linux runtime.
-        S:2 — software-enforced via Linux namespaces with shared host kernel; no seccomp/Landlock/Seatbelt evidence to justify
-        S:3
+      note: Linux containers (one per Repl) on GCP VMs; shared host kernel; Nix-based
+        full Linux runtime; unprivileged containers (user namespaces disabled). S:2 —
+        software-enforced via Linux namespaces with shared host kernel. NEEDS REVIEW —
+        Stack Overflow evidence (Jan 2023) confirms seccomp-BPF filter is active in
+        Replit containers (/proc/self/status shows filter mode); likely Docker's default
+        profile (~44 blocked syscalls). If confirmed, L1 upgrades to S:3 (kernel-enforced,
+        irreversible syscall filtering). No Replit-published seccomp documentation or
+        custom profile evidence exists. G:1 — binary (container is either running or not).
+        Evidence — blog.replit.com/regional-goval (Linux containers), SO#75115099 (seccomp
+        active), github.com/openai/codex/issues/16018 (user namespaces disabled).
     L2:
       s: 3
       g: 2
-      note: 1–4 vCPU, 2–8 GB RAM, 2–50 GB disk; cgroups + btrfs quotas; kernel-enforced
+      note: cgroups enforced via Linux container runtime (standard for containers on GCP
+        VMs); btrfs quotas for disk (historically 1 GiB, now managed via Bottomless
+        Storage with virtual block devices). S:3 — kernel-enforced via cgroups (inferred
+        from container runtime; specific cgroups v1/v2 config not publicly documented).
+        G:2 — per-resource caps (CPU, memory, disk quotas). WARNING — billing-based
+        compute units (CPU seconds, RAM seconds) are business controls, not sandbox
+        resource caps per the taxonomy; they do not prevent fork bombs within a session.
+        Specific vCPU/RAM limits per plan not publicly documented with precision.
+        Evidence — blog.replit.com/replit-storage-the-next-generation (btrfs quotas),
+        docs.replit.com/billing/about-usage-based-billing (compute units).
     L3:
       s: 3
       g: 2
-      note: Persistent btrfs filesystem; Docker mount namespaces; Margarine/NBD from GCS for storage; not ephemeral. G:2 —
-        Docker mount namespaces provide path-level granularity (allowlist of mounted paths)
+      note: Persistent btrfs filesystem on virtual block devices via NBD protocol, backed
+        by Google Cloud Storage; Copy-on-Write at block device level enables instant
+        filesystem forks. Docker mount namespaces provide path-level isolation. Agent 4
+        tasks run in isolated CoW copies of the project filesystem. OS-level sandboxing
+        blocks Agent from editing critical files (git history, .replit config, Agent state
+        files) deterministically at process level. Immutable append-only git remote on
+        separate disk volume survives full filesystem deletion. S:3 — working-dir-only
+        mount via Docker mount namespaces; agent sees a full Linux filesystem, not just
+        project dir, so not S:4 (ephemeral root). G:2 — Docker mount namespaces provide
+        path-level granularity (allowlist of mounted paths). Evidence —
+        blog.replit.com/inside-replits-snapshot-engine (CoW, NBD, immutable git),
+        blog.replit.com/safe-vibe-coding (OS-level Agent file blocking),
+        blog.replit.com/introducing-agent-4-built-for-creativity (isolated task forks).
     L4:
       s: 2
       g: 1
-      note: Permissive egress by default; rate-limited; Cloud Armor DDoS protection; no user-configurable firewall or allowlist
+      note: Default egress is open (S:0 in default config). Opt-in firewalled mode
+        (firewalledreplit.com) blocks all internet except trusted package repos (pypi.org,
+        npmjs.org, maven.org); enforcement is "deep within our network" per docs. Rate-
+        limited egress in standard mode. Cloud Armor DDoS protection. Demonstrated ability
+        to block specific exfiltration endpoints at network level (Shai-Hulud worm
+        response, Sep 2025). No user-configurable egress allowlist or firewall. S:2 —
+        software-enforced in firewalled mode (opaque network-level blocking, not
+        bypassable from inside container); default mode is S:0. G:1 — binary (internet
+        on/off in firewalled mode; no per-domain or per-port user configuration).
+        Evidence — docs.replit.com/additional-resources/firewalled-replit (firewalled
+        mode), blog.replit.com/npm-supply-chain-attack (Shai-Hulud endpoint blocking),
+        replit.com/products/security (Cloud Armor).
     L5:
       s: 2
       g: 2
-      note: AES-256 encryption at rest; env var injection for secrets; secret scanner; SOC 2 Type 2; secrets visible inside
-        container
+      note: Replit Secrets — encrypted env vars injected into container; secrets visible
+        as standard environment variables inside the container (os.environ, process.env).
+        Prompt scanning intercepts API keys pasted into Agent prompts and redirects to
+        Secrets tool. Secret values hidden from forked Repls. Agent restricted to
+        development database only (cannot access production). S:2 — env-var filtering
+        (only configured secrets forwarded as env vars); secrets are visible inside the
+        container, so not S:3+. G:2 — per-secret allowlist (user chooses which secrets
+        to create and inject). NOTE — AES-256 encryption at rest and TLS in transit
+        protect data from external attackers, not from the agent; they are not L5
+        mechanisms per the taxonomy. SOC 2 Type II is an organizational control, not a
+        sandbox enforcement mechanism. Evidence — docs.replit.com secrets docs (env var
+        injection, visibility), blog.replit.com/safe-vibe-coding (prompt scanning),
+        blog.replit.com/inside-replits-snapshot-engine (dev/prod database split).
     L6:
       s: null
       g: null
-      note: Seccomp profile with ~44 blocked syscalls; capabilities dropped; runs as non-root runner user. Scored — (not addressed)
-        because seccomp/capability enforcement is L1 (compute isolation), not L6 (action governance). No runtime policy engine
-        governs what the agent does with the access it has
+      note: No runtime policy engine governs what the agent does with the access it has.
+        Scored — (not addressed). NOTE — seccomp profile and dropped capabilities are L1
+        (compute isolation), not L6 (action governance). OS-level Agent file blocking
+        (git history, .replit, Agent state) is L3 (filesystem boundary), not L6. Decision-
+        time guidance (classifier injecting situational instructions) is agent alignment,
+        not sandbox enforcement. Dev/prod database split is L5 (credential scoping). Pre-
+        deployment Semgrep scanning is a code quality gate, not runtime action governance.
+        None of these constitute a runtime policy engine that governs what the agent does
+        with the access it has at a semantic level. Evidence — blog.replit.com/safe-vibe-
+        coding (file blocking), blog.replit.com/decision-time-guidance (classifier),
+        blog.replit.com/inside-replits-snapshot-engine (dev/prod split).
     L7:
       s: 2
       g: 2
-      note: Console logs; resource monitor; enterprise audit logging; no OTel or Logpush integration. G:2 — console logs and
-        enterprise audit provide per-command granularity
-  notes: 'L6 now — (seccomp/capabilities are L1, not L6). Persistent filesystem means T5 relies on L1+L3+L6 — with L6 now
-    unaddressed, T5 drops to partial. L4 permissive egress is weakest link — rate-limited but no allowlist. Complements: Egress
-    allowlist for L4 upgrade'
-  last_reviewed: null
+      note: LangSmith integration for full Agent execution tracing (hundreds of steps per
+        trace). Enterprise audit logs via WorkOS (SCIM-enabled orgs only) with SIEM
+        streaming to Datadog, Splunk, S3, webhooks. Audit events focus on org-level
+        actions (user lifecycle, provisioning, role changes), not per-Agent-action audit
+        trails. Console logs and resource monitor available to all users. Security Center
+        for Enterprise with CVE detection and SBOM export. S:2 — command-level audit
+        (LangSmith traces every Agent step; enterprise audit logs track org events). G:2
+        — per-command granularity via LangSmith traces and enterprise audit logs.
+        Evidence — blog.langchain.com/customers-replit (LangSmith), docs.replit.com audit
+        logs docs (WorkOS, SIEM streaming), blog.replit.com/2025-replit-in-review
+        (Security Center, SBOM).
+  notes: 'L6 — (not addressed): seccomp/capabilities are L1, Agent file blocking is L3,
+    decision-time guidance is agent alignment, dev/prod split is L5. Persistent filesystem
+    means T5 relies on L1+L3+L6 — with L6 unaddressed, T5 is partial. L4 default-open
+    egress is weakest link — firewalled mode exists but is opt-in and education-focused.
+    NEEDS REVIEW — seccomp-BPF confirmed active via SO evidence; if verified as kernel-
+    enforced, L1 upgrades to S:3 and T6 upgrades from partial to addressed. Complements:
+    egress allowlist for L4 upgrade, runtime policy engine for L6.'
+  last_reviewed: '2026-04-14'
   evidence_level: docs
   reviewed_by: null
 - name: Deno Sandbox

@@ -543,7 +543,7 @@
 <rect x="654" y="760" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
 <text x="686.0" y="753.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
 <text x="765.0" y="753.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
-<text x="855.0" y="753.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">Pending Review</text>
+<text x="855.0" y="753.0" fill="#6b7280" font-size="8" text-anchor="middle" dominant-baseline="middle">2026-04-14</text>
 <text x="14" y="787.0" fill="#111827" font-size="10" font-weight="500">Stakpak Warden</text>
 <rect x="200" y="769" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="204" y="791" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
