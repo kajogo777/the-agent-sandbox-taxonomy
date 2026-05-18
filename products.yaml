@@ -290,6 +290,91 @@ products:
   last_reviewed: null
   evidence_level: docs
   reviewed_by: null
+- name: Docker Container Runtime
+  portability:
+  - linux
+  - mac
+  - docker
+  layers:
+    L1:
+      s: 2
+      g: 1
+      note: 'Linux namespaces (PID/mount/net/user/IPC/UTS) + cgroups + default seccomp profile (~44 syscalls blocked out of 300+)
+        + default capability set dropped to a minimal subset (CHOWN, DAC_OVERRIDE, FSETID, FOWNER, MKNOD, NET_RAW, SETGID, SETUID,
+        SETFCAP, SETPCAP, NET_BIND_SERVICE, SYS_CHROOT, KILL, AUDIT_WRITE). S:2 — software-enforced via shared host kernel; container
+        escape via kernel CVE remains the well-known risk class (e.g., io_uring, AF_VSOCK historically blocked due to escapes).
+        Not S:3 because shared kernel surface is large despite seccomp filtering. G:1 — binary: container is either running with
+        defaults or not. WARNING: ``--privileged``, ``--cap-add SYS_ADMIN``, ``--security-opt seccomp=unconfined``, ``--pid=host``,
+        ``--userns=host`` all collapse L1 to S:0 — defaults matter, escape hatches exist. macOS/Windows: Docker Desktop runs containers
+        inside a managed Linux VM (LinuxKit), which adds a hypervisor boundary outside the container — but the container-vs-VM
+        boundary is still S:2; the VM protects the user host, not the agent inside the container. Evidence: Docker engine docs (security/seccomp,
+        security/capabilities), moby/moby source. NEEDS REVIEW: hands-on bypass testing not performed'
+    L2:
+      s: 3
+      g: 2
+      note: 'cgroups v2 enforced by host kernel; configurable via ``--cpus``, ``--memory``, ``--memory-swap``, ``--pids-limit``,
+        ``--ulimit``, ``--blkio-weight``, ``--device-read-bps``. S:3 — kernel-enforced and irreversible from inside the sandbox
+        (an agent with root in the container cannot raise its own cgroup limits). G:2 — per-resource caps (CPU, memory, PIDs,
+        block I/O, file descriptors) set at run time. WARNING: defaults are unlimited — operator must set flags. Without flags,
+        a fork bomb or memory leak inside the container will exhaust host resources. Score reflects what the runtime *can* enforce
+        when configured. Evidence: Docker run reference, cgroups v2 kernel docs'
+    L3:
+      s: 2
+      g: 2
+      note: 'Mount namespace + image-layer overlay filesystem; container sees only the image rootfs plus explicitly bind-mounted
+        paths. No host paths visible by default — protection is by *absence* (host FS not mounted) rather than by allowlist enforcement.
+        S:2 — software-enforced (mount namespace separation), capped at S:2 because the operator can trivially mount the host
+        with ``-v /:/host`` or any sensitive path; no protection against operator misconfiguration and no kernel-level allowlist
+        of sensitive paths. G:2 — per-mount control (read-only, bind, tmpfs). WARNING: ``-v /var/run/docker.sock:/var/run/docker.sock``
+        gives container full host control via the Docker API; common in CI and dev workflows. Hardened mode (``--read-only`` root
+        + tmpfs + no host bind mounts) does not change the score — still S:2 software-enforced. Evidence: Docker storage docs,
+        mount namespace kernel docs'
+    L4:
+      s: 0
+      g: 0
+      note: 'Default bridge network: unrestricted outbound — containers can reach internet, RFC1918, loopback, and cloud metadata
+        endpoints (169.254.169.254 reachable from default bridge). No filtering, no allowlist, no MITM. S:0 — the layer operates
+        (containers have a network interface) but provides no enforcement by default. G:0 — no policy mechanism in the runtime.
+        Operator must add iptables rules, ``--network none``, ``--internal`` networks, or external tools (Cilium, NetworkPolicy
+        on K8s) to get any L4 enforcement. Even with ``--network none``, that is binary off — would score S:4/G:1 in that specific
+        config, but it is not the default. Score reflects default behavior per scoring rules ("Default off features score the
+        default"). WARNING: this is the most common misconfiguration — agents in plain Docker can exfiltrate secrets, hit cloud
+        metadata, scan internal networks. Evidence: Docker network docs (engine/network/, engine/network/drivers/bridge/)'
+    L5:
+      s: 0
+      g: 0
+      note: 'Env vars passed via ``-e`` / ``--env-file`` and bind-mounted secret files are visible inside the container with no
+        filtering, transformation, or proxying. ``docker run -e AWS_ACCESS_KEY_ID=... -e ANTHROPIC_API_KEY=...`` exposes credentials
+        directly to the agent process. S:0 — no credential management mechanism in the runtime. Docker secrets (``docker secret``)
+        only applies to Swarm mode and still mounts the secret as a tmpfs file inside the container — visible to the agent. G:0
+        — no policy mechanism. Hardened mode (e.g., external secret manager + injecting only at startup) does not change the
+        sandbox score; it shifts the secret out of env vars but does not prevent the agent from reading the mounted file. Evidence:
+        Docker run reference, Docker secrets docs'
+    L6:
+      s: null
+      g: null
+      note: ''
+    L7:
+      s: 1
+      g: 1
+      note: '``docker logs`` (stdout/stderr capture), ``docker events`` (lifecycle events: create/start/stop/die), ``docker stats``
+        (resource usage). Session-level only — no command-level audit, no syscall trace, no file-operation audit, no MCP/tool-call
+        visibility. S:1 — session-level logs (start/stop, exit codes, stdio). G:1 — coarse-grained, no per-action filtering. Hardened
+        mode requires external tooling (Falco, auditd, OpenTelemetry sidecar) to reach S:2+ — score reflects the runtime alone.
+        Evidence: Docker logging drivers reference, docker events command reference'
+  notes: 'Scope: plain Docker Engine on Linux (and Docker Desktop on macOS/Windows, where containers run inside a managed LinuxKit
+    VM). This entry scores the *container runtime as a generic sandbox primitive* with default flags — distinct from the AI-specific
+    "Docker Sandbox" product (microVM + credential proxy). Gaps: L4 wide open by default (exfiltration is one curl away), L5
+    unaddressed (secrets sit in env vars), L6 unaddressed (no semantic governance), L7 session-level only. The most common misconfiguration
+    pattern in the wild: running an agent in default Docker thinking namespaces alone are a sandbox. Hardened deltas (operator
+    must configure): ``--network none`` → L4 S:4/G:1; custom seccomp + ``--cap-drop ALL`` → L1 S:3/G:2; ``--read-only`` root +
+    tmpfs → L3 S:3/G:2 (still software-enforced). Even fully hardened, plain Docker does not provide L5 or L6 — those require
+    external tools. Complements: network proxy / NetworkPolicy (L4), credential proxy (L5), governance engine like Stakpak Warden
+    or StrongDM Leash (L6), audit pipeline like Falco (L7). T1 risk: L4=0 + L5=0 means data exfiltration is essentially unmitigated
+    in default config'
+  last_reviewed: '2026-05-17'
+  evidence_level: docs
+  reviewed_by: null
 - name: Google Agent Sandbox
   portability:
   - cloud-managed
