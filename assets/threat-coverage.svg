@@ -88,10 +88,14 @@
 <circle cx="305.0" cy="163.0" r="8" fill="#059669"/>
 <circle cx="365.0" cy="161.0" r="6" fill="#059669"/>
 <text x="365.0" y="175.0" fill="#6b7280" font-size="7" text-anchor="middle">L</text>
-<circle cx="387.0" cy="161.0" r="6" fill="#059669"/>
+<circle cx="387.0" cy="161.0" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 387.0,155.0 A 6,6 0 0,0 387.0,167.0 Z" fill="#d97706"/>
+<circle cx="387.0" cy="161.0" r="6" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <text x="387.0" y="175.0" fill="#6b7280" font-size="7" text-anchor="middle">R</text>
 <circle cx="447.0" cy="163.0" r="8" fill="#059669"/>
-<circle cx="518.0" cy="163.0" r="8" fill="#059669"/>
+<circle cx="518.0" cy="163.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 518.0,155.0 A 8,8 0 0,0 518.0,171.0 Z" fill="#d97706"/>
+<circle cx="518.0" cy="163.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="589.0" cy="163.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
 <path d="M 589.0,155.0 A 8,8 0 0,0 589.0,171.0 Z" fill="#d97706"/>
 <circle cx="589.0" cy="163.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
@@ -183,10 +187,14 @@
 <circle cx="305.0" cy="318.0" r="8" fill="#059669"/>
 <circle cx="365.0" cy="316.0" r="6" fill="#059669"/>
 <text x="365.0" y="330.0" fill="#6b7280" font-size="7" text-anchor="middle">L</text>
-<circle cx="387.0" cy="316.0" r="6" fill="#059669"/>
+<circle cx="387.0" cy="316.0" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 387.0,310.0 A 6,6 0 0,0 387.0,322.0 Z" fill="#d97706"/>
+<circle cx="387.0" cy="316.0" r="6" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <text x="387.0" y="330.0" fill="#6b7280" font-size="7" text-anchor="middle">R</text>
 <circle cx="447.0" cy="318.0" r="8" fill="#059669"/>
-<circle cx="518.0" cy="318.0" r="8" fill="#059669"/>
+<circle cx="518.0" cy="318.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 518.0,310.0 A 8,8 0 0,0 518.0,326.0 Z" fill="#d97706"/>
+<circle cx="518.0" cy="318.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="589.0" cy="318.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="318.0" r="8" fill="#059669"/>
 <text x="737.0" y="319.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>
@@ -318,10 +326,14 @@
 <circle cx="305.0" cy="535.0" r="8" fill="#059669"/>
 <circle cx="365.0" cy="533.0" r="6" fill="#059669"/>
 <text x="365.0" y="547.0" fill="#6b7280" font-size="7" text-anchor="middle">L</text>
-<circle cx="387.0" cy="533.0" r="6" fill="#059669"/>
+<circle cx="387.0" cy="533.0" r="6" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 387.0,527.0 A 6,6 0 0,0 387.0,539.0 Z" fill="#d97706"/>
+<circle cx="387.0" cy="533.0" r="6" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <text x="387.0" y="547.0" fill="#6b7280" font-size="7" text-anchor="middle">R</text>
 <circle cx="447.0" cy="535.0" r="8" fill="#059669"/>
-<circle cx="518.0" cy="535.0" r="8" fill="#059669"/>
+<circle cx="518.0" cy="535.0" r="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+<path d="M 518.0,527.0 A 8,8 0 0,0 518.0,543.0 Z" fill="#d97706"/>
+<circle cx="518.0" cy="535.0" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
 <circle cx="589.0" cy="535.0" r="8" fill="#059669"/>
 <circle cx="660.0" cy="535.0" r="8" fill="#059669"/>
 <text x="737.0" y="536.0" fill="#d97706" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="middle">Docs</text>

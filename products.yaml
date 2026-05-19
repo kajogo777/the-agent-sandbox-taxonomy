@@ -412,18 +412,27 @@ products:
       note: 'Workload Identity Federation: ephemeral, least-privilege IAM per sandbox; network blocks metadata server; ADK
         PII redaction; OAuth token delegation'
     L6:
-      s: 2
-      g: 3
-      note: ADK callbacks validate model/tool calls before/after execution; in-tool guardrails; Model Armor plugin; Gemini-as-Judge
-        via callbacks
+      s: 1
+      g: 2
+      note: 'ADK callbacks validate model/tool calls before/after execution; in-tool guardrails; Model Armor plugin; Gemini-as-Judge
+        via callbacks. S:1 — cooperative: ADK callbacks govern ADK-mediated tool calls only, not arbitrary shell execution
+        within the sandbox; consistent with Claude Code (local) L6:1.2 reasoning ("PreToolUse hooks are framework-specific...
+        not semantic action governance"). Gemini-as-Judge is agent alignment (an LLM evaluating outputs), explicitly excluded
+        from sandbox scoring per SKILL.md ("Sandboxes Are Orthogonal to Agent Alignment"). Model Armor is a runtime safety/policy
+        plugin that may provide genuine sandbox-side enforcement but cannot be verified from public docs alone. G:2 — allowlist/blocklist:
+        ADK callback configuration is per-tool but not a structured policy engine like Cedar/OPA. NEEDS REVIEW: hands-on verification
+        whether Model Armor enforces at the sandbox boundary or at the framework layer — if sandbox-enforced as a runtime gate,
+        L6 may upgrade to S:2'
     L7:
       s: 2
       g: 2
       note: K8s logging (Cloud Logging on GKE); ADK evaluation and tracing; Cloud Audit Logs; Cloud Monitoring; pod-level
         stdout/stderr
-  notes: 'Strong coverage across all layers. With Kata (L1:4), dependent layers are no longer capped. With gVisor default (L1:3),
-    layers enforced inside the sandbox are capped at S:3. L4 is kernel-enforced (S:3) but packet-level only (G:2) — cannot
-    inspect HTTP content. Complements: MITM proxy for L4 G:3 content-aware filtering'
+  notes: 'Strong coverage across most layers. With Kata (L1:4), dependent layers are no longer capped. With gVisor default
+    (L1:3), layers enforced inside the sandbox are capped at S:3. L4 is kernel-enforced (S:3) but packet-level only (G:2) —
+    cannot inspect HTTP content. L6 downgraded from S:2 to S:1 (May 2026 audit): ADK callbacks govern only ADK-mediated tool
+    calls (framework, not sandbox), Gemini-as-Judge is agent alignment, Model Armor unverified. Complements: MITM proxy for
+    L4 G:3 content-aware filtering, runtime policy engine (Cedar/OPA) for L6 upgrade'
   last_reviewed: '2026-04-11'
   evidence_level: docs
   reviewed_by: null
@@ -1076,16 +1085,23 @@ products:
       g: 2
       note: Env vars + secrets (write-only in dashboard); 3 deployment contexts; SOC 2 Type 1; secrets visible at runtime
     L6:
-      s: 2
-      g: 1
-      note: No subprocess, FFI, or process.exit; fixed capability set enforced by runtime; CLI permission flags don't apply
-        in Deploy
+      s: null
+      g: null
+      note: 'V8 isolate runtime: no subprocess, no FFI, no process.exit; fixed capability set enforced by the Deno Deploy runtime;
+        CLI permission flags don''t apply in Deploy. Scored — (not addressed) because these are L1 compute isolation features
+        (the runtime does not expose subprocess/FFI APIs to the isolate), not L6 action governance per SKILL.md: "L6 is not L1.
+        Kernel-level syscall filtering... capabilities... restricts what system calls a process can make — that is compute isolation
+        (L1), not action governance". Consistent with how just-bash and Pydantic Monty (both in-process interpreter sandboxes
+        with no subprocess API) correctly score L6: —. No runtime policy engine governs what the deployment does with the access
+        it has at a semantic level'
     L7:
       s: 2
       g: 3
       note: Native OTel support; auto-instrumentation; log streaming; immutable deploy IDs for traceability
   notes: 'V8 isolate model with process-level namespaces. L4 fetch() unrestricted is the weakest link — no domain filtering.
-    Read-only FS (L3) is strong. Complements: Egress allowlist for L4 upgrade'
+    Read-only FS (L3) is strong. L6 reclassified to — (May 2026 audit): "no subprocess/FFI/process.exit" is L1 compute isolation
+    (the runtime does not expose those APIs), not L6 action governance — same pattern as just-bash and Pydantic Monty which
+    correctly score L6: —. Complements: Egress allowlist for L4 upgrade, runtime policy engine for L6'
   last_reviewed: null
   evidence_level: docs
   reviewed_by: null
@@ -1126,9 +1142,16 @@ products:
         credentials for different services. Standard Workers: write-only secrets per-Worker scope (S:2, G:2). Scored at Dynamic
         Workers configured maximum. Evidence: Dynamic Workers docs (egress-control), SDK reference'
     L6:
-      s: 2
-      g: 2
-      note: eval() disabled; capability-based bindings model (explicit resource access); no SharedArrayBuffer; software-enforced
+      s: null
+      g: null
+      note: 'V8 isolate runtime: eval() disabled, capability-based bindings model (explicit resource access via env bindings),
+        no SharedArrayBuffer. Scored — (not addressed) because these are L1 compute isolation features (the V8 isolate runtime
+        does not expose those APIs), not L6 action governance per SKILL.md: "L6 is not L1. Kernel-level syscall filtering...
+        capabilities... restricts what system calls a process can make — that is compute isolation (L1), not action governance".
+        Same mechanism class as just-bash Defense-in-Depth Box and Pydantic Monty interpreter capability model — both correctly
+        score L6: —. The Worker can still perform any action available within its bindings (fetch, KV, R2, D1, queues) without
+        runtime-level governance of what it does with that access. No policy engine, no command blocklist, no declarative-only
+        mode'
     L7:
       s: 2
       g: 3
@@ -1136,8 +1159,10 @@ products:
         log retention
   notes: 'T6 partial: L1:2 (shared process, not kernel/hardware isolation) caps privilege escalation defense. No filesystem
     is a structural strength (L3). Dynamic Workers (open beta Mar 2026) add globalOutbound egress control (L4 G:3) and credential
-    injection via HttpGateway (L5 S:4). Standard Workers retain original scores. Complements: Stronger compute isolation for
-    L1 upgrade'
+    injection via HttpGateway (L5 S:4). Standard Workers retain original scores. L6 reclassified to — (May 2026 audit): "eval()
+    disabled, capability bindings, no SharedArrayBuffer" is L1 compute isolation (V8 isolate runtime API absence), not L6 action
+    governance — same pattern as just-bash and Pydantic Monty which correctly score L6: —. Complements: Stronger compute isolation
+    for L1 upgrade, runtime policy engine for L6'
   last_reviewed: '2026-04-11'
   evidence_level: docs
   reviewed_by: null

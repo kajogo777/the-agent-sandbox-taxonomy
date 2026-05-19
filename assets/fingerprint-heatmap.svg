@@ -102,9 +102,8 @@
 <rect x="500" y="149" width="72" height="28" rx="4" fill="#ecfdf5" stroke="#34d399" stroke-width="1"/>
 <rect x="504" y="171" width="64.0" height="3" rx="1.5" fill="#34d399" opacity="0.6"/>
 <text x="536.0" y="164.0" fill="#059669" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">4.3</text>
-<rect x="575" y="149" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<rect x="579" y="171" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="611.0" y="164.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
+<rect x="575" y="149" width="72" height="28" rx="4" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
+<text x="611.0" y="164.0" fill="#9ca3af" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">—</text>
 <rect x="650" y="149" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="654" y="171" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
 <text x="686.0" y="164.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
@@ -217,9 +216,8 @@
 <rect x="500" y="304" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="504" y="326" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
 <text x="536.0" y="319.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
-<rect x="575" y="304" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<rect x="579" y="326" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="611.0" y="319.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.1</text>
+<rect x="575" y="304" width="72" height="28" rx="4" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
+<text x="611.0" y="319.0" fill="#9ca3af" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">—</text>
 <rect x="650" y="304" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="654" y="326" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
 <text x="686.0" y="319.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
@@ -376,9 +374,9 @@
 <rect x="500" y="521" width="72" height="28" rx="4" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1"/>
 <rect x="504" y="543" width="48.0" height="3" rx="1.5" fill="#a78bfa" opacity="0.6"/>
 <text x="536.0" y="536.0" fill="#7c3aed" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">3.3</text>
-<rect x="575" y="521" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
-<rect x="579" y="543" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
-<text x="611.0" y="536.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.3</text>
+<rect x="575" y="521" width="72" height="28" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
+<rect x="579" y="543" width="16.0" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
+<text x="611.0" y="536.0" fill="#d97706" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">1.2</text>
 <rect x="650" y="521" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="654" y="543" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
 <text x="686.0" y="536.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
