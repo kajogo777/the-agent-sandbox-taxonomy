@@ -387,8 +387,9 @@
 <text x="14" y="570.0" fill="#111827" font-size="10" font-weight="500">just-bash</text>
 <rect x="200" y="552" width="72" height="28" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
 <text x="236.0" y="567.0" fill="#dc2626" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">0.0</text>
-<rect x="275" y="552" width="72" height="28" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
-<text x="311.0" y="567.0" fill="#dc2626" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">0.0</text>
+<rect x="275" y="552" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
+<rect x="279" y="574" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
+<text x="311.0" y="567.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>
 <rect x="350" y="552" width="72" height="28" rx="4" fill="#eff6ff" stroke="#60a5fa" stroke-width="1"/>
 <rect x="354" y="574" width="32.0" height="3" rx="1.5" fill="#60a5fa" opacity="0.6"/>
 <text x="386.0" y="567.0" fill="#2563eb" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="middle">2.2</text>

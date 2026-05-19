@@ -241,7 +241,8 @@ products:
       note: Instance state tracking with timestamps exists (session-level logs). Audit trail and metrics monitoring both ON
         ROADMAP — roadmap features not scored
   notes: 'Gaps: L4 (no egress filtering), L5 (no secrets management), L6 (no governance), L7 (roadmap only). Not designed
-    as agent sandbox'
+    as agent sandbox. WARNING: L4:1 + L5:1 = T1 exfiltration risk if used as one (consistent with packnplay/Devin annotation
+    pattern)'
   last_reviewed: null
   evidence_level: docs
   reviewed_by: null
@@ -484,7 +485,10 @@ products:
     L2:
       s: 0
       g: 0
-      note: No documented resource limits beyond Docker defaults
+      note: 'No documented resource limits beyond Docker defaults; standard Docker container with no ``--cpus``, ``--memory``,
+        or ``--pids-limit`` configuration shipped by default. S:0 — no resource enforcement mechanism in the product itself;
+        operator must add Docker resource flags externally to get any L2 cap. Without flags, fork bomb or memory leak inside
+        agent container exhausts host resources. G:0 — no policy mechanism. Evidence: README, project Dockerfile'
     L3:
       s: 2
       g: 2
@@ -575,7 +579,10 @@ products:
     L2:
       s: 0
       g: 0
-      note: No documented resource limits; Docker defaults only
+      note: 'No documented resource limits in the product itself; relies entirely on Docker defaults (which are unlimited unless
+        operator passes ``--cpus``/``--memory``/``--pids-limit``). S:0 — product provides no resource enforcement mechanism;
+        operator must configure Docker flags externally. Fork bomb or memory leak inside agent container will exhaust host resources
+        in default config. G:0 — no policy mechanism. Evidence: README, project configuration'
     L3:
       s: 2
       g: 1
@@ -1426,13 +1433,17 @@ products:
         no granularity. Evidence: source code (src/security/blocked-globals.ts, src/security/defense-in-depth-box.ts), README.
         README explicitly recommends Vercel Sandbox for full VM isolation'
     L2:
-      s: 0
-      g: 0
-      note: 'In-process execution limits exist (maxCallDepth:100, maxCommandCount:10000, maxLoopIterations: 10000, maxStringLength:10MB,
-        maxOutputSize:10MB, maxFileDescriptors:1024, timeouts via AbortSignal) but enforcement depends on L1 boundary (interpreter
-        not being escaped). With L1:0, a prototype pollution or interpreter escape bypasses all limits. S:0 — no effective
-        host resource enforcement; in-process limits are not host resource enforcement (cgroups, hypervisor). Consistent with
-        Leash/Warden/packnplay which also score L2:0. G:0 — no effective granularity. Evidence: source code (src/limits.ts)'
+      s: 2
+      g: 2
+      note: 'In-process resource tracking via TypeScript runtime: maxCallDepth:100, maxCommandCount:10000, maxLoopIterations:10000,
+        maxStringLength:10MB, maxOutputSize:10MB, maxFileDescriptors:1024, timeouts via AbortSignal. Limits checked at statement
+        boundaries by the host interpreter; sandboxed bash code cannot by[REDACTED_SECRET:url-beta-bypass-clean:rerolled]e (checks are in TypeScript, not in interpreted
+        bash). S:2 — software-enforced: matches SKILL.md mechanism table entry "In-interpreter resource tracking" (S:2, G:2);
+        consistent with Pydantic Monty L2:2.2 (same in-process interpreter pattern). Not S:3 because enforcement is application-level,
+        not kernel-level (cgroups, hypervisor). Interpreter escape via prototype pollution would by[REDACTED_SECRET:url-beta-bypass-clean:rerolled] limits but that is
+        a CVE-class attack on the runtime, not cooperative by[REDACTED_SECRET:url-beta-bypass-clean:rerolled] — same risk class as a hypervisor CVE escaping Firecracker.
+        G:2 — per-resource: maxCallDepth, maxCommandCount, maxLoopIterations, maxStringLength, maxOutputSize, maxFileDescriptors,
+        timeout independently configurable. Evidence: source code (src/limits.ts)'
     L3:
       s: 2
       g: 2
