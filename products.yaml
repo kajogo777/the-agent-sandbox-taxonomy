@@ -50,9 +50,14 @@ products:
   - docker
   layers:
     L1:
-      s: 2
+      s: 4
       g: 1
-      note: Sysbox container runtime (NOT Kata); user-namespace isolation; shared host kernel
+      note: 'Kata Containers supported as opt-in for stronger isolation (hardware-isolated microVM per workload via KVM).
+        S:4 — structural via Kata, scored at configured maximum per AST rule "score the strongest available mode but note
+        the weakest" (consistent with Google Agent Sandbox L1, Vercel L5 conventions). G:1 — binary: sandbox is either running
+        or not. WARNING: default runtime is Sysbox (user-namespace container with shared host kernel, S:2); Kata requires
+        explicit operator opt-in. Most deployments in practice run on the Sysbox default. Evidence: Daytona docs, 2026 sandbox
+        comparisons (Northflank, StartupHub.ai)'
     L2:
       s: 2
       g: 2
@@ -79,9 +84,10 @@ products:
       s: 2
       g: 2
       note: Comprehensive audit logs; 12-month retention, tamper-protected; OTel experimental; SOC 2 Type I
-  notes: 'Gaps: L1 (shared kernel), L5 (env var delivery), L6 (no governance). Complements: Kata for L1 upgrade, credential
-    proxy for L5, Warden/Leash for L6'
-  last_reviewed: null
+  notes: 'L1 scored at configured maximum (Kata = S:4) per AST rule; default deployment uses Sysbox (S:2) which caps dependent
+    layers in practice. Gaps: L5 (env var delivery), L6 (no governance). Complements: Credential proxy for L5, Warden/Leash
+    for L6'
+  last_reviewed: '2026-06-10'
   evidence_level: docs
   reviewed_by: null
 - name: Modal
@@ -456,10 +462,15 @@ products:
       note: Working directory bind-mounted (read/write, changes reflect on host); optional agent config mounts. G:2 — working-dir
         mount with optional config mounts constitutes a path allowlist
     L4:
-      s: 2
+      s: 3
       g: 3
-      note: Kernel-level network interception in leash container; Cedar policies evaluate traffic before connection; context-aware
-        rules; capped by L1:2
+      note: 'Kernel-level network interception in the leash container (separate from the agent container); Cedar policies
+        evaluate traffic before connection; context-aware rules. S:3 — kernel-enforced interception in a sidecar process
+        external to the agent container; per AST rule, enforcement outside the sandbox is not capped by L1:2 (same logic
+        as L5 external credential proxies). The agent cannot reconfigure rules from inside its own container. NEEDS REVIEW:
+        verify the agent container is unprivileged (no CAP_NET_RAW/CAP_NET_ADMIN); if the agent could load conflicting eBPF
+        or iptables rules from inside its container, the score should drop to S:2. Evidence: Leash architecture docs (two-container
+        model)'
     L5:
       s: 1
       g: 1
@@ -504,10 +515,14 @@ products:
       note: Volume mounts with explicit read-only option; cloud credentials mountable as read-only; standard Docker namespace
         isolation
     L4:
-      s: 2
+      s: 3
       g: 3
-      note: Transparent proxy with Cedar policies; every network request routed through proxy; deterministic guardrails; capped
-        by L1:2
+      note: 'Transparent proxy with Cedar policies; every network request routed through proxy outside the agent container;
+        deterministic guardrails. S:3 — proxy runs external to the agent container in a hardened sidecar; the agent container
+        is hardened so the agent cannot modify the sidecar iptables (vendor-confirmed June 2026). Per AST rule, enforcement
+        outside the sandbox is not capped by L1:2 (same logic as L5 placeholder substitution in the same product). The agent
+        cannot reconfigure rules from inside its own container. G:3 — Cedar policy engine evaluates per-request content. Evidence:
+        Warden architecture (CLI proxy + container manager), vendor confirmation of agent-container hardening'
     L5:
       s: 3
       g: 3
@@ -552,9 +567,11 @@ products:
         (G:3 requires HTTP/body inspection)
     L4:
       s: 3
-      g: 2
-      note: Network blocked by default (--net-block); allowlist-based host filtering via local proxy; seccomp blocks raw socket
-        creation; proxy enforcement outside sandbox
+      g: 3
+      note: 'Network blocked by default (--net-block); allowlist-based host filtering via local proxy; seccomp blocks raw socket
+        creation; proxy enforcement outside sandbox. v0.60 (June 2026) added fine-grained method+path restrictions in allow_domain
+        — content-aware HTTP filtering. S:3 — kernel-enforced (seccomp blocks raw sockets, irreversible). G:3 — content-aware
+        per AST rule (HTTP method + URL path inspection, comparable to Vercel L4 matchers)'
     L5:
       s: 3
       g: 3
@@ -567,13 +584,21 @@ products:
       note: Destructive syscalls (unlink, rmdir) blocked at kernel level; seccomp-BPF supervisor intercepts syscalls; fd-injection
         after user approval; built-in audited profiles; dry-run mode
     L7:
-      s: 3
+      s: 2
       g: 3
-      note: Sigstore cryptographic audit chain; DSSE envelopes with in-toto/SLSA attestations; keyed or keyless signing (OIDC
-        + Fulcio + Rekor); instruction files cryptographically signed
-  notes: 'ALL restrictions IRREVERSIBLE. Only gap is L2 (resource capping). Highest per-layer scores among all local-first
-    tools. Complements: cgroups/ulimits wrapper for L2'
-  last_reviewed: null
+      note: 'DSSE-signed session audit roots + Merkle hash-chain of recorded events; keyed signing via --audit-sign-key;
+        local tamper-evidence (chain detects modification if signing key not compromised). S:2 — command-level audit with
+        local signing. NOT S:3 because per nono own docs: "Without an external timestamp, transparency log, or other anchor,
+        this remains host-local attestation material rather than a globally witnessed timestamped proof" — no Sigstore/Fulcio/Rekor/SLSA
+        integration despite earlier scoring claim. Protects against the agent (which cannot reach the signing key) but not
+        against host compromise. G:3 — per-event hash chain with structured metadata. Evidence: docs/cli/internals/security-model.mdx,
+        docs/cli/features/audit.mdx'
+  notes: 'ALL L1/L3/L4/L5/L6 restrictions IRREVERSIBLE. Only gap is L2 (resource capping). Strong per-layer scores among
+    local-first tools; L7 corrected from S:3 to S:2 (June 2026): audit chain is local DSSE+Merkle, not externally anchored
+    (no Sigstore/Fulcio/Rekor despite earlier claim). v0.60 (June 2026) added method+path-aware proxy filtering (L4 G:3).
+    v0.58 added Bitwarden credential source via bw:// URI scheme (L5). Complements: cgroups/ulimits wrapper for L2, external
+    audit anchor (e.g., true Sigstore integration) for L7 upgrade'
+  last_reviewed: '2026-06-10'
   evidence_level: docs
   reviewed_by: null
 - name: packnplay
@@ -617,8 +642,9 @@ products:
       g: 0
       note: No logging beyond Docker native; no audit trail, no session replay
   notes: 'WARNING: L4:0 with credentials present is a T1 exfiltration risk. Designed for developer convenience, not security.
-    Complements: Network proxy, governance overlay, nono inside container'
-  last_reviewed: null
+    Project dormant since 2026-03-21 (last commit on main); maintainer recommends StrongDM Leash as a more powerful alternative
+    with comprehensive access control. Complements: Network proxy, governance overlay, nono inside container'
+  last_reviewed: '2026-06-10'
   evidence_level: docs
   reviewed_by: null
 - name: Claude Code (local)
@@ -648,7 +674,12 @@ products:
       s: 1
       g: 1
       note: 'Protected indirectly: filesystem denies on ~/.ssh, ~/.aws; network proxy prevents exfiltration; but env vars
-        in shell session are visible; no vault or credential proxy'
+        in shell session are visible; no vault or credential proxy. Opt-in upgrade path (v2.1.83+, default OFF): setting
+        CLAUDE_CODE_SUBPROCESS_ENV_SCRUB=1 strips Anthropic + cloud-provider credentials (AWS/GCP/Azure) from Bash/hook/MCP
+        subprocess envs — parent process filters env before spawn so the agent in the subprocess cannot reconstruct it.
+        Mechanism is env-var filtering (S:2/G:2 per AST table) when enabled. Score reflects default (off) per AST rule "default
+        off features score the default". macOS Keychain integration and `apiKeyHelper` script also provide vault hooks but
+        do not change L5 default behavior'
     L6:
       s: 1
       g: 2
@@ -658,12 +689,17 @@ products:
         enterprise managed settings
     L7:
       s: 2
-      g: 2
-      note: Session transcripts (30-day retention); Sentry error logging (TLS + AES-256); enterprise Compliance API for real-time
-        usage/conversation data
-  notes: 'Gaps: L2 (no resource limits), L5 (env vars visible). Complements: Resource limits (ulimits/cgroups), credential
-    proxy, ephemeral wrapper (Docker Sandbox or VM). MIT'
-  last_reviewed: null
+      g: 3
+      note: 'Session transcripts (30-day retention); Sentry error logging (TLS + AES-256); enterprise Compliance API for real-time
+        usage/conversation data. OTel export with per-tool-call telemetry via OTEL_LOG_TOOL_DETAILS=1 (v2.1.83+) adds tool_parameters
+        to spans; ConfigChange / FileChanged / CwdChanged hooks (v2.1.83); forceRemoteSettingsRefresh fail-closed managed
+        policy fetch (v2.1.92). G:3 — per-call telemetry with parameter detail meets AST G:3 (per-resource policy with content-aware
+        inspection)'
+  notes: 'Gaps: L2 (no resource limits), L5 (env vars visible by default; ENV_SCRUB opt-in available). L6 stays at S:1 even
+    after Auto Mode shipped: LLM classifier is agent alignment per AST principle (vector-agnostic sandboxes), consistent with
+    Google ADK Gemini-as-Judge and Codex Guardian Smart Approvals scoring. Complements: Resource limits (ulimits/cgroups),
+    credential proxy, ephemeral wrapper (Docker Sandbox or VM). MIT'
+  last_reviewed: '2026-06-10'
   evidence_level: docs
   reviewed_by: null
 - name: Claude Code (web)
@@ -731,9 +767,12 @@ products:
         writable roots; requires git repo. G:2 — Landlock path whitelists are allowlist/blocklist, not content-aware'
     L4:
       s: 3
-      g: 1
-      note: 'Network disabled by default; seccomp blocks socket, connect, bind syscalls (except AF_UNIX); opt-in via config;
-        when enabled: unrestricted (no domain filtering)'
+      g: 2
+      note: 'Network disabled by default; seccomp blocks socket, connect, bind syscalls (except AF_UNIX); opt-in via config.
+        v0.139 (June 2026) added proxy-only networking: when network is enabled, traffic is routed through a managed proxy
+        with host allowlist (previously was binary on/off with no domain filtering once enabled). v0.134: Node-based tools
+        now honor managed network proxy environment. S:3 — kernel-enforced (seccomp blocks raw sockets, irreversible). G:2
+        — host allowlist via managed proxy when network mode is enabled. Evidence: GitHub releases v0.128–v0.139'
     L5:
       s: 2
       g: 3
@@ -754,10 +793,16 @@ products:
       g: 3
       note: OpenTelemetry export (OTLP-HTTP/gRPC); JSONL event streaming; thread/turn lifecycle, command executions, file
         changes, MCP calls; session persistence/resume; notification hooks
-  notes: 'Gaps: L2 (no resource caps), L4 binary (network on = unrestricted). L6 upgraded from — to S:1 via requirements.toml
-    command prefix rules (existed Dec 2025, missed in initial scoring). Complements: Resource wrapper (cgroups), domain-level
-    network filtering, ephemeral container'
-  last_reviewed: '2026-04-11'
+  notes: 'Gaps: L2 (no resource caps), L5 still env-var based for user secrets. L4 G:2 upgrade (June 2026): v0.139 added
+    proxy-only networking with host allowlist when network mode is enabled — was binary on/off before. L5 unchanged: new
+    codex-secrets/codex-keyring-store crates store Codex own OAuth/API tokens in OS keyring (parent-process auth), not user
+    secret isolation; shell_environment_policy KEY/SECRET/TOKEN pattern filtering remains the user-secret mechanism. L6 unchanged
+    at S:1: requirements.toml v0.133 added inheritance + runtime refresh + admin lockdown, but underlying mechanism is still
+    pattern-based command prefix matching (bypassable via libraries/scripts/alternative tools per AST command-blocklist rule);
+    Guardian extension is LLM-classifier-based, consistent with how Google Gemini-as-Judge and Claude Code Auto Mode are
+    excluded as alignment, not sandbox enforcement. Complements: Resource wrapper (cgroups), semantic policy engine (Cedar/OPA)
+    for L6, external credential proxy for L5'
+  last_reviewed: '2026-06-10'
   evidence_level: docs
   reviewed_by: null
 - name: Cursor (sandboxed)
@@ -879,10 +924,13 @@ products:
       note: VM-scoped workspace; resets to saved Machine Snapshot at session start; repo selection configurable; ephemeral
         within session scope
     L4:
-      s: 0
-      g: 0
-      note: 'Internet access required for Devin to function; no built-in firewall or egress restrictions; WARNING: L4:0 +
-        secrets present = T1 exfiltration risk'
+      s: 2
+      g: 2
+      note: 'Network egress runs through a domain allowlist that defaults to deny (per devin.ai/security). S:2 — software-enforced
+        platform default; allowlist applied outside the agent process so the sandbox cannot circumvent. G:2 — domain allowlist
+        (allowlist/blocklist semantics), not content-aware HTTP matchers. NEEDS REVIEW: docs.devin.ai/admin/security does not
+        document the mechanism details (host proxy vs kernel-level), per-customer configurability, or default-deny scope. Evidence:
+        devin.ai/security marketing page (2026). Score is conservative pending hands-on verification'
     L5:
       s: 1
       g: 3
@@ -899,9 +947,11 @@ products:
       g: 3
       note: 'Full replay timeline: every command, file diff, browser interaction; session insights; real-time monitoring dashboard;
         SOC 2 Type II (since Sep 2024); continuous logging'
-  notes: 'WARNING: L4:0 is the critical gap. Unrestricted network + secrets as env vars = T1 exfiltration risk. Complements:
-    Network egress firewall (critical), credential proxy, SIEM integration'
-  last_reviewed: null
+  notes: 'L4 upgraded from 0 to 2 (June 2026): devin.ai/security documents default-deny domain allowlist for network egress.
+    T1 risk reduced but not eliminated — L5:1 still leaves secrets accessible as plaintext env vars in the Devbox, so any
+    domain in the allowlist remains a viable exfiltration channel. Complements: credential proxy / external secrets injection
+    for L5 upgrade, runtime action governance for L6, SIEM integration via session transcript export'
+  last_reviewed: '2026-06-10'
   evidence_level: docs
   reviewed_by: null
 - name: Replit
@@ -913,14 +963,19 @@ products:
       g: 1
       note: Linux containers (one per Repl) on GCP VMs; shared host kernel; Nix-based
         full Linux runtime; unprivileged containers (user namespaces disabled). S:2 —
-        software-enforced via Linux namespaces with shared host kernel. NEEDS REVIEW —
-        Stack Overflow evidence (Jan 2023) confirms seccomp-BPF filter is active in
-        Replit containers (/proc/self/status shows filter mode); likely Docker's default
-        profile (~44 blocked syscalls). If confirmed, L1 upgrades to S:3 (kernel-enforced,
-        irreversible syscall filtering). No Replit-published seccomp documentation or
-        custom profile evidence exists. G:1 — binary (container is either running or not).
-        Evidence — blog.replit.com/regional-goval (Linux containers), SO#75115099 (seccomp
-        active), github.com/openai/codex/issues/16018 (user namespaces disabled).
+        software-enforced via Linux namespaces with shared host kernel. Stack Overflow
+        evidence (Jan 2023) shows a seccomp-BPF filter is active in Replit containers
+        (/proc/self/status shows filter mode), consistent with Docker's default profile
+        (~44 blocked syscalls). Per Docker Container Runtime precedent (same default
+        seccomp profile + dropped capabilities + namespaces is scored S:2 with explicit
+        reasoning "shared kernel surface is large despite seccomp filtering"), confirmed
+        default seccomp does NOT push Replit to S:3. S:3 would require Replit to publish
+        a substantially expanded custom seccomp profile or use kernel-enforced LSM (Landlock,
+        AppArmor, SELinux) as the primary boundary. G:1 — binary (container is either
+        running or not). Evidence — blog.replit.com/regional-goval (Linux containers),
+        SO#75115099 (seccomp active), github.com/openai/codex/issues/16018 (user
+        namespaces disabled), Docker Container Runtime entry (L294) for the seccomp
+        precedent.
     L2:
       s: 3
       g: 2
@@ -1166,6 +1221,82 @@ products:
   last_reviewed: '2026-04-11'
   evidence_level: docs
   reviewed_by: null
+- name: Cloudflare Sandboxes
+  portability:
+  - cloud-managed
+  layers:
+    L1:
+      s: 4
+      g: 1
+      note: 'Each sandbox runs in its own Firecracker microVM (KVM-isolated). Cloudflare Containers platform uses Firecracker
+        microVMs (confirmed via 2025-2026 Cloudflare announcements about Firecracker-powered Containers). Per Cloudflare
+        Sandbox security docs: "The Sandbox SDK is built on Containers, which run each sandbox in its own VM for strong
+        isolation". Distinct from Cloudflare Workers (V8 isolate model — see separate entry). S:4 — structural: hardware
+        boundary via KVM-enforced VM isolation; same isolation tech class as E2B, Vercel Sandbox, Fly.io Sprites, Blaxel.
+        G:1 — binary: sandbox is either running or not. Evidence: official Sandbox security docs, GA blog (2026-04-13), public
+        info about Firecracker-on-Cloudflare-Containers architecture'
+    L2:
+      s: 4
+      g: 2
+      note: 'Six predefined instance types with fixed vCPU/memory/disk allocations: lite (1/16 vCPU, 256 MiB, 2 GB), basic
+        (1/4 vCPU, 1 GiB, 4 GB), standard-1 (1/2 vCPU, 4 GiB, 8 GB), standard-2 (1 vCPU, 6 GiB, 12 GB), standard-3 (2 vCPU,
+        8 GiB, 16 GB), standard-4 (4 vCPU, 12 GiB, 20 GB). Account-level concurrent caps (6 TiB memory, 1500 vCPU, 30 TB disk).
+        S:4 — hypervisor-allocated at VM creation. G:2 — per-resource CPU/memory/disk caps. WARNING: no per-sandbox timeout
+        documented. Evidence: developers.cloudflare.com/containers/platform-details/limits/'
+    L3:
+      s: 4
+      g: 1
+      note: 'Filesystem isolation per docs: "Sandboxes cannot access other sandboxes'' files"; full Linux env per sandbox;
+        ephemeral root by default; snapshots stored in R2 within customer account for persistence (opt-in). S:4 — ephemeral
+        guest FS; no host paths visible. G:1 — binary: no per-path read/write controls or sensitive-path blocking documented.
+        Evidence: security concepts page, GA blog (snapshot/R2 details)'
+    L4:
+      s: 2
+      g: 3
+      note: 'Default-deny opt-in via `enableInternet = false` on the Sandbox class — "only traffic you explicitly allow later
+        through allowedHosts or outbound handlers can leave the sandbox". Host-based filtering via `allowedHosts` / `deniedHosts`.
+        Programmable outbound handlers: "programmable egress proxies that run on the same machine as the sandbox" — a sidecar
+        process spawned inside the sandbox network namespace applies routing rules to intercept traffic before it reaches
+        the network stack. Runtime policy changes via `setOutboundByHost()`. S:2 — software-enforced: sidecar proxy inside
+        the sandbox network namespace that the agent cannot reconfigure from inside (separate process owned by the platform);
+        not kernel-level. G:3 — content-aware: programmable handlers can inspect/modify HTTP requests (method/path/headers).
+        WARNING: `enableInternet` defaults to true (internet allowed) unless operator opts into deny-by-default. Evidence:
+        developers.cloudflare.com/sandbox/guides/outbound-traffic/, SDK reference'
+    L5:
+      s: 4
+      g: 3
+      note: 'External credential proxy via Worker. Flow: Sandbox (short-lived JWT, default 15-min expiry) → Worker proxy
+        (validates JWT, injects real credential) → External API. Per Cloudflare docs: "Real credentials never enter the
+        sandbox" and "The Worker validates the JWT and injects the real credential before forwarding the request". Sandbox
+        gets `PROXY_TOKEN` and `PROXY_BASE` env vars to reach the Worker proxy without seeing the actual API key. The `transform`
+        function replaces JWT with real credential right before forwarding to external API. Enables credential rotation
+        without reconfiguring sandboxes. S:4 — external credential proxy (structural: secrets architecturally absent from
+        sandbox VM); same mechanism class as Vercel Sandbox L5, Docker Sandbox L5, Claude Code (web) L5. G:3 — per-host header
+        injection with per-tenant context; different credentials for different services; JWT scope binding. Evidence: developers.cloudflare.com/sandbox/guides/proxy-requests/'
+    L6:
+      s: null
+      g: null
+      note: 'No runtime action governance documented for Sandboxes. No policy engine, no command blocklist, no declarative-only
+        mode. Authentication and authorization are explicitly listed as developer responsibilities in the security model docs.
+        Scored — (not addressed)'
+    L7:
+      s: 1
+      g: 1
+      note: 'Sandbox SDK process exec (`sandbox.startProcess()`) captures stdout/stderr available via SDK; per GitHub issue
+        cloudflare/workers-sdk#12998, continuous streaming of container stdout/stderr to Workers Observability is in progress
+        (status as of 2026-06). The controlling Worker has access to full Workers observability stack (Workers Logs, Tail
+        Workers, OTel, Logpush, 18-month audit log retention) but those apply to Worker invocations, not sandbox-internal
+        actions. S:1 — session-level: per-process stdout/stderr captured via SDK; no command-level audit, no syscall trace,
+        no MCP-specific instrumentation for sandbox internals. G:1 — binary: observability is captured-or-not via SDK calls.
+        NEEDS REVIEW: verify if container stdout/stderr streaming to Workers Logs has shipped (would push toward S:2/G:2)'
+  notes: 'Cloudflare Sandboxes reached GA on 2026-04-13 (distinct from Cloudflare Workers V8 isolate entry — Sandboxes are
+    full-Linux VM-isolated containers for persistent agent environments). Selected by Anthropic for Claude Managed Agents
+    (2026-05-19). Strong L1/L2/L3 from VM isolation + L5 from Worker-proxy credential injection. Gaps: L4 default policy
+    unclear, L6 no governance, L7 audit unverified. Complements: Governance overlay for L6, explicit audit/SIEM integration
+    for L7. Preliminary score card — score reflects documentation only; hands-on verification recommended'
+  last_reviewed: '2026-06-10'
+  evidence_level: docs
+  reviewed_by: null
 - name: Ona
   portability:
   - cloud-managed
@@ -1333,15 +1464,17 @@ products:
         FS. Evidence: system specifications page, concepts page'
     L4:
       s: 2
-      g: 2
+      g: 3
       note: 'Host-level network firewall outside the microVM; three modes: allow-all (default, unrestricted egress), deny-all
         (blocks all egress including DNS), user-defined (default-deny with domain allowlist via SNI + CIDR subnet allow/deny).
-        Live policy updates without sandbox restart. S:2 — software-enforced: host-level proxy outside the VM that the sandbox
-        cannot circumvent (VM boundary prevents bypass); not kernel-level packet filtering (iptables/eBPF) but proxy-based SNI
-        matching. G:2 — domain allowlist/blocklist via SNI + CIDR subnet allow/deny; packet-level filtering (domain/IP), not
-        content-aware (no HTTP method, URL path, or body inspection). TLS termination for header injection is credential brokering
-        (scored under L5), not L4 network filtering. WARNING: default is allow-all (unrestricted egress). Evidence: firewall
-        docs, SDK reference (NetworkPolicy class), SDK source code (network-policy.ts)'
+        Live policy updates without sandbox restart. Per-domain content-aware matchers on allow rules: path, method, queryString,
+        headers with exact/startsWith/regex (RE2). Also supports forwardURL request proxying with OIDC-signed metadata headers
+        (vercel-forwarded-host/scheme/port/path, vercel-sandbox-oidc-token) and Postgres wire-protocol interception with explicit
+        TLS handshake. S:2 — software-enforced: host-level proxy outside the VM that the sandbox cannot circumvent (VM boundary
+        prevents bypass); not kernel-level packet filtering. G:3 — content-aware HTTP filtering per AST rule (method/path/headers
+        inspection); scored at configured maximum consistent with L5 credential brokering. WARNING: default is allow-all (unrestricted
+        egress); matchers and forwardURL require Pro/Enterprise plan (Hobby is limited to domain-level filtering, G:2). Evidence:
+        firewall docs (Matchers, Requests proxying, Postgres sections), changelog (request proxying and filtering, 2026)'
     L5:
       s: 4
       g: 3
@@ -1367,11 +1500,12 @@ products:
         structured metadata; goes beyond session-level; not tamper-evident (no cryptographic commitments). G:2 — per-command
         granularity with structured metadata; no syscall-level telemetry, no OTel export, no network packet capture. Evidence:
         SDK reference (Command class, CommandFinished class), working-with-sandbox docs (Monitor your sandbox section)'
-  notes: 'Firecracker microVM with strong L1-L3 (identical architecture to E2B). L4 firewall with credential brokering (Pro/Enterprise)
-    is standout feature — comparable to Docker Sandbox L5. WARNING: default network policy is allow-all; credential brokering
-    requires Pro/Enterprise. Gaps: L6 (no governance), L7 (no tamper-evident logging, no OTel). Complements: Governance overlay
-    (Leash/Warden) for L6, external SIEM for L7 upgrade'
-  last_reviewed: '2026-03-31'
+  notes: 'Firecracker microVM with strong L1-L3 (identical architecture to E2B). L4 firewall with content-aware matchers
+    (path/method/queryString/headers) and credential brokering (Pro/Enterprise) is standout feature — comparable to Docker
+    Sandbox L5. WARNING: default network policy is allow-all; matchers/forwardURL/credential brokering require Pro/Enterprise.
+    Gaps: L6 (no governance), L7 (no tamper-evident logging, no OTel). Complements: Governance overlay (Leash/Warden) for L6,
+    external SIEM for L7 upgrade'
+  last_reviewed: '2026-06-10'
   evidence_level: docs
   reviewed_by: null
 - name: Pydantic Monty
